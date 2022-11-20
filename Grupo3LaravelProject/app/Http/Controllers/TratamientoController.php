@@ -14,10 +14,9 @@ class TratamientoController extends Controller
      */
     public function index()
     {
-        $tratamientos = DB::select("SELECT * FROM tratamiento");
-        return view('tratamientos/tratamientosIndex', [
-            "tratamientos"=>$tratamientos
-        ]);
+        $tratamientos = DB::select(
+            "SELECT * FROM tratamiento");
+        return view('tratamientos/tratamientosIndex');
     }
 
     /**
@@ -52,8 +51,7 @@ class TratamientoController extends Controller
         $tratamiento = DB::selectOne("SELECT * FROM tratamiento WHERE id_tratamiento = {$id}");
         $tratamientos = DB::select("SELECT * FROM tratamiento");
             return view('tratamientos/showTratamiento', [
-                "tratamiento"=>$tratamiento,
-                "tratamientos"=>$tratamientos
+                "tratamiento"=>$tratamiento
             ]);
     }
 

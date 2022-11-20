@@ -15,9 +15,7 @@ class VistasController extends Controller
     public function index()
     {
         $tratamientos = DB::select("SELECT id_tratamiento,nombre FROM tratamiento");
-        return view('home',[
-            'tratamientos' => $tratamientos
-        ]);
+        return view('home');
     }
 
     /**

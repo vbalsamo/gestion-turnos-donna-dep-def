@@ -9,7 +9,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ($tratamientos as $tratamiento)
+        @foreach ($tratamientos_global as $tratamiento)
         <tr>
             <td><a href="{{ route('tratamientos.show', $tratamiento->id_tratamiento) }}">{{ $tratamiento->nombre }}</a></td>
             <td>{{ $tratamiento->descripcion }}</td>
