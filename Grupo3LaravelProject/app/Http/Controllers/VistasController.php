@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class TratamientoController extends Controller
+class VistasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +13,7 @@ class TratamientoController extends Controller
      */
     public function index()
     {
-        $tratamientos = DB::select("SELECT * FROM tratamiento");
-
-        return view('tratamientos/tratamientosIndex', [
-            "tratamientos"=>$tratamientos
-        ]);
+        return view('home');
     }
 
     /**
@@ -50,10 +45,7 @@ class TratamientoController extends Controller
      */
     public function show($id)
     {
-        $tratamiento = DB::selectOne("SELECT * FROM tratamiento WHERE id_tratamiento = {$id}");
-            return view('tratamientos/showTratamiento', [
-                "tratamiento"=>$tratamiento
-            ]);
+        //
     }
 
     /**
