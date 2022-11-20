@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class TratamientoController extends Controller
 {
@@ -26,62 +28,103 @@ class TratamientoController extends Controller
      */
     public function create()
     {
-        //
+        return view('tratamientos/createTratamiento');
+    }
+
+    private function validar(Request $request)
+    {
+        return Validator::make($request->post(), [
+            'nombre' => ['required'],
+            'descripcion' => ['required']
+        ])->validate();
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validar($request);
+
+        try {
+            DB::transaction(function () use ($request) {
+                DB::insert('INSERT INTO tratamiento (nombre, descripcion) values (?, ?)', [
+                    $request->post("nombre"),
+                    $request->post("descripcion")
+                ]);
+            });
+
+            return redirect(route('tratamientos.index'));
+            //return $request->post('id_tratamiento');
+        } catch (ValidationException $ex) {
+
+        } catch (\Exception $exception) {
+            echo $exception->getMessage();
+        }
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $tratamiento = DB::selectOne("SELECT * FROM tratamiento WHERE id_tratamiento = {$id}");
-        $tratamientos = DB::select("SELECT * FROM tratamiento");
-            return view('tratamientos/showTratamiento', [
-                "tratamiento"=>$tratamiento
-            ]);
+        return view('tratamientos/showTratamiento', [
+            "tratamiento" => $tratamiento
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $tratamiento = DB::selectOne("SELECT * FROM tratamiento WHERE id_tratamiento = {$id}");
+        return view('tratamientos/createTratamiento', [
+            "tratamiento" => $tratamiento
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            DB::table('tratamiento')
+                ->where('id_tratamiento', $id)
+                ->update([
+                    'nombre' => $request->post('nombre'),
+                    'descripcion' => $request->post('descripcion')
+                ]);
+
+        } catch (ValidationException $ex) {
+
+        } catch (\Exception $exception) {
+            echo $exception->getMessage();
+        }
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

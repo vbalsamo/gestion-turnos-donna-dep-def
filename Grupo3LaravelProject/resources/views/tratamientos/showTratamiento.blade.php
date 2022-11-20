@@ -7,7 +7,7 @@
         <form action="{{ route('turnos.index') }}" method="get">
             <button type="submit" class="btn btn-info">Pedir turno para {{ $tratamiento->nombre }}</button>
         </form>
-        <form action="">
+        <form action="{{ route('tratamientos.edit', $tratamiento->id_tratamiento) }}">
             <button type="submit" class="btn btn-secondary">Editar {{ $tratamiento->nombre }}</button>
         </form>
     </div>
