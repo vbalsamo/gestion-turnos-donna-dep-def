@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class VistasController extends Controller
+class TurnosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +13,7 @@ class VistasController extends Controller
      */
     public function index()
     {
-        $tratamientos = DB::select("SELECT id_tratamiento,nombre FROM tratamiento");
-        return view('home',[
-            'tratamientos' => $tratamientos
-        ]);
+        //
     }
 
     /**

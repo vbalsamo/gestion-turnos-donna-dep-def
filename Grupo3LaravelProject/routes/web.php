@@ -14,3 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 Route::resource('tratamientos', \App\Http\Controllers\TratamientoController::class);
 Route::resource('vistas', \App\Http\Controllers\VistasController::class);
+Route::resource('turnos', \App\Http\Controllers\TurnosController::class);
+Route::resource('locaciones', \App\Http\Controllers\LocacionController::class);
