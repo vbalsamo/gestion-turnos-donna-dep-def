@@ -1,6 +1,11 @@
 @extends('base')
 @section('contenido')
     <h1>Listado de tratamientos</h1>
+
+    <form action="{{ route('tratamientos.create') }}">
+        <button type="submit" class="btn btn-secondary">Crear nuevo tratamiento</button>
+    </form>
+
     <table class="table table">
         <thead>
         <tr>

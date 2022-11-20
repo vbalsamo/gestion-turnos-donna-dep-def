@@ -12,7 +12,7 @@
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F8EEE2">
-    <a class="navbar-brand" href="{{ route('vistas.index') }}">
+    <a class="navbar-brand" href="{{ route('/') }}">
         <img src="{{ asset('logo.jpg') }}" width="65" height="30" alt="Donna depilación definitiva">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
