@@ -1,4 +1,5 @@
 @extends('base')
+
 @section('contenido')
     <form method="POST" action=@yield('action')>
 
@@ -13,4 +14,5 @@
             <button type="submit" class="btn btn-secondary">Guardar</button>
         </div>
     </form>
+
 @endsection

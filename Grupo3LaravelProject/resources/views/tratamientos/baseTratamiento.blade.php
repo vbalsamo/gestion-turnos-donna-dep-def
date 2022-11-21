@@ -9,3 +9,4 @@
     <textarea class="form-control" name="descripcion">@if(isset($tratamiento))
             {{ $tratamiento->descripcion }}
         @endif</textarea>
+@endsection
