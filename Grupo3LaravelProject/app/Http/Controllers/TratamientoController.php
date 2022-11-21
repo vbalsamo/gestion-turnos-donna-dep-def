@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 
 class TratamientoController extends Controller
 {
@@ -58,8 +57,8 @@ class TratamientoController extends Controller
                 ]);
             });
 
-            return redirect(route('tratamientos.index'));
-            //return $request->post('id_tratamiento');
+            //return redirect(route('tratamientos.index'));
+            return $request->post('id_tratamiento');
         } catch (ValidationException $ex) {
 
         } catch (\Exception $exception) {
@@ -91,7 +90,7 @@ class TratamientoController extends Controller
     public function edit($id)
     {
         $tratamiento = DB::selectOne("SELECT * FROM tratamiento WHERE id_tratamiento = {$id}");
-        return view('tratamientos/createTratamiento', [
+        return view('tratamientos/editTratamiento', [
             "tratamiento" => $tratamiento
         ]);
     }
@@ -105,14 +104,13 @@ class TratamientoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
+        try{
             DB::table('tratamiento')
                 ->where('id_tratamiento', $id)
                 ->update([
                     'nombre' => $request->post('nombre'),
                     'descripcion' => $request->post('descripcion')
                 ]);
-
         } catch (ValidationException $ex) {
 
         } catch (\Exception $exception) {
