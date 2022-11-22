@@ -19,3 +19,4 @@ Route::resource('turnos', \App\Http\Controllers\TurnosController::class);
 Route::resource('locaciones', \App\Http\Controllers\LocacionController::class);
 
 
+

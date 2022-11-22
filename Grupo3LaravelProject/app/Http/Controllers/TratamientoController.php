@@ -58,7 +58,7 @@ class TratamientoController extends Controller
             });
 
             //return redirect(route('tratamientos.index'));
-            return $request->post('id_tratamiento');
+            return $request->post('id');
         } catch (ValidationException $ex) {
 
         } catch (\Exception $exception) {
@@ -75,7 +75,7 @@ class TratamientoController extends Controller
      */
     public function show($id)
     {
-        $tratamiento = DB::selectOne("SELECT * FROM tratamiento WHERE id_tratamiento = {$id}");
+        $tratamiento = DB::selectOne("SELECT * FROM tratamiento WHERE id = {$id}");
         return view('tratamientos/showTratamiento', [
             "tratamiento" => $tratamiento
         ]);
@@ -89,7 +89,7 @@ class TratamientoController extends Controller
      */
     public function edit($id)
     {
-        $tratamiento = DB::selectOne("SELECT * FROM tratamiento WHERE id_tratamiento = {$id}");
+        $tratamiento = DB::selectOne("SELECT * FROM tratamiento WHERE id = {$id}");
         return view('tratamientos/editTratamiento', [
             "tratamiento" => $tratamiento
         ]);
@@ -106,7 +106,7 @@ class TratamientoController extends Controller
     {
         try{
             DB::table('tratamiento')
-                ->where('id_tratamiento', $id)
+                ->where('id', $id)
                 ->update([
                     'nombre' => $request->post('nombre'),
                     'descripcion' => $request->post('descripcion')
@@ -115,6 +115,7 @@ class TratamientoController extends Controller
 
         } catch (\Exception $exception) {
             echo $exception->getMessage();
+
         }
 
     }
@@ -125,10 +126,17 @@ class TratamientoController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_tratamiento)
+    public function destroy($id)
     {
-        DB::table('tratamiento')->delete($id_tratamiento);
+        try{
 
-        return redirect()->back();
+            DB::table('tratamiento')->delete($id);
+
+        } catch (ValidationException $ex) {
+
+        } catch (\Exception $exception) {
+            echo $exception->getMessage();
+        }
+
     }
 }

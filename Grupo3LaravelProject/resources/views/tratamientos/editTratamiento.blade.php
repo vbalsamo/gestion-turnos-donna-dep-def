@@ -2,7 +2,7 @@
 
 @section('action')
 
-    "{{ route('tratamientos.update', $tratamiento->id_tratamiento)}}"
+    "{{ route('tratamientos.update', $tratamiento->id)}}"
 
 @endsection
 

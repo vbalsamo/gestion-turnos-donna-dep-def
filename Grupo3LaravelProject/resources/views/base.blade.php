@@ -32,7 +32,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     @foreach($tratamientos_global as $tratamiento_global)
-                    <a class="dropdown-item" href="{{ route('tratamientos.show', $tratamiento_global->id_tratamiento) }}">{{$tratamiento_global->nombre}}</a>
+                    <a class="dropdown-item" href="{{ route('tratamientos.show', $tratamiento_global->id) }}">{{$tratamiento_global->nombre}}</a>
                     @endforeach
                     <a class="dropdown-item font-weight-bold" href="{{ route('tratamientos.index') }}">Ver todos</a>
                 </div>
