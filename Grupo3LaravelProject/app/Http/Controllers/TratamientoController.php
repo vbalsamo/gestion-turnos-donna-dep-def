@@ -46,10 +46,8 @@ class TratamientoController extends Controller
      */
     public function store(Request $request)
     {
-
-        $this->validar($request);
-
         try {
+            $this->validar($request);
             DB::transaction(function () use ($request) {
                 DB::insert('INSERT INTO tratamiento (nombre, descripcion) values (?, ?)', [
                     $request->post("nombre"),
@@ -104,7 +102,8 @@ class TratamientoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
+        try {
+            $this->validar($request);
             DB::table('tratamiento')
                 ->where('id', $id)
                 ->update([
@@ -115,8 +114,8 @@ class TratamientoController extends Controller
 
         } catch (\Exception $exception) {
             echo $exception->getMessage();
-
         }
+        return redirect()->route('tratamientos.index');
 
     }
 
@@ -128,7 +127,7 @@ class TratamientoController extends Controller
      */
     public function destroy($id)
     {
-        try{
+        try {
 
             DB::table('tratamiento')->delete($id);
 
