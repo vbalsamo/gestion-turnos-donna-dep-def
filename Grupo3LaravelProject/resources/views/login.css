@@ -1,0 +1,35 @@
+
+body {
+    background: pink;
+}
+
+.container {
+    background-color: beige;
+}
+
+.logo {
+    background-color: white;
+}
+
+#btnIngresar {
+    background-color: pink;
+    border: none;
+    transition-duration: 0.1s;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.1);
+}
+
+#btnRegistrarse {
+    background: pink;
+    border: none;
+    transition-duration: 0.1s;
+}
+
+#btnIngresar:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+#btnRegistrarse:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
