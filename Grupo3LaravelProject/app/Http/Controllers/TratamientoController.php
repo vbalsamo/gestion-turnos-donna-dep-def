@@ -33,7 +33,7 @@ class TratamientoController extends Controller
     private function validar(Request $request)
     {
         return Validator::make($request->post(), [
-            'nombre' => ['required'],
+            'nombre' => ['required', 'alpha'],
             'descripcion' => ['required']
         ])->validate();
     }
@@ -46,21 +46,19 @@ class TratamientoController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validar($request);
         try {
-            $this->validar($request);
             DB::transaction(function () use ($request) {
                 DB::insert('INSERT INTO tratamiento (nombre, descripcion) values (?, ?)', [
                     $request->post("nombre"),
                     $request->post("descripcion")
                 ]);
             });
-
-            //return redirect(route('tratamientos.index'));
-            return $request->post('id');
+            return redirect(route('tratamientos.index'));
         } catch (ValidationException $ex) {
 
         } catch (\Exception $exception) {
-            echo $exception->getMessage();
+
         }
 
     }
@@ -102,20 +100,21 @@ class TratamientoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validar($request);
         try {
-            $this->validar($request);
             DB::table('tratamiento')
                 ->where('id', $id)
                 ->update([
                     'nombre' => $request->post('nombre'),
                     'descripcion' => $request->post('descripcion')
                 ]);
+            return redirect()->route('tratamientos.index');
         } catch (ValidationException $ex) {
 
         } catch (\Exception $exception) {
-            echo $exception->getMessage();
+
         }
-        return redirect()->route('tratamientos.index');
+
 
     }
 

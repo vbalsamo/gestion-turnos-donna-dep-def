@@ -1,6 +1,7 @@
 @extends('base')
 
 @section('contenido')
+
     <form method="POST" action=@yield('action')>
 
     <div class="form-group">

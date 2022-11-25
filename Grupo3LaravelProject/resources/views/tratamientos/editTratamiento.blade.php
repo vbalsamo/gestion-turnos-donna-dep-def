@@ -7,7 +7,7 @@
 @endsection
 
 @section('method')
-    @method('PATCH')
+    {{method_field('PATCH')}}
 @endsection
 
 
