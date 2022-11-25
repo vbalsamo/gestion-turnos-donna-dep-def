@@ -33,7 +33,7 @@ class TratamientoController extends Controller
     private function validar(Request $request)
     {
         return Validator::make($request->post(), [
-            'nombre' => ['required', 'alpha'],
+            'nombre' => ['required'],
             'descripcion' => ['required']
         ])->validate();
     }
@@ -86,7 +86,7 @@ class TratamientoController extends Controller
     public function edit($id)
     {
         $tratamiento = DB::selectOne("SELECT * FROM tratamiento WHERE id = {$id}");
-        return view('tratamientos/editTratamiento', [
+        return view('tratamientos/createTratamiento', [
             "tratamiento" => $tratamiento
         ]);
     }
@@ -129,6 +129,7 @@ class TratamientoController extends Controller
         try {
 
             DB::table('tratamiento')->delete($id);
+            return redirect()->route('tratamientos.index');
 
         } catch (ValidationException $ex) {
 
