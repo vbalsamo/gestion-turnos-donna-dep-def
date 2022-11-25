@@ -1,30 +1,6 @@
 @extends('baseCreate')
 
 @section('formulario')
-    {{--<label>Nombre</label>
-    @if(!empty($errors->get('nombre')))
-        @foreach($errors->get('nombre') as $error)
-            <a>{{ $error }}</a>
-        @endforeach
-    @endif
-    <input type="text" name="nombre" class="form-control"
-           @if(isset($tratamiento)) value="{{ $tratamiento->nombre }}" @endif
-           @if(empty($errors->get('nombre')))
-               @if(!is_null(old('nombre'))) value="{{ old('nombre') }}" @endif
-           @else
-               class="form-control is-invalid"
-
-        @endif
-    >
-    <label>Descripción</label>
-    @if(!empty($errors->get('nombre')))
-        @foreach($errors->get('nombre') as $error)
-            <a>{{ $error }}</a>
-        @endforeach
-    @endif
-    <textarea class="form-control" name="descripcion">@if(isset($tratamiento))
-            {{ $tratamiento->descripcion }}
-        @endif</textarea>--}}
 
     <div class="form-group">
         <label for="nombre">Nombre</label>
@@ -51,4 +27,5 @@
                 </span>
         @endif
         </div>
+
 @endsection
