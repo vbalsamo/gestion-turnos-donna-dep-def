@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,6 @@ Route::resource('tratamientos', \App\Http\Controllers\TratamientoController::cla
 Route::resource('vistas', \App\Http\Controllers\VistasController::class);
 Route::resource('turnos', \App\Http\Controllers\TurnosController::class);
 Route::resource('locaciones', \App\Http\Controllers\LocacionController::class);
-
+Route::resource('login', \App\Http\Controllers\LoginController::class);
 
 
