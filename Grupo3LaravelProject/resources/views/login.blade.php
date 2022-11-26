@@ -20,12 +20,12 @@
 
                 <!-- Log In -->
 
-                <form action="#" method="#" class="mx-4">
+                <form action="{{ route('login.store') }}" method="POST" class="mx-4">
                     <div class="mb-4">
                         <input type="text" class="form-control" name="usuario" placeholder="Usuario">
                     </div>
                     <div class="mb-4">
-                        <input type="password" class="form-control" name="contrasena" placeholder="Contraseña">
+                        <input type="password" class="form-control" name="contrasenia" placeholder="Contraseña">
                     </div>
                     <div class="mb-4 text-center">
                         <button id="btnIngresar" type="submit" class="btn btn-primary shadow">Ingresar</button>

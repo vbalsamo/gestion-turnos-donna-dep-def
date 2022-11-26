@@ -20,5 +20,6 @@ Route::resource('turnos', \App\Http\Controllers\TurnosController::class);
 Route::resource('locaciones', \App\Http\Controllers\LocacionController::class);
 Route::resource('login', \App\Http\Controllers\LoginController::class)
 ->only(['index', 'store', 'destroy']);
+Route::resource('register', \App\Http\Controllers\RegisterController::class);
 
 
