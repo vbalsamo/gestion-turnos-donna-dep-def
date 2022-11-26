@@ -15,6 +15,8 @@ class Cliente
 
     private $turnos;
 
+    private $IDusuario;
+
     /**
      * @return mixed
      */
@@ -93,6 +95,22 @@ class Cliente
     public function setTurnos($turnos): void
     {
         $this->turnos = $turnos;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIDusuario()
+    {
+        return $this->IDusuario;
+    }
+
+    /**
+     * @param mixed $IDusuario
+     */
+    public function setIDusuario($IDusuario): void
+    {
+        $this->IDusuario = $IDusuario;
     }
 
 
