@@ -9,10 +9,10 @@
   </head>
   <body>
 
-    <div class="container w-75 mt-4 rounded shadow">
+    <div class="container w-75 mt-5 rounded shadow" id="container">
         <div class="row align-items-stretch">
-            <div class="col-md-5 col-xl-6 rounded" id="logo">
-                <img src="{{ asset('logo.jpg') }}" width="200" height="100" alt="Donna depilación definitiva">
+            <div class="col-md-5 col-xl-6 rounded-start" id="logo">
+                <img src="{{ asset('logo.png') }}" width="300" height="300" alt="Donna depilación definitiva">
 
             </div>
             <div class="col-md-7 col-xl-6 rounded-end">
@@ -21,12 +21,11 @@
                 <!-- Log In -->
 
                 <form action="{{ route('login.store') }}" method="POST" class="mx-4">
-                    @csrf
                     <div class="mb-4">
-                        <input type="text" class="form-control" name="email" placeholder="Correo electrónico">
+                        <input type="text" class="form-control" name="usuario" placeholder="Usuario">
                     </div>
                     <div class="mb-4">
-                        <input type="password" class="form-control" name="password" placeholder="Contraseña">
+                        <input type="password" class="form-control" name="contrasenia" placeholder="Contraseña">
                     </div>
                     <div class="mb-4 text-center">
                         <button id="btnIngresar" type="submit" class="btn btn-primary shadow">Ingresar</button>
