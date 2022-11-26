@@ -42,5 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    private $nombreUser;
+    private $contrasenia;
+    private $email;
+    private $remember_token;
     private $rol;
 }

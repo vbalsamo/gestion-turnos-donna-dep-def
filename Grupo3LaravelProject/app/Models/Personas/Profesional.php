@@ -9,8 +9,6 @@ class Profesional
 
     private $especialidades;
 
-    private $telefono;
-
     /**
      * @return mixed
      */
@@ -42,23 +40,5 @@ class Profesional
     {
         $this->especialidades = $especialidades;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getTelefono()
-    {
-        return $this->telefono;
-    }
-
-    /**
-     * @param mixed $telefono
-     */
-    public function setTelefono($telefono): void
-    {
-        $this->telefono = $telefono;
-    }
-
-
 
 }
