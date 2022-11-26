@@ -15,7 +15,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        //
+        return view('register');
     }
 
     /**
@@ -25,7 +25,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        return view('register');
+
     }
 
     /**
@@ -36,11 +36,13 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        DB::insert('INSERT INTO usuario (email,password) values (?,?)' , [
+        DB::insert('INSERT INTO usuario (email,password,nombre,numero_tel) values (?,?,?,?)' , [
             $request->post('email'),
-            Hash::make($request->post('password')) //nos hashea la contraseña y la lleva a la base de datos
+            Hash::make($request->post('password')),
+            $request->post('nombre'),
+            $request->post('numero_tel')
         ]);
-        return view('home');
+        return view('login');
     }
 
     /**

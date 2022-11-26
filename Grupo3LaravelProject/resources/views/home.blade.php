@@ -1,4 +1,4 @@
 @extends('base')
 @section('contenido')
-    TODO: pagina principal
+    id user logueado: {{ \Illuminate\Support\Facades\Auth::user()->email }}
 @endsection()

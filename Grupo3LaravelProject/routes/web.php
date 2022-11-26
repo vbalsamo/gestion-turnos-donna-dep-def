@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'login')->name('/');
 Route::view('home', 'home')->name('home');
 Route::resource('tratamientos', \App\Http\Controllers\TratamientoController::class);
-Route::resource('vistas', \App\Http\Controllers\VistasController::class);
 Route::resource('turnos', \App\Http\Controllers\TurnosController::class);
 Route::resource('locaciones', \App\Http\Controllers\LocacionController::class);
 Route::resource('login', \App\Http\Controllers\LoginController::class)

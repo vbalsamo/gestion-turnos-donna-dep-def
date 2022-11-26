@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="my-4 text-center">
-                        <a id="btnRegistrarse" class="btn btn-primary shadow" href="#" role="button">Registrarse</a>
+                        <a id="btnRegistrarse" class="btn btn-primary shadow" href="{{ route('register.index') }}" role="button">Registrarse</a>
                     </div>
                     <div class="mb-5 text-center">
                         <span><a href="#">¿Olvidó su clave o usuario?</a></span>

@@ -32,39 +32,24 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `grupo3_tp`.`usuario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `grupo3_tp`.`usuario` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(100) NOT NULL,
-  `rol` VARCHAR(100) NOT NULL,
-  `remember_token` VARCHAR(100) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `grupo3_tp`.`cliente`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `grupo3_tp`.`cliente` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(100) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
+  `rol` VARCHAR(100) NOT NULL DEFAULT 'cliente',
+  `remember_token` VARCHAR(100) NOT NULL,
   `nombre` VARCHAR(300) NOT NULL,
   `numero_tel` VARCHAR(25) NOT NULL,
-  `adeuda` TINYINT(4) NOT NULL,
+  `adeuda` TINYINT(4) NULL,
   `id_usuarioCliente` INT(11) NOT NULL,
   `id_profesional_preferido` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_cliente_usuarioCliente1_idx` (`id_usuarioCliente` ASC) ,
   INDEX `fk_cliente_profesional1_idx` (`id_profesional_preferido` ASC) ,
   CONSTRAINT `fk_cliente_profesional1`
     FOREIGN KEY (`id_profesional_preferido`)
-    REFERENCES `grupo3_tp`.`profesional` (`id`),
-  CONSTRAINT `fk_cliente_usuarioCliente1`
-    FOREIGN KEY (`id_usuarioCliente`)
-    REFERENCES `grupo3_tp`.`usuario` (`id`))
+    REFERENCES `grupo3_tp`.`profesional` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
