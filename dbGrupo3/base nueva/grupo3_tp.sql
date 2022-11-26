@@ -36,13 +36,13 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `grupo3_tp`.`usuario` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `nombre_usuario` VARCHAR(100) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
-  `contraseña` VARCHAR(100) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
   `rol` VARCHAR(100) NOT NULL,
-  `remember_token` VARCHAR(100) NOT NULL,
+  `remember_token` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`tratamiento` (
   `descripcion` VARCHAR(500) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 17
+AUTO_INCREMENT = 18
 DEFAULT CHARACTER SET = utf8;
 
 
