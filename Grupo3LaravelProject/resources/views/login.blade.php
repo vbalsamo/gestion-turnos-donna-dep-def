@@ -22,12 +22,10 @@
 
                 <form action="#" method="#" class="mx-4">
                     <div class="mb-4">
-                        <label class="form-label">Usuario</label>
-                        <input type="text" class="form-control" name="usuario">
+                        <input type="text" class="form-control" name="usuario" placeholder="Usuario">
                     </div>
                     <div class="mb-4">
-                        <label class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" name="contrasena">
+                        <input type="password" class="form-control" name="contrasena" placeholder="Contraseña">
                     </div>
                     <div class="mb-4 text-center">
                         <button id="btnIngresar" type="submit" class="btn btn-primary shadow">Ingresar</button>
