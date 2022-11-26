@@ -26,12 +26,7 @@ CREATE TABLE `profesional` (
   `id_profesional` int NOT NULL,
   `nombre` varchar(300) NOT NULL,
   `id_tratamientoxProfesional` int NOT NULL,
-  `numero_tel` int NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `id_usuarioProfesional` int NOT NULL,
   PRIMARY KEY (`id_profesional`),
-  KEY `fk_profesional_usuarioProfesional1_idx` (`id_usuarioProfesional`),
-  CONSTRAINT `fk_profesional_usuarioProfesional1` FOREIGN KEY (`id_usuarioProfesional`) REFERENCES `usuarioprofesional` (`id_usuario_administrador`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

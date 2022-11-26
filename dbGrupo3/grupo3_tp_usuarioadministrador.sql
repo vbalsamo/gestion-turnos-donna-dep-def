@@ -25,7 +25,9 @@ DROP TABLE IF EXISTS `usuarioadministrador`;
 CREATE TABLE `usuarioadministrador` (
   `id_usuario_administrador` int NOT NULL,
   `email` varchar(100) NOT NULL,
-  `contraseña` varchar(20) NOT NULL,
+  `contraseña` varchar(100) NOT NULL,
+  'username' varchar(100) NOT NULL,
+  'remember_token' varchar(100) NOT NULL,
   PRIMARY KEY (`id_usuario_administrador`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
