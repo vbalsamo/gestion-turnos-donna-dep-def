@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -22,17 +24,17 @@ class LoginController extends Controller
 //REALIZAR VALIDACIONES QUE APRENDIMOS
 
         if(Auth::attempt([
-            'nombre_usuario' => $request->post('usuario'),
-            'contrasenia' => $request->post('contrasenia'),
+            'email' => $request->post('email'),
+            'password' => $request->post('password'),
         ])){
             $request->session()->regenerate();
 
-            return redirect()->intended(route('tecnicos.index'));
+            return redirect()->intended(route('home'));
         }
         else {
             return back()->withErrors([
-                'usuario' => 'El email/nombre de usuario no existe en la base de datos',
-                'contrasenia' => 'La contraseña no coincide con el email/nombre de usuario proporcionado'
+                'username' => 'El email/nombre de usuario no existe en la base de datos',
+                'password' => 'La contraseña no coincide con el email/nombre de usuario proporcionado'
             ]);
             //NO COINCIDE NOMBRE DE USUARIO Y/O CONTRASEÑA
         }

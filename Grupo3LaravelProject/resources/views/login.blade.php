@@ -21,11 +21,12 @@
                 <!-- Log In -->
 
                 <form action="{{ route('login.store') }}" method="POST" class="mx-4">
+                    @csrf
                     <div class="mb-4">
-                        <input type="text" class="form-control" name="usuario" placeholder="Usuario">
+                        <input type="text" class="form-control" name="email" placeholder="Correo electrónico">
                     </div>
                     <div class="mb-4">
-                        <input type="password" class="form-control" name="contrasenia" placeholder="Contraseña">
+                        <input type="password" class="form-control" name="password" placeholder="Contraseña">
                     </div>
                     <div class="mb-4 text-center">
                         <button id="btnIngresar" type="submit" class="btn btn-primary shadow">Ingresar</button>
