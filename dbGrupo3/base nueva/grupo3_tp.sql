@@ -18,19 +18,6 @@ CREATE SCHEMA IF NOT EXISTS `grupo3_tp` DEFAULT CHARACTER SET utf8mb4 ;
 USE `grupo3_tp` ;
 
 -- -----------------------------------------------------
--- Table `grupo3_tp`.`usuarioprofesional`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `grupo3_tp`.`usuarioprofesional` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(100) NOT NULL,
-  `contraseña` VARCHAR(20) NOT NULL,
-  `id_cliente` INT(11) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `grupo3_tp`.`profesional`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `grupo3_tp`.`profesional` (
@@ -39,24 +26,21 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`profesional` (
   `id_tratamientoxProfesional` INT(11) NOT NULL,
   `numero_tel` INT(11) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
-  `id_usuarioProfesional` INT(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_profesional_usuarioProfesional1_idx` (`id_usuarioProfesional` ASC) ,
-  CONSTRAINT `fk_profesional_usuarioProfesional1`
-    FOREIGN KEY (`id_usuarioProfesional`)
-    REFERENCES `grupo3_tp`.`usuarioprofesional` (`id`))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `grupo3_tp`.`usuariocliente`
+-- Table `grupo3_tp`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `grupo3_tp`.`usuariocliente` (
+CREATE TABLE IF NOT EXISTS `grupo3_tp`.`usuario` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre_usuario` VARCHAR(100) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
-  `contraseña` VARCHAR(20) NOT NULL,
-  `id_cliente` INT(11) NOT NULL,
+  `contraseña` VARCHAR(100) NOT NULL,
+  `rol` VARCHAR(100) NOT NULL,
+  `remember_token` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -80,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`cliente` (
     REFERENCES `grupo3_tp`.`profesional` (`id`),
   CONSTRAINT `fk_cliente_usuarioCliente1`
     FOREIGN KEY (`id_usuarioCliente`)
-    REFERENCES `grupo3_tp`.`usuariocliente` (`id`))
+    REFERENCES `grupo3_tp`.`usuario` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -105,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`tratamiento` (
   `descripcion` VARCHAR(500) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 12
+AUTO_INCREMENT = 17
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -157,18 +141,6 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`turno` (
   CONSTRAINT `fk_turno_tratamiento1`
     FOREIGN KEY (`id_tratamiento`)
     REFERENCES `grupo3_tp`.`tratamiento` (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `grupo3_tp`.`usuarioadministrador`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `grupo3_tp`.`usuarioadministrador` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(100) NOT NULL,
-  `contraseña` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
