@@ -35,6 +35,9 @@
                     <input type="text" class="form-control" name="numero_tel" placeholder="Celular" required>
                 </div>
                 <div class="mb-4">
+                    <input type="text" class="form-control" name="id_usuarioCliente" placeholder="Usuario" required>
+                </div>
+                <div class="mb-4">
                     <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña"
                            required>
                 </div>
