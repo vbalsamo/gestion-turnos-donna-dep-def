@@ -14,7 +14,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F8EEE2">
         <a class="navbar-brand" href="{{ route('/') }}">
-            <img src="{{ asset('logo.jpg') }}" width="65" height="30" alt="Donna depilación definitiva">
+            <img src="{{ asset('logo.png') }}" width="60" height="60" alt="Donna depilación definitiva">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -38,32 +38,37 @@
                         <a class="dropdown-item font-weight-bold" href="{{ route('tratamientos.index') }}">Ver todos</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown active" style="position: relative; left: 190%;">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <! agregar doble llaves>
+                        \Illuminate\Support\Facades\Auth::user()->email
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <! cambiar links y agregar if para usr comun y usr admin>
+                        <a class="dropdown-item font-weight-bold" href="{{ route('menu.index') }}">Volver al menu</a>
+                        <a class="dropdown-item font-weight-bold" href="{{ route('login.index') }}">Cerrar sesion</a>
+                    </div>
+                </li>
+            </ul>
             </ul>
         </div>
     </nav>
 </header>
 
-<body>
-
+<body style="background: #FAD8D1;">
     @yield('contenido')
 
 </body>
 
-<footer class="fixed-bottom">
+<footer class="fixed-bottom" style="background-color: #F8EEE2; height: 30px;">
     <div class="container">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-            <div class="col-md-4 d-flex align-items-center">
-                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                    <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-                </a>
-                <span class="mb-3 mb-md-0 text-muted">© 2022 Company, Inc</span>
+        <footer class="row row-cols-2">
+            <div class="col-md-10">
+                <span class=" text-muted ">UTN FullStack - Grupo 3</span>
             </div>
-
-            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-            </ul>
+            <div class="col">
+                <span class=" text-muted ">2022</span>
+            </div>
         </footer>
     </div>
 </footer>

@@ -21,5 +21,6 @@ Route::resource('locaciones', \App\Http\Controllers\LocacionController::class);
 Route::resource('login', \App\Http\Controllers\LoginController::class)
 ->only(['index', 'store', 'destroy']);
 Route::resource('register', \App\Http\Controllers\RegisterController::class);
+Route::resource('menu', \App\Http\Controllers\MenuController::class);
 
 

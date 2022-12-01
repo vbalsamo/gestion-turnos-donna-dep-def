@@ -3,17 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inicia sesión</title>
+    <title>Inicio sesión</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/login.css') }}">
   </head>
   <body>
 
-    <div class="container w-75 mt-5 rounded shadow" id="container">
+    <div class="container w-75 position-absolute top-50 start-50 translate-middle rounded shadow" id="container">
         <div class="row align-items-stretch">
-            <div class="col-md-5 col-xl-6 rounded-start" id="logo">
-                <img src="{{ asset('logo.png') }}" width="300" height="300" alt="Donna depilación definitiva">
-
+            <div class="col-md-5 col-xl-6 row-cols-2 rounded-start" id="logo">
+                <img class ="position-relative top-50 start-50 translate-middle" src="{{ asset('logo.png') }}" width="300" height="300" alt="Donna depilación definitiva">
             </div>
             <div class="col-md-7 col-xl-6 rounded-end">
                 <h5 class="py-5 text-center">Ingrese sus credenciales</h5>

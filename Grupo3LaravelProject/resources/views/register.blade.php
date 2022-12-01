@@ -12,10 +12,10 @@
 </head>
 <body>
 
-<div class="container w-75 mt-5 rounded shadow" id="container">
+<div class="container w-75 mt-5 rounded shadow" id="containerR" >
     <div class="row align-items-stretch">
         <div class="col-md-5 col-xl-6 rounded-start" id="logo">
-            <img src="{{ asset('logo.png') }}" width="300" height="300" alt="Donna depilación definitiva">
+            <img class ="position-relative top-50 start-50 translate-middle" src="{{ asset('logo.png') }}" width="300" height="300" alt="Donna depilación definitiva">
 
         </div>
         <div class="col-md-7 col-xl-6 rounded-end">
