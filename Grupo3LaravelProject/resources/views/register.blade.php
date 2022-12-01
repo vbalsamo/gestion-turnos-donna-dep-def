@@ -8,18 +8,19 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
             integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/login.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/register.css') }}">
 </head>
 <body>
 
-<div class="container w-75 mt-5 rounded shadow" id="containerR" >
+<div class="container w-75 rounded shadow" id="container">
     <div class="row align-items-stretch">
         <div class="col-md-5 col-xl-6 rounded-start" id="logo">
-            <img class ="position-relative top-50 start-50 translate-middle" src="{{ asset('logo.png') }}" width="300" height="300" alt="Donna depilación definitiva">
+            <img src="{{ asset('logo.png') }}" width="300" height="300" alt="Donna depilación definitiva">
 
         </div>
         <div class="col-md-7 col-xl-6 rounded-end">
-            <h5 class="py-5 text-center">Ingrese sus credenciales</h5>
+            <h5 class="pt-5 pb-4 text-center">Ingrese sus credenciales</h5>
+            <p class="ps-4">Todos los campos son obligatorios.</p>
 
             <!-- Log In -->
 
@@ -33,6 +34,9 @@
                 </div>
                 <div class="mb-4">
                     <input type="text" class="form-control" name="numero_tel" placeholder="Celular" required>
+                </div>
+                <div class="mb-4">
+                    <input type="text" class="form-control" name="id_usuarioCliente" placeholder="Usuario" required>
                 </div>
                 <div class="mb-4">
                     <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña"
