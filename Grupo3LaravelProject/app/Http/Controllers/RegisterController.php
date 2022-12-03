@@ -36,7 +36,7 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        DB::insert('INSERT INTO usuario (email,password,nombre,numero_tel) values (?,?,?,?)' , [
+        DB::insert('INSERT INTO cliente (email,password,nombre,numero_tel) values (?,?,?,?)' , [
             $request->post('email'),
             Hash::make($request->post('password')),
             $request->post('nombre'),
