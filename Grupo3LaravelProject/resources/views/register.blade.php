@@ -15,34 +15,53 @@
 <div class="container w-75 rounded shadow" id="container">
     <div class="row align-items-stretch">
         <div class="col-md-5 col-xl-6 rounded-start" id="logo">
-            <img src="{{ asset('logo.png') }}" width="300" height="300" alt="Donna depilación definitiva" id ="logoImg">
+            <img src="{{ asset('logo.png') }}" width="300" height="300" alt="Donna depilación definitiva" id="logoImg">
 
         </div>
         <div class="col-md-7 col-xl-6 rounded-end">
             <h5 class="pt-5 pb-4 text-center">Ingrese sus credenciales</h5>
             <p class="ps-4">Todos los campos son obligatorios.</p>
 
+
             <!-- Registro -->
 
             <form action="{{ route('register.store') }}" method="POST" class="mx-4">
                 @csrf
-                <div class="mb-4">
-                    <input type="text" class="form-control" name="nombre" placeholder="Nombre y Apellido" required>
-                </div>
-                <div class="mb-4">
-                    <input type="text" class="form-control" name="email" placeholder="Email" required>
-                </div>
-                <div class="mb-4">
-                    <input type="text" class="form-control" name="numero_tel" placeholder="Celular" required>
-                </div>
-                <div class="mb-4">
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña"
-                           required>
-                </div>
-                <div class="mb-4">
-                    <input type="password" class="form-control" name="confirm_password" id="confirm_password"
-                           placeholder="Confirmar contraseña" required>
-                </div>
+
+                @php
+                    $campos = ['nombre', 'email', 'numero_tel', 'password', 'password_confirmation'];
+                    $placeholders = [
+                        'nombre' => 'Nombre y Apellido',
+                        'email' => 'Email',
+                        'numero_tel' => 'Teléfono',
+                        'password' => 'Contraseña',
+                        'password_confirmation' => 'Confirmar contraseña'
+                    ];
+                    function tipoInput ($campo){
+                        if($campo == 'password' or $campo == 'password_confirmation') return 'password';
+                        else return 'text';
+                    }
+                @endphp
+
+                @foreach($campos as $campo)
+                    <div class="mb-4">
+                        @if (!$errors->has($campo))
+                            <input type="{{ tipoInput($campo) }}"
+                                   class="form-control" name="{{ $campo }}" placeholder="{{ $placeholders[$campo] }}"
+                                   value="{{ old($campo) }}"
+                                    id="{{ $campo }}">
+                        @else
+                            <input id="{{ $campo }}" type="{{ tipoInput($campo) }}"
+                                   class="form-control is-invalid" name="{{ $campo }}"
+                                   placeholder="{{ $placeholders[$campo] }}">
+                            @foreach($errors->get($campo) as $error)
+                                <ul id="error-list-{{ $campo }}" class="invalid-feedback">
+                                    <li>{{ $error }}</li>
+                                </ul>
+                            @endforeach
+                        @endif
+                    </div>
+                @endforeach
                 <span id='alerta'></span>
                 <div class="mb-4 text-center">
                     <button id="btnRegistrarse" type="submit" class="btn btn-primary shadow">Registrarse</button>
@@ -53,26 +72,7 @@
     </div>
 </div>
 
-<script>
-    //todavia no funciona bien, es para comprobar si los campos 'contraseña' y 'confirmar contraseña' son iguales
-    $('#password, #confirm_password').on('keyup', function () {
-        if ($('#password').val().length == 0 && $('#confirm_password').val().length == 0) {
-            $('#alerta').prop('hidden', true);
-            $('#password, #confirm_password').attr('class', 'form-control');
-            $('#btnRegistrarse').prop('disabled', true);
-
-        } else if ($('#password').val() == $('#confirm_password').val()) {
-            $('#alerta').html('Las contraseñas coinciden').css('color', 'green').prop('hidden', false);
-            $('#password, #confirm_password').attr('class', 'form-control is-valid');
-            $('#btnRegistrarse').prop('disabled', false);
-        } else {
-            $('#alerta').html('Las contraseñas no coinciden').css('color', 'red').prop('hidden', false);
-            $('#password, #confirm_password').attr('class', 'form-control is-invalid');
-            $('#btnRegistrarse').prop('disabled', true);
-        }
-    });
-
-</script>
+<script src="{{ asset('js/register.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>

@@ -26,7 +26,7 @@
                 @csrf
                 <div class="mb-4">
                     @if (!$errors->has('email'))
-                        <input type="text" class="form-control" name="email" placeholder="Email">
+                        <input type="text" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}">
                     @else
                         <input id="error-email" type="text" class="form-control is-invalid" name="email"
                                placeholder="Email">

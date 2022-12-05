@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
 {
@@ -18,37 +21,50 @@ class RegisterController extends Controller
         return view('register');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    private function validar(Request $request)
     {
-
+        return Validator::make($request->post(), [
+            'nombre' => ['required', 'alpha'],
+            'email' => ['required', 'email'],
+            'numero_tel' => ['required', 'numeric'],
+            'password' => ['required', Password::min(8)],
+            'password_confirmation' => ['required', 'confirmed']
+        ])->validate();
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        DB::insert('INSERT INTO cliente (email,password,nombre,numero_tel) values (?,?,?,?)' , [
-            $request->post('email'),
-            Hash::make($request->post('password')),
-            $request->post('nombre'),
-            $request->post('numero_tel')
-        ]);
-        return view('login');
+        $this->validar($request);
+
+        try {
+
+            DB::insert('INSERT INTO cliente (email,password,nombre,numero_tel) values (?,?,?,?)', [
+                $request->post('email'),
+                Hash::make($request->post('password')),
+                $request->post('nombre'),
+                $request->post('numero_tel')
+            ]);
+            return view('login');
+
+        } catch (ValidationException $ex) {
+
+        } catch (\Exception $exception) {
+
+        }
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -59,7 +75,7 @@ class RegisterController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -70,8 +86,8 @@ class RegisterController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -82,7 +98,7 @@ class RegisterController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -23,7 +23,7 @@ class LoginController extends Controller
     private function validar(Request $request)
     {
         return Validator::make($request->post(), [
-            'email' => ['required', 'email', 'alpha_num'],
+            'email' => ['required', 'email'],
             'password' => ['required']
         ])->validate();
     }
@@ -42,7 +42,7 @@ class LoginController extends Controller
                 return redirect()->intended(route('home'));
             } else {
                 return back()->withErrors([
-                    'username' => 'El email/nombre de usuario no existe en la base de datos',
+                    'email' => 'El email/nombre de usuario no existe en la base de datos',
                     'password' => 'La contraseña no coincide con el email/nombre de usuario proporcionado'
                 ]);
                 //NO COINCIDE NOMBRE DE USUARIO Y/O CONTRASEÑA
