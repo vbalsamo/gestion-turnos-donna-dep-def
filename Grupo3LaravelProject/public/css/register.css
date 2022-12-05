@@ -1,26 +1,46 @@
 body {
-    background: #f9efe2;
+    background: pink;
 }
 
 #container {
-    background-color: #fae5c0;
+    background-color: beige;
+    position: absolute;
+    top: 22%;
+    left: 17%;
 }
 
 #logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fbf9f4;    
+    background-color: white;
+}
+
+#logoImg{
+    position: relative;
+    left: 26.5%;
+    top: 21%;
 }
 
 h5 {
     color: #5a1d3e;
 }
 
-#btnRegistrarse {
-    background: #eb7381;
+#btnIngresar {
+    background-color: pink;
     border: none;
     transition-duration: 0.1s;
+    color: #5a1d3e;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.1);
+}
+
+#btnRegistrarse {
+    background: pink;
+    border: none;
+    color: #5a1d3e;
+    transition-duration: 0.1s;
+}
+
+#btnIngresar:hover {
+    background-color: #B05661;
+    color: white;
 }
 
 #btnRegistrarse:hover {
