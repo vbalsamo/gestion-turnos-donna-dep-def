@@ -22,7 +22,7 @@
             <h5 class="pt-5 pb-4 text-center">Ingrese sus credenciales</h5>
             <p class="ps-4">Todos los campos son obligatorios.</p>
 
-            <!-- Log In -->
+            <!-- Registro -->
 
             <form action="{{ route('register.store') }}" method="POST" class="mx-4">
                 @csrf
@@ -34,9 +34,6 @@
                 </div>
                 <div class="mb-4">
                     <input type="text" class="form-control" name="numero_tel" placeholder="Celular" required>
-                </div>
-                <div class="mb-4">
-                    <input type="text" class="form-control" name="id_usuarioCliente" placeholder="Usuario" required>
                 </div>
                 <div class="mb-4">
                     <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña"
