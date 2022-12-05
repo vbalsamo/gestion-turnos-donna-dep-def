@@ -24,7 +24,7 @@ class RegisterController extends Controller
     private function validar(Request $request)
     {
         return Validator::make($request->post(), [
-            'nombre' => ['required', 'alpha'],
+            'nombre' => ['required', 'alpha_spaces'],
             'email' => ['required', 'email'],
             'numero_tel' => ['required', 'numeric'],
             'password' => ['required', Password::min(8)],
