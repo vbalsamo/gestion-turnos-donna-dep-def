@@ -39,11 +39,10 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`cliente` (
   `email` VARCHAR(100) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
   `rol` VARCHAR(100) NOT NULL DEFAULT 'cliente',
-  `remember_token` VARCHAR(100) NOT NULL,
+  `remember_token` VARCHAR(100) NULL DEFAULT NULL,
   `nombre` VARCHAR(300) NOT NULL,
   `numero_tel` VARCHAR(25) NOT NULL,
-  `adeuda` TINYINT(4) NULL,
-  `id_usuarioCliente` INT(11) NOT NULL,
+  `adeuda` TINYINT(4) NULL DEFAULT NULL,
   `id_profesional_preferido` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_cliente_profesional1_idx` (`id_profesional_preferido` ASC) ,
@@ -51,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`cliente` (
     FOREIGN KEY (`id_profesional_preferido`)
     REFERENCES `grupo3_tp`.`profesional` (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 10
 DEFAULT CHARACTER SET = utf8;
 
 
