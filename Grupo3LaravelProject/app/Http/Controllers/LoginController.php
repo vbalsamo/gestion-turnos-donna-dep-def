@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -19,32 +20,46 @@ class LoginController extends Controller
         return view('login');
     }
 
+    private function validar(Request $request)
+    {
+        return Validator::make($request->post(), [
+            'email' => ['required', 'email', 'alpha_num'],
+            'password' => ['required']
+        ])->validate();
+    }
+
     public function store(Request $request)
     {
-//REALIZAR VALIDACIONES QUE APRENDIMOS
+        $this->validar($request);
 
-        if(Auth::attempt([
-            'email' => $request->post('email'),
-            'password' => $request->post('password'),
-        ])){
-            $request->session()->regenerate();
+        try {
+            if (Auth::attempt([
+                'email' => $request->post('email'),
+                'password' => $request->post('password'),
+            ])) {
+                $request->session()->regenerate();
 
-            return redirect()->intended(route('home'));
+                return redirect()->intended(route('home'));
+            } else {
+                return back()->withErrors([
+                    'username' => 'El email/nombre de usuario no existe en la base de datos',
+                    'password' => 'La contraseña no coincide con el email/nombre de usuario proporcionado'
+                ]);
+                //NO COINCIDE NOMBRE DE USUARIO Y/O CONTRASEÑA
+            }
+        } catch (ValidationException $ex) {
+
+        } catch (\Exception $exception) {
+
         }
-        else {
-            return back()->withErrors([
-                'username' => 'El email/nombre de usuario no existe en la base de datos',
-                'password' => 'La contraseña no coincide con el email/nombre de usuario proporcionado'
-            ]);
-            //NO COINCIDE NOMBRE DE USUARIO Y/O CONTRASEÑA
-        }
+
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
 

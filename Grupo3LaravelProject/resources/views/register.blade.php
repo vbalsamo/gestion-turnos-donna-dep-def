@@ -59,19 +59,19 @@
 <script>
     //todavia no funciona bien, es para comprobar si los campos 'contraseña' y 'confirmar contraseña' son iguales
     $('#password, #confirm_password').on('keyup', function () {
-        if($('#password').val().length == 0 && $('#confirm_password').val().length== 0){
+        if ($('#password').val().length == 0 && $('#confirm_password').val().length == 0) {
             $('#alerta').prop('hidden', true);
             $('#password, #confirm_password').attr('class', 'form-control');
-            $('#btnRegistrarse').prop('disabled',true);
+            $('#btnRegistrarse').prop('disabled', true);
 
-        }else if ($('#password').val() == $('#confirm_password').val()) {
+        } else if ($('#password').val() == $('#confirm_password').val()) {
             $('#alerta').html('Las contraseñas coinciden').css('color', 'green').prop('hidden', false);
             $('#password, #confirm_password').attr('class', 'form-control is-valid');
-            $('#btnRegistrarse').prop('disabled',false);
-        }else{
+            $('#btnRegistrarse').prop('disabled', false);
+        } else {
             $('#alerta').html('Las contraseñas no coinciden').css('color', 'red').prop('hidden', false);
             $('#password, #confirm_password').attr('class', 'form-control is-invalid');
-            $('#btnRegistrarse').prop('disabled',true);
+            $('#btnRegistrarse').prop('disabled', true);
         }
     });
 
