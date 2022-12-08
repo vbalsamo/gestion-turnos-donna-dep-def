@@ -27,7 +27,7 @@ class RegisterController extends Controller
             'nombre' => ['required', 'alpha_spaces'],
             'email' => ['required', 'email'],
             'numero_tel' => ['required', 'numeric'],
-            'password' => ['required', Password::min(8)],
+            'password' => ['required', Password::min(8), 'confirmed'],
             'password_confirmation' => ['required']
         ])->validate();
     }
