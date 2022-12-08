@@ -28,7 +28,7 @@ class RegisterController extends Controller
             'email' => ['required', 'email'],
             'numero_tel' => ['required', 'numeric'],
             'password' => ['required', Password::min(8)],
-            'password_confirmation' => ['required', 'confirmed']
+            'password_confirmation' => ['required']
         ])->validate();
     }
 
@@ -42,16 +42,24 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $this->validar($request);
-
         try {
+            $email = $request->post('email');
+            $usuarioDuplicado = DB::selectOne("SELECT email FROM cliente WHERE email = '{$email}'");
+            if($usuarioDuplicado == null){
+                DB::insert('INSERT INTO cliente (email,password,nombre,numero_tel) values (?,?,?,?)', [
+                    $request->post('email'),
+                    Hash::make($request->post('password')),
+                    $request->post('nombre'),
+                    $request->post('numero_tel')
+                ]);
+                return view('login');
+            }
+            else{
+                return view('register')->withErrors([
+                    'email' => 'El email ya está registrado en la base de datos'
+                ]);
+            }
 
-            DB::insert('INSERT INTO cliente (email,password,nombre,numero_tel) values (?,?,?,?)', [
-                $request->post('email'),
-                Hash::make($request->post('password')),
-                $request->post('nombre'),
-                $request->post('numero_tel')
-            ]);
-            return view('login');
 
         } catch (ValidationException $ex) {
 

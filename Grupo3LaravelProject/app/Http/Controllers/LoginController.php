@@ -42,7 +42,7 @@ class LoginController extends Controller
                 return redirect()->intended(route('home'));
             } else {
                 return back()->withErrors([
-                    'email' => 'El email/nombre de usuario no existe en la base de datos',
+                    'email' => 'El email no existe en la base de datos',
                     'password' => 'La contraseña no coincide con el email/nombre de usuario proporcionado'
                 ]);
                 //NO COINCIDE NOMBRE DE USUARIO Y/O CONTRASEÑA
