@@ -15,8 +15,6 @@ class TratamientoController extends Controller
      */
     public function index()
     {
-        $tratamientos = DB::select(
-            "SELECT * FROM tratamiento");
         return view('tratamientos/tratamientosIndex');
     }
 

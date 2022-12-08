@@ -25,6 +25,7 @@ class LoginController extends Controller
         return Validator::make($request->post(), [
             'email' => ['required', 'email'],
             'password' => ['required']
+            //TODO: 'activo'=> true;
         ])->validate();
     }
 
@@ -57,14 +58,12 @@ class LoginController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $request->session()->invalidate();
+        return redirect(route('login.index'));
     }
 }

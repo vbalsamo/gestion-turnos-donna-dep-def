@@ -19,7 +19,8 @@ Route::resource('tratamientos', \App\Http\Controllers\TratamientoController::cla
 Route::resource('turnos', \App\Http\Controllers\TurnosController::class);
 Route::resource('locaciones', \App\Http\Controllers\LocacionController::class);
 Route::resource('login', \App\Http\Controllers\LoginController::class)
-->only(['index', 'store', 'destroy']);
+->only(['index', 'store']);
+Route::post('logout', [\App\Http\Controllers\LoginController::class, 'destroy'])->name('logout');
 Route::resource('register', \App\Http\Controllers\RegisterController::class);
 Route::resource('menu', \App\Http\Controllers\MenuController::class);
 
