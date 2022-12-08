@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`cliente` (
     FOREIGN KEY (`id_profesional_preferido`)
     REFERENCES `grupo3_tp`.`profesional` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 10
+AUTO_INCREMENT = 14
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -60,6 +60,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `grupo3_tp`.`locacion` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(400) NOT NULL,
+  `direccion` VARCHAR(400) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -74,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`tratamiento` (
   `descripcion` VARCHAR(500) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 18
+AUTO_INCREMENT = 20
 DEFAULT CHARACTER SET = utf8;
 
 
