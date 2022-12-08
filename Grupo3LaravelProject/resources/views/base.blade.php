@@ -40,8 +40,8 @@
                 </li>
                 <li class="nav-item dropdown active" style="position: relative; left: 190%;">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <! agregar doble llaves>
-                        \Illuminate\Support\Facades\Auth::user()->email
+                        {{\Illuminate\Support\Facades\Auth::user()->nombre}}
+
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <! cambiar links y agregar if para usr comun y usr admin>
