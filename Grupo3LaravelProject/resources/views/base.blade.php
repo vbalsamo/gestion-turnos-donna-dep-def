@@ -66,6 +66,7 @@
                         {{--<! cambiar links y agregar if para usr comun y usr admin>--}}
                         <a class="dropdown-item font-weight-bold" href="{{ route('menu.index') }}">Volver al menu</a>
                         <form action="{{ route('logout') }}" id="logout-form" method="post">
+                            @csrf
                             <a class="dropdown-item font-weight-bold" href="#"
                                onclick="document.getElementById('logout-form').submit()">Cerrar sesion</a>
                         </form>
