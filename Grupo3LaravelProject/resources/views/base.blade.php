@@ -15,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}">
     <title>Donna Depilación Definitiva</title>
 </head>
 
@@ -48,31 +49,35 @@
                         <a class="dropdown-item font-weight-bold" href="{{ route('tratamientos.index') }}">Ver todos</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown active" style="position: relative; left: 190%;">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        @php
-                            use \Illuminate\Support\Facades\Auth;
-                            $cliente = Auth::user();
-                        @endphp
-                        @if(isset($cliente))
-                            {{ $cliente->nombre }}
-                        @else
-                            Usuario
-                        @endif
+                @php
+                    use \Illuminate\Support\Facades\Auth;
+                    $cliente = Auth::user();
+                @endphp
+                @if(isset($cliente))
+                    <li class="nav-item dropdown active my-2" style="position: relative; left: 190%;">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">{{ $cliente->nombre }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            {{--<! cambiar links y agregar if para usr comun y usr admin>--}}
+                            <a class="dropdown-item font-weight-bold" href="{{ route('menu.index') }}">Volver al
+                                menu</a>
+                            <form action="{{ route('logout') }}" id="logout-form" method="post">
+                                @csrf
+                                <a class="dropdown-item font-weight-bold" href="#"
+                                   onclick="document.getElementById('logout-form').submit()">Cerrar sesion</a>
+                            </form>
 
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        {{--<! cambiar links y agregar if para usr comun y usr admin>--}}
-                        <a class="dropdown-item font-weight-bold" href="{{ route('menu.index') }}">Volver al menu</a>
-                        <form action="{{ route('logout') }}" id="logout-form" method="post">
-                            @csrf
-                            <a class="dropdown-item font-weight-bold" href="#"
-                               onclick="document.getElementById('logout-form').submit()">Cerrar sesion</a>
+                        </div>
+                    </li>
+                @else
+                    <li class="nav-item dropdown active" style="position: relative; left: 190%;">
+                        <form action="{{ route('login.index') }}">
+                            <button id="btnIngresar" type="submit" class="btn btn-primary shadow">Iniciar Sesión
+                            </button>
                         </form>
-
-                    </div>
-                </li>
+                    </li>
+                @endif
             </ul>
         </div>
     </nav>
