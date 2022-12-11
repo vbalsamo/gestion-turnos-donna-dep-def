@@ -29,8 +29,18 @@
             @endif
 
             <label for="descripcion">Descripción</label>
+            @php
+                $descripcionTextarea = '';
+
+                if(isset($tratamiento)){
+                    $descripcionTextarea = $tratamiento->descripcion;
+                }else{
+                    $descripcionTextarea = old('descripcion');
+                }
+            @endphp
+
             <textarea class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}"
-                      name="descripcion" autofocus>@if(isset($tratamiento)){{ $tratamiento->descripcion }}@endif{{ old('descripcion') }}</textarea>
+                      name="descripcion" autofocus>{{ $descripcionTextarea }}</textarea>
             {{--el textarea tiene que estar escrito si o si en una sola línea xq sino agrega los enters como si fueran parte del input--}}
 
             @if ($errors->has('descripcion'))
