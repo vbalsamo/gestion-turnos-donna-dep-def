@@ -100,12 +100,14 @@ class TratamientoController extends Controller
     {
         $this->validar($request);
         try {
-            DB::table('tratamiento')
-                ->where('id', $id)
-                ->update([
-                    'nombre' => $request->post('nombre'),
-                    'descripcion' => $request->post('descripcion')
-                ]);
+            DB::transaction(function () use ($request, $id) {
+                DB::table('tratamiento')
+                    ->where('id', $id)
+                    ->update([
+                        'nombre' => $request->post('nombre'),
+                        'descripcion' => $request->post('descripcion')
+                    ]);
+            });
             return redirect()->route('tratamientos.index');
         } catch (ValidationException $ex) {
 
@@ -123,8 +125,10 @@ class TratamientoController extends Controller
     public function destroy($id)
     {
         try {
+            DB::transaction(function () use ($id) {
+                DB::table('tratamiento')->delete($id);
+            });
 
-            DB::table('tratamiento')->delete($id);
             return redirect()->route('tratamientos.index');
 
         } catch (ValidationException $ex) {
