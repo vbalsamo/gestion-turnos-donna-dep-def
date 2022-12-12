@@ -15,37 +15,33 @@
             {{method_field('PATCH')}}
         @endif
 
+        @php
+            $campos = ['ciudad', 'calle', 'altura', 'piso', 'depto'];
+        @endphp
         <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}"
-                   name="nombre" @if(isset($locacion)) value="{{ $locacion->nombre }}"
-                   @endif value="{{ old('nombre') }}" autofocus>
-
-            @if ($errors->has('nombre'))
-                <span class="invalid feedback" role="alert">
-                    <strong>{{ $errors->first('nombre') }}</strong>
-                    <br>
-                </span>
-            @endif
-
-            <div class="form-group">
-                <label for="direccion">Dirección</label>
-                <input id="direccion" type="text" class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}"
-                       name="direccion" @if(isset($locacion)) value="{{ $locacion->direccion }}"
-                       @endif value="{{ old('direccion') }}" autofocus>
-
-                @if ($errors->has('direccion'))
-                    <span class="invalid feedback" role="alert">
-                    <strong>{{ $errors->first('direccion') }}</strong>
-                    <br>
-                </span>
+            @foreach($campos as $campo)
+                @if (!$errors->has($campo))
+                    <label for="{{ $campo }}">{{ ucfirst($campo) }}</label>
+                    <input id="{{ $campo }}" type="text" class="form-control{{ $errors->has($campo) ? ' is-invalid' : '' }}"
+                           name="{{ $campo }}" @if(isset($locacion)) value="{{ $locacion->$campo }}"
+                           @endif value="{{ old($campo) }}" autofocus>
+                @else
+                    <label for="{{ $campo }}">{{ ucfirst($campo) }}</label>
+                    <input id="{{ $campo }}" type="text"
+                           class="form-control is-invalid" name="{{ $campo }}">
+                    @foreach($errors->get($campo) as $error)
+                        <ul id="error-list-{{ $campo }}" class="invalid-feedback">
+                            <li>{{ $error }}</li>
+                        </ul>
+                    @endforeach
                 @endif
 
-            </div>
+            @endforeach
+        </div>
 
-            <div>
-                <button type="submit" class="btn btn-secondary">Guardar</button>
-            </div>
+        <div>
+            <button type="submit" class="btn btn-secondary">Guardar</button>
+        </div>
     </form>
 
 @endsection('contenido')

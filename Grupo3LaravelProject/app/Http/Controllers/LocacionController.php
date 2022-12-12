@@ -31,8 +31,11 @@ class LocacionController extends Controller
     private function validar(Request $request)
     {
         return Validator::make($request->post(), [
-            'nombre' => ['required'],
-            'direccion' => ['required']
+            'ciudad' => ['required'],
+            'calle' => ['required'],
+            'altura'=> ['required', 'numeric'],
+            'piso'=> ['nullable', 'numeric'],
+            'depto'=> ['nullable', 'numeric']
         ])->validate();
     }
 
@@ -47,9 +50,12 @@ class LocacionController extends Controller
         $this->validar($request);
         try {
             DB::transaction(function () use ($request) {
-                DB::insert('INSERT INTO locacion (nombre, direccion) values (?, ?)', [
-                    $request->post("nombre"),
-                    $request->post("direccion")
+                DB::insert('INSERT INTO locacion (ciudad, calle, altura, piso, depto) values (?, ?, ?, ?, ?)', [
+                    $request->post("ciudad"),
+                    $request->post("calle"),
+                    $request->post("altura"),
+                    $request->post("piso"),
+                    $request->post("depto")
                 ]);
             });
             return redirect(route('locaciones.index'));
@@ -68,7 +74,10 @@ class LocacionController extends Controller
      */
     public function show($id)
     {
-        //
+        $locacion = DB::selectOne("SELECT * FROM locacion WHERE id = {$id}");
+        return view('locaciones/showlocacion', [
+            "locacion" => $locacion
+        ]);
     }
 
     /**
@@ -79,7 +88,10 @@ class LocacionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $locacion = DB::selectOne("SELECT * FROM locacion WHERE id = {$id}");
+        return view('locaciones/createLocacion', [
+            "locacion" => $locacion
+        ]);
     }
 
     /**
@@ -91,7 +103,23 @@ class LocacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validar($request);
+        try {
+            DB::table('locacion')
+                ->where('id', $id)
+                ->update([
+                    'ciudad' => $request->post('ciudad'),
+                    'calle' => $request->post('calle'),
+                    'altura' => $request->post('altura'),
+                    'piso' => $request->post('piso'),
+                    'depto' => $request->post('depto')
+                ]);
+            return redirect()->route('locaciones.index');
+        } catch (ValidationException $ex) {
+
+        } catch (\Exception $exception) {
+
+        }
     }
 
     /**
@@ -102,6 +130,15 @@ class LocacionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+
+            DB::table('locacion')->delete($id);
+            return redirect()->route('locaciones.index');
+
+        } catch (ValidationException $ex) {
+
+        } catch (\Exception $exception) {
+            echo $exception->getMessage();
+        }
     }
 }

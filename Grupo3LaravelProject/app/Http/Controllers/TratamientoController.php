@@ -112,8 +112,6 @@ class TratamientoController extends Controller
         } catch (\Exception $exception) {
 
         }
-
-
     }
 
     /**
