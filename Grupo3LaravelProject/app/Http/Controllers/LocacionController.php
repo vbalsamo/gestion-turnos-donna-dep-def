@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class LocacionController extends Controller
 {
@@ -26,6 +28,14 @@ class LocacionController extends Controller
         return view('locaciones.createLocacion');
     }
 
+    private function validar(Request $request)
+    {
+        return Validator::make($request->post(), [
+            'nombre' => ['required'],
+            'direccion' => ['required']
+        ])->validate();
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -34,7 +44,20 @@ class LocacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validar($request);
+        try {
+            DB::transaction(function () use ($request) {
+                DB::insert('INSERT INTO locacion (nombre, direccion) values (?, ?)', [
+                    $request->post("nombre"),
+                    $request->post("direccion")
+                ]);
+            });
+            return redirect(route('locaciones.index'));
+        } catch (ValidationException $ex) {
+
+        } catch (\Exception $exception) {
+
+        }
     }
 
     /**

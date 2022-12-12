@@ -28,23 +28,24 @@
                 </span>
             @endif
 
-            <label for="direccion">Descripción</label>
-            <textarea class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}"
-                      name="direccion" autofocus>@if(isset($locacion)){{ $locacion->direccion }}@endif{{ old('direccion') }}</textarea>
-            {{--el textarea tiene que estar escrito si o si en una sola línea xq sino agrega los enters como si fueran parte del input--}}
+            <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input id="direccion" type="text" class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}"
+                       name="direccion" @if(isset($locacion)) value="{{ $locacion->direccion }}"
+                       @endif value="{{ old('direccion') }}" autofocus>
 
-            @if ($errors->has('direccion'))
-                <span class="invalid feedback" role="alert">
+                @if ($errors->has('direccion'))
+                    <span class="invalid feedback" role="alert">
                     <strong>{{ $errors->first('direccion') }}</strong>
                     <br>
                 </span>
-            @endif
+                @endif
 
-        </div>
+            </div>
 
-        <div>
-            <button type="submit" class="btn btn-secondary">Guardar</button>
-        </div>
+            <div>
+                <button type="submit" class="btn btn-secondary">Guardar</button>
+            </div>
     </form>
 
 @endsection('contenido')
