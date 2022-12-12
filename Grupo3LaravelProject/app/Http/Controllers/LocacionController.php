@@ -39,6 +39,18 @@ class LocacionController extends Controller
         ])->validate();
     }
 
+    private function storeLocacion(Request $request){
+        DB::transaction(function () use ($request) {
+            DB::insert('INSERT INTO locacion (ciudad, calle, altura, piso, depto) values (?, ?, ?, ?, ?)', [
+                $request->post("ciudad"),
+                $request->post("calle"),
+                $request->post("altura"),
+                $request->post("piso"),
+                $request->post("depto")
+            ]);
+        });
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -49,15 +61,7 @@ class LocacionController extends Controller
     {
         $this->validar($request);
         try {
-            DB::transaction(function () use ($request) {
-                DB::insert('INSERT INTO locacion (ciudad, calle, altura, piso, depto) values (?, ?, ?, ?, ?)', [
-                    $request->post("ciudad"),
-                    $request->post("calle"),
-                    $request->post("altura"),
-                    $request->post("piso"),
-                    $request->post("depto")
-                ]);
-            });
+            $this->storeLocacion($request);
             return redirect(route('locaciones.index'));
         } catch (ValidationException $ex) {
 
@@ -94,6 +98,20 @@ class LocacionController extends Controller
         ]);
     }
 
+    private function updateLocacion(Request $request, $id){
+        DB::transaction(function () use ($request, $id) {
+            DB::table('locacion')
+                ->where('id', $id)
+                ->update([
+                    'ciudad' => $request->post('ciudad'),
+                    'calle' => $request->post('calle'),
+                    'altura' => $request->post('altura'),
+                    'piso' => $request->post('piso'),
+                    'depto' => $request->post('depto')
+                ]);
+        });
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -105,17 +123,7 @@ class LocacionController extends Controller
     {
         $this->validar($request);
         try {
-            DB::transaction(function () use ($request, $id) {
-                DB::table('locacion')
-                    ->where('id', $id)
-                    ->update([
-                        'ciudad' => $request->post('ciudad'),
-                        'calle' => $request->post('calle'),
-                        'altura' => $request->post('altura'),
-                        'piso' => $request->post('piso'),
-                        'depto' => $request->post('depto')
-                    ]);
-            });
+            $this->updateLocacion($request, $id);
             return redirect()->route('locaciones.index');
         } catch (ValidationException $ex) {
 
