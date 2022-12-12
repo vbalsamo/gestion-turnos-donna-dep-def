@@ -105,15 +105,17 @@ class LocacionController extends Controller
     {
         $this->validar($request);
         try {
-            DB::table('locacion')
-                ->where('id', $id)
-                ->update([
-                    'ciudad' => $request->post('ciudad'),
-                    'calle' => $request->post('calle'),
-                    'altura' => $request->post('altura'),
-                    'piso' => $request->post('piso'),
-                    'depto' => $request->post('depto')
-                ]);
+            DB::transaction(function () use ($request, $id) {
+                DB::table('locacion')
+                    ->where('id', $id)
+                    ->update([
+                        'ciudad' => $request->post('ciudad'),
+                        'calle' => $request->post('calle'),
+                        'altura' => $request->post('altura'),
+                        'piso' => $request->post('piso'),
+                        'depto' => $request->post('depto')
+                    ]);
+            });
             return redirect()->route('locaciones.index');
         } catch (ValidationException $ex) {
 
@@ -131,8 +133,9 @@ class LocacionController extends Controller
     public function destroy($id)
     {
         try {
-
-            DB::table('locacion')->delete($id);
+            DB::transaction(function () use ($id) {
+                DB::table('locacion')->delete($id);
+            });
             return redirect()->route('locaciones.index');
 
         } catch (ValidationException $ex) {
