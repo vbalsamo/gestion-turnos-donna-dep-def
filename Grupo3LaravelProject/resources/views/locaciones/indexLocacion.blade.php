@@ -3,7 +3,7 @@
     <h1>Listado de locaciones</h1>
 
     <form action="{{ route('locaciones.create') }}">
-        <button type="submit" class="btn btn-secondary">Crear nuevo locacion</button>
+        <button type="submit" class="btn btn-secondary">Crear nueva locacion</button>
     </form>
 
     <table class="table table">

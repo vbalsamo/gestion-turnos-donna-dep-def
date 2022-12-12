@@ -28,7 +28,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $tratamientos = DB::select("SELECT * FROM tratamiento");
         View::share('tratamientos_global', $tratamientos);
-        
+
+        $locaciones = DB::select("SELECT * FROM locacion");
+        View::share('locaciones_global', $locaciones);
+
         Validator::extend('alpha_spaces', function ($attribute, $value){
             return preg_match('/^[\pL\s]+$/u', $value);
         });
