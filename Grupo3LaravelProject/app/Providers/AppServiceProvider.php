@@ -26,11 +26,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $tratamientos = DB::select("SELECT * FROM tratamiento");
-        View::share('tratamientos_global', $tratamientos);
+        View::share('tratamientos_global', DB::select("SELECT * FROM tratamiento"));
 
-        $locaciones = DB::select("SELECT * FROM locacion");
-        View::share('locaciones_global', $locaciones);
+        View::share('locaciones_global', DB::select("SELECT * FROM locacion"));
+
+        View::share('profesionales_global', DB::select("SELECT * FROM profesional"));
 
         Validator::extend('alpha_spaces', function ($attribute, $value){
             return preg_match('/^[\pL\s]+$/u', $value);

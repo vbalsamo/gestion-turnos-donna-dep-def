@@ -23,5 +23,6 @@ Route::resource('login', \App\Http\Controllers\LoginController::class)
 Route::post('logout', [\App\Http\Controllers\LoginController::class, 'destroy'])->name('logout');
 Route::resource('register', \App\Http\Controllers\RegisterController::class);
 Route::resource('menu', \App\Http\Controllers\MenuController::class);
+Route::resource('profesionales', \App\Http\Controllers\ProfesionalController::class);
 
 
