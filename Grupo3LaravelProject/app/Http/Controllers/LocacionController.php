@@ -142,7 +142,7 @@ class LocacionController extends Controller
     {
         try {
             DB::transaction(function () use ($id) {
-                DB::table('locacion')->delete($id);
+                DB::update("UPDATE locacion SET activo = 0 WHERE id = {$id}");
             });
             return redirect()->route('locaciones.index');
 

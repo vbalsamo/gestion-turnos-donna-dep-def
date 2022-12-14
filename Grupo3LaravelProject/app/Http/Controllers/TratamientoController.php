@@ -136,7 +136,7 @@ class TratamientoController extends Controller
     {
         try {
             DB::transaction(function () use ($id) {
-                DB::table('tratamiento')->delete($id);
+                DB::update("UPDATE tratamiento SET activo = 0 WHERE id = {$id}");
             });
 
             return redirect()->route('tratamientos.index');

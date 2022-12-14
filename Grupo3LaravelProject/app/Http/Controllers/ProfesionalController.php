@@ -77,14 +77,14 @@ class ProfesionalController extends Controller
     {
         return DB::select("SELECT tratamiento.* FROM (profesional INNER JOIN tratamientoxprofesional ON profesional.id = tratamientoxprofesional.id_profesional)
         INNER JOIN tratamiento ON tratamientoxprofesional.id_tratamiento = tratamiento.id
-        WHERE profesional.id = {$id}");
+        WHERE profesional.id = {$id} AND tratamiento.activo = 1");
     }
 
     public static function idTratamientosProfesional($id)
     {
         return DB::select("SELECT tratamiento.id FROM (profesional INNER JOIN tratamientoxprofesional ON profesional.id = tratamientoxprofesional.id_profesional)
         INNER JOIN tratamiento ON tratamientoxprofesional.id_tratamiento = tratamiento.id
-        WHERE profesional.id = {$id}");
+        WHERE profesional.id = {$id} AND tratamiento.activo = 1");
     }
 
     /**
@@ -186,7 +186,7 @@ class ProfesionalController extends Controller
         try {
             DB::transaction(function () use ($id) {
                 DB::delete("DELETE from tratamientoxprofesional WHERE id_profesional = {$id}");
-                DB::table('profesional')->delete($id);
+                DB::update("UPDATE profesional SET activo = 0 WHERE id = {$id}");;
             });
             return redirect()->route('profesionales.index');
 

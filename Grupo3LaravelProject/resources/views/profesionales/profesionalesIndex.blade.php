@@ -19,7 +19,8 @@
         <tbody>
         @foreach ($profesionales_global as $profesional)
             <tr>
-                <td><a {{--href="{{ route('profesionales.show', $profesional->id) }}"--}}>{{ $profesional->nombre }}</a>
+                <td>
+                    <a>{{ $profesional->nombre }}</a>
                 </td>
                 <td>
                     <ul>
