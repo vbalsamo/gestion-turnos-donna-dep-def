@@ -3,7 +3,7 @@
 @section('contenido')
 
     <form method="POST" action="
-        @if(isset($locacion->id))
+        @if(isset($profesional->id))
         {{ route('profesionales.update', $profesional->id)}}
         @else
         {{ route('profesionales.store') }}
@@ -64,6 +64,18 @@
                     </ul>
                 @endforeach
             @endif
+
+            <label>Tratamientos</label><br>
+                @foreach(($tratamientos_global) as $tratamiento)
+                    <label><input type="checkbox" name="tratamientos[]"
+                                  @if(isset($tratamientosProfesional))
+                                  @if(in_array($tratamiento, $tratamientosProfesional))
+                                      checked
+                                  @endif
+                                  @endif
+                                  value={{$tratamiento->id}}>{{ $tratamiento->nombre }}</label><br>
+                @endforeach
+
 
         </div>
 

@@ -64,6 +64,6 @@ class LoginController extends Controller
     public function destroy(Request $request)
     {
         $request->session()->invalidate();
-        return redirect(route('login.index'));
+        return redirect()->intended(route('login.index'));
     }
 }
