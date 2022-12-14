@@ -15,8 +15,6 @@ class TratamientoController extends Controller
      */
     public function index()
     {
-        $tratamientos = DB::select(
-            "SELECT * FROM tratamiento");
         return view('tratamientos/tratamientosIndex');
     }
 
@@ -38,6 +36,16 @@ class TratamientoController extends Controller
         ])->validate();
     }
 
+    private function storeTratamiento(Request $request)
+    {
+        DB::transaction(function () use ($request) {
+            DB::insert('INSERT INTO tratamiento (nombre, descripcion) values (?, ?)', [
+                $request->post("nombre"),
+                $request->post("descripcion")
+            ]);
+        });
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -48,12 +56,7 @@ class TratamientoController extends Controller
     {
         $this->validar($request);
         try {
-            DB::transaction(function () use ($request) {
-                DB::insert('INSERT INTO tratamiento (nombre, descripcion) values (?, ?)', [
-                    $request->post("nombre"),
-                    $request->post("descripcion")
-                ]);
-            });
+            $this->storeTratamiento($request);
             return redirect(route('tratamientos.index'));
         } catch (ValidationException $ex) {
 
@@ -91,6 +94,18 @@ class TratamientoController extends Controller
         ]);
     }
 
+    private function updateTratamiento(Request $request, $id)
+    {
+        DB::transaction(function () use ($request, $id) {
+            DB::table('tratamiento')
+                ->where('id', $id)
+                ->update([
+                    'nombre' => $request->post('nombre'),
+                    'descripcion' => $request->post('descripcion')
+                ]);
+        });
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -102,20 +117,13 @@ class TratamientoController extends Controller
     {
         $this->validar($request);
         try {
-            DB::table('tratamiento')
-                ->where('id', $id)
-                ->update([
-                    'nombre' => $request->post('nombre'),
-                    'descripcion' => $request->post('descripcion')
-                ]);
+            $this->updateTratamiento($request, $id);
             return redirect()->route('tratamientos.index');
         } catch (ValidationException $ex) {
 
         } catch (\Exception $exception) {
 
         }
-
-
     }
 
     /**
@@ -127,8 +135,10 @@ class TratamientoController extends Controller
     public function destroy($id)
     {
         try {
+            DB::transaction(function () use ($id) {
+                DB::update("UPDATE tratamiento SET activo = 0 WHERE id = {$id}");
+            });
 
-            DB::table('tratamiento')->delete($id);
             return redirect()->route('tratamientos.index');
 
         } catch (ValidationException $ex) {

@@ -20,6 +20,7 @@ return [
     'alpha'                => 'El campo :attribute solo puede contener letras.',
     'alpha_dash'           => 'El campo :attribute solo puede contener letras, números, guiones y guiones bajos.',
     'alpha_num'            => 'El campo :attribute solo puede contener letras y números.',
+    'alpha_spaces'         => 'El campo :attribute solo puede contener letras y espacios.',
     'array'                => 'El campo :attribute debe ser un array.',
     'before'               => 'El campo :attribute debe ser una fecha anterior a :date.',
     'before_or_equal'      => 'El campo :attribute debe ser una fecha anterior o igual a :date.',

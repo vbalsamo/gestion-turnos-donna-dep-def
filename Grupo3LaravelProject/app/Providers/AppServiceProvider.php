@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,7 +26,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $tratamientos = DB::select("SELECT * FROM tratamiento");
-        View::share('tratamientos_global', $tratamientos);
+        View::share('tratamientos_global', DB::select("SELECT * FROM tratamiento WHERE activo = 1"));
+
+        View::share('locaciones_global', DB::select("SELECT * FROM locacion WHERE activo = 1"));
+
+        View::share('profesionales_global', DB::select("SELECT * FROM profesional WHERE activo = 1"));
+
+        Validator::extend('alpha_spaces', function ($attribute, $value){
+            return preg_match('/^[\pL\s]+$/u', $value);
+        });
     }
 }
