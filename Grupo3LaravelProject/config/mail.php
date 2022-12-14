@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => env('MAIL_MAILER', 'failover'),
 
     /*
     |--------------------------------------------------------------------------
@@ -74,8 +74,8 @@ return [
         'failover' => [
             'transport' => 'failover',
             'mailers' => [
-                'smtp',
-                'log',
+                'postmark',
+                'mailgun',
             ],
         ],
     ],
@@ -92,8 +92,12 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', '3UTNfullstack@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Donna Grupo3UTN'),
+    ],
+
+    'reply_to' => ['address' => '3UTNfullstack@gmail.com',
+        'name' => 'Donna Grupo3UTN'
     ],
 
     /*

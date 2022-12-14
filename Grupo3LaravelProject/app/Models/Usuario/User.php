@@ -47,4 +47,14 @@ class User extends Authenticatable
     private $email;
     private $remember_token;
     private $rol;
+
+    /**
+     * @param $email
+     */
+    public function __construct($email)
+    {
+        $this->email = $email;
+    }
+
+
 }

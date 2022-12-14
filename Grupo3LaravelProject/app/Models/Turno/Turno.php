@@ -22,6 +22,26 @@ class Turno
     private $cancelado;
 
     /**
+     * @param $fecha
+     * @param $hora
+     * @param $cliente
+     * @param $profesional
+     * @param $tratamiento
+     * @param $locacion
+     */
+    public function __construct($fecha, $hora, $cliente, $profesional, $tratamiento, $locacion)
+    {
+        $this->fecha = $fecha;
+        $this->hora = $hora;
+        $this->cliente = $cliente;
+        $this->profesional = $profesional;
+        $this->tratamiento = $tratamiento;
+        $this->locacion = $locacion;
+        $this->proximo = true;
+        $this->cancelado = false;
+    }
+
+    /**
      * @return mixed
      */
     public function getFecha()
