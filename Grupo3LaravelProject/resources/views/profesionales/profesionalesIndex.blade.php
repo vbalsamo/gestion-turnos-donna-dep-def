@@ -1,6 +1,6 @@
 @extends('base')
 @section('contenido')
-<h1>Listado de profesionals</h1>
+<h1>Listado de profesionales</h1>
 <form action="{{ route('profesionales.create') }}">
     <button type="submit" class="btn btn-secondary">Agregar un profesional</button>
 </form>
@@ -20,7 +20,11 @@
     @foreach ($profesionales_global as $profesional)
         <tr>
             <td><a href="{{ route('profesionales.show', $profesional->id) }}">{{ $profesional->nombre }}</a></td>
-            <td>logica tratamientos que realiza</td>
+            <td>
+                @foreach((\App\Http\Controllers\ProfesionalController::tratamientosProfesional($profesional->id)) as $tratamiento)
+                    {{$tratamiento->nombre}}<br>
+                @endforeach
+            </td>
             <td>{{ $profesional->numero_tel }}</td>
             <td>{{ $profesional->email }}</td>
             <td><form action="{{ route('profesionales.edit', $profesional->id) }}">
