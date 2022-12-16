@@ -60,8 +60,14 @@ class TurnoController extends Controller
     }
 
     private function matchDiaDeHoy(Turno $turno){
-        $currentDate = new Date();
-        $currentDate->format('d/m/y');
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        $currentDate = date('d/m/y');
+        return ($turno->getFecha() == $currentDate);
+    }
+
+    private function matchDiaDeAyer(Turno $turno){
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        $currentDate = date('d/m/y', strtotime("-1 days"));
         return ($turno->getFecha() == $currentDate);
     }
 
@@ -78,9 +84,9 @@ class TurnoController extends Controller
     }
 
     public static function actualizarEstadoTurnos(){
-        //get todos los turnos del día anterior
 
-        $turnos = [];
+        $turnos = DB::select("SELECT * FROM turno");
+        array_filter($turnos, "matchDiaDeAyer");
 
         foreach($turnos as &$turno){
             $turno->setProximo(false);

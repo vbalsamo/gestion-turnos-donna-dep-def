@@ -14,11 +14,9 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
-    protected function schedule(Schedule $schedule)
-    {
+    protected function schedule(Schedule $schedule){
          $schedule->call(function () {TurnoController::enviarMailRecordatorio();})->daily();
-         //Actualizar turnos a pasados
-         //$schedule->call(function () {TurnoController::actualizarEstadoTurnos();})->daily();
+         $schedule->call(function () {TurnoController::actualizarEstadoTurnos();})->daily();
     }
 
     /**
