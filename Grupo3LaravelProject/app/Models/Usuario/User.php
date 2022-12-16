@@ -51,10 +51,13 @@ class User extends Authenticatable
     /**
      * @param $email
      */
-    public function __construct($email)
+    public function __construct($email, )
     {
         $this->email = $email;
     }
 
+    public function getEmail(){
+        return $this->email;
+    }
 
 }

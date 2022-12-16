@@ -110,6 +110,11 @@
       <path value="$PROJECT_DIR$/Grupo3LaravelProject/vendor/hamcrest/hamcrest-php" />
       <path value="$PROJECT_DIR$/Grupo3LaravelProject/vendor/nesbot/carbon" />
       <path value="$PROJECT_DIR$/Grupo3LaravelProject/vendor/voku/portable-ascii" />
+      <path value="$PROJECT_DIR$/../../php" />
+      <path value="$PROJECT_DIR$/Grupo3LaravelProject/vendor/laraveles/spanish" />
+      <path value="$PROJECT_DIR$/Grupo3LaravelProject/vendor/symfony/mailgun-mailer" />
+      <path value="$PROJECT_DIR$/Grupo3LaravelProject/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/Grupo3LaravelProject/vendor/symfony/http-client" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

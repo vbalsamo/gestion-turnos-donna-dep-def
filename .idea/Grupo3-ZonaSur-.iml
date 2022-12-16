@@ -116,6 +116,10 @@
       <excludeFolder url="file://$MODULE_DIR$/Grupo3LaravelProject/vendor/hamcrest/hamcrest-php" />
       <excludeFolder url="file://$MODULE_DIR$/Grupo3LaravelProject/vendor/nesbot/carbon" />
       <excludeFolder url="file://$MODULE_DIR$/Grupo3LaravelProject/vendor/voku/portable-ascii" />
+      <excludeFolder url="file://$MODULE_DIR$/Grupo3LaravelProject/vendor/laraveles/spanish" />
+      <excludeFolder url="file://$MODULE_DIR$/Grupo3LaravelProject/vendor/symfony/mailgun-mailer" />
+      <excludeFolder url="file://$MODULE_DIR$/Grupo3LaravelProject/vendor/symfony/http-client-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/Grupo3LaravelProject/vendor/symfony/http-client" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

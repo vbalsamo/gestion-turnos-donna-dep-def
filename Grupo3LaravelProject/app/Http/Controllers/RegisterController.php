@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\EnviarTurno;
+use App\Mail\RegistroUsuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 
@@ -52,6 +55,7 @@ class RegisterController extends Controller
                     $request->post('nombre'),
                     $request->post('numero_tel')
                 ]);
+                Mail::to($request->post('email'))->send(new RegistroUsuario());
                 return view('login');
             }
             else{

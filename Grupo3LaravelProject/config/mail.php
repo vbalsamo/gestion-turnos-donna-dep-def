@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'failover'),
+    'default' => env('MAIL_MAILER', 'mailgun'),
 
     /*
     |--------------------------------------------------------------------------
@@ -94,10 +94,6 @@ return [
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', '3UTNfullstack@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'Donna Grupo3UTN'),
-    ],
-
-    'reply_to' => ['address' => '3UTNfullstack@gmail.com',
-        'name' => 'Donna Grupo3UTN'
     ],
 
     /*

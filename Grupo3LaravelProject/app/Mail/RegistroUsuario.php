@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class EnviarTurno extends Mailable
+class RegistroUsuario extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,14 +18,9 @@ class EnviarTurno extends Mailable
      *
      * @return void
      */
-
-    //Los datos que se envían en EnviarTurno
-
-    public $datos;
-
-    public function __construct($datos)
+    public function __construct()
     {
-        $this->datos = $datos;
+        //
     }
 
     /**
@@ -36,9 +31,7 @@ class EnviarTurno extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Turno Reservado para '.$this->datos->getTratamiento(),
-            //Para realizar una funcion antes de enviar el mail
-            using: [],
+            subject: 'Registro de usuario',
         );
     }
 
@@ -50,15 +43,7 @@ class EnviarTurno extends Mailable
     public function content()
     {
         return new Content(
-            view: 'enviarTurno',
-            with: [
-                'fecha' => $this->datos->getFecha(),
-                'hora' => $this->datos->getHora(),
-                'cliente' => $this->datos->getCliente(),
-                'profesional' => $this->datos->getProfesional(),
-                'tratamiento' => $this->datos->getTratamiento(),
-                'locacion' => $this->datos->getLocacion(),
-            ],
+            view: 'registroTurno',
         );
     }
 

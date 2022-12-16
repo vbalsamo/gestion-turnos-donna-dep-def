@@ -16,7 +16,7 @@ class EnviarMailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function enviarMail(Request $request)
     {
         //aca debería cargarlo con el Request
         //Debería también guardarse el turno
@@ -29,6 +29,6 @@ class EnviarMailController extends Controller
         //Mail::to($request->user())->send(new EnviarTurno($turno));
 
         //prueba
-        Mail::to($usuarioPrueba)->send(new EnviarTurno($turno));
+        Mail::to('gonzalorduarte@gmail.com')->send(new EnviarTurno($turno));
     }
 }

@@ -13,7 +13,7 @@
 <p>     Profesional: {{$profesional}}</p>
 <p>     Locacion: {{$locacion}}</p>
 <p>Solo responder este correo en caso de error al solicitar el turno</p>
-<p>Si no puede asistir al turno, comunicarlo antes de las 24hs o será penalizado/a</p>
+<p>Si no puede asistir al turno, cancelarlo antes de las 24hs o será penalizado/a</p>
 
 </body>
 </html>
