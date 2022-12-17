@@ -32,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
 
         View::share('profesionales_global', DB::select("SELECT * FROM profesional WHERE activo = 1"));
 
+        View::share('meses_global', DB::select("SELECT * FROM mes WHERE activo = 1"));
+
         Validator::extend('alpha_spaces', function ($attribute, $value){
             return preg_match('/^[\pL\s]+$/u', $value);
         });

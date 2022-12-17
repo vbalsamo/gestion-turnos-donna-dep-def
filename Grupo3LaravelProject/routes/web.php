@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'home')->name('/');
 Route::view('home', 'home')->name('home');
 Route::resource('tratamientos', \App\Http\Controllers\TratamientoController::class);
-Route::resource('turnos', \App\Http\Controllers\TurnosController::class);
 Route::resource('locaciones', \App\Http\Controllers\LocacionController::class);
 Route::resource('login', \App\Http\Controllers\LoginController::class)
 ->only(['index', 'store']);
@@ -25,4 +24,6 @@ Route::resource('register', \App\Http\Controllers\RegisterController::class);
 Route::resource('menu', \App\Http\Controllers\MenuController::class);
 Route::resource('profesionales', \App\Http\Controllers\ProfesionalController::class);
 Route::resource('turnos', \App\Http\Controllers\TurnoController::class);
-
+Route::resource('calendarioSelect', \App\Http\Controllers\CalendarioController::class);
+Route::post('filter', [\App\Http\Controllers\CalendarioController::class, 'show'])->name('filter');
+Route::post('turnoShow', [\App\Http\Controllers\TurnoController::class, 'show'])->name('turnoShow');
