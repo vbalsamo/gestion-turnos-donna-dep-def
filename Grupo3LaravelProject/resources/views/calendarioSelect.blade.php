@@ -1,6 +1,6 @@
 @extends('base')
 
-<form action="{{ route('calendarioSelect.filter') }}" METHOD="POST">
+<form action="{{ route('filter') }}" METHOD="POST">
     @csrf
 <p>Filtre según el turno que desea: </p>
 
