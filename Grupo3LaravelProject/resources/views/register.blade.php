@@ -15,7 +15,8 @@
 <div class="container w-75 rounded shadow" id="container">
     <div class="row align-items-stretch">
         <div class="col-md-5 col-xl-6 rounded-start" id="logo">
-            <img src="{{ asset('logo.png') }}" width="300" height="300" alt="Donna depilación definitiva" id="logoImg">
+            <img class="img-fluid position-relative top-50 start-50 translate-middle py-4 px-3 md-mx-1" 
+            src="{{ asset('logo.png') }}" width="300" height="auto" alt="Donna depilación definitiva" id="logoImg">
 
         </div>
         <div class="col-md-7 col-xl-6 rounded-end">
