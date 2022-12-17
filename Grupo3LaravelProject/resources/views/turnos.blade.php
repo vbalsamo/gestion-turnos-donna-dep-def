@@ -7,16 +7,16 @@
     <!--Cargar en el form id del cliente y id del turno -->
 
 @foreach($turnosFav as $turnoFav)
-    <p>{{$turnoFav->tratamiento}}</p>
-    <p>{{$turnoFav->hora}}</p>
-    <p>{{$turnoFav->profesional}}</p>
+    <p>{{$turnoFav->getTratamiento()}}</p>
+    <p>{{$turnoFav->getHora()}}</p>
+    <p>{{$turnoFav->getProfesional()}}</p>
 
 @endforeach
 
-@foreach ($turnos as $turno)
-    <p>{{$turno->tratamiento}}</p>
-    <p>{{$turno->hora}}</p>
-    <p>{{$turno->profesional}}</p>
+@foreach ($turnosFiltrados as $turno)
+    <p>{{$turno->getTratamiento()}}</p>
+    <p>{{$turno->getHora()}}</p>
+    <p>{{$turno->getProfesional()}}</p>
 @endforeach
 
     <button type="submit" class="btn btn-secondary">Confirmar</button>

@@ -14,6 +14,18 @@ class Dia
     private $activo;
 
     /**
+     * @param $diaNum
+     * @param $diaNom
+     */
+    public function __construct($diaNum, $diaNom)
+    {
+        $this->diaNum = $diaNum;
+        $this->diaNom = $diaNom;
+        $this->activo = true;
+    }
+
+
+    /**
      * @return mixed
      */
     public function getDiaNum()

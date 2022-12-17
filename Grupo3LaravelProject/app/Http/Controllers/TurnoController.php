@@ -7,6 +7,7 @@ use App\Mail\RecordatorioTurno;
 use App\Models\Turno\Turno;
 use App\Models\Usuario\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -20,7 +21,7 @@ class TurnoController extends Controller
      */
     public function index()
     {
-        $this->enviarMailReserva();
+
     }
 
     /**
@@ -28,30 +29,14 @@ class TurnoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $clienteId = Auth::id();
-        $cliente = DB::select("SELECT * FROM cliente WHERE id = $clienteId");
-
-        $turnos = DB::select("SELECT * FROM turno WHERE idDia = {$request->session()->get('diaId')}");
-        $turnosFav = DB::select("SELECT * FROM turno WHERE profesional = {$cliente -> $profesionalPreferido}");
-
-
-        $turnosFiltrados = array_filter($turnos, function($turno) use ($request) {
-            return $turno->locacion == $request->session()->get('locacionActual') && $turno->tratamiento == $request->session()->get('tratamientoActual');
-        });
-
-        return view('turnos', [
-            "turnosFav" => $turnosFav,
-            "turnosFiltrados" => $turnosFiltrados
-        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -112,9 +97,29 @@ class TurnoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $clienteId = Auth::id();
+        $cliente = DB::select("SELECT * FROM cliente WHERE id = $clienteId");
+
+
+        //real
+        //$turnos = DB::select("SELECT * FROM turno WHERE idDia = {$request->session()->get('diaId')}");
+        //$turnosFav = DB::select("SELECT * FROM turno WHERE profesional = {$cliente -> $profesionalPreferido}");
+
+        //prueba
+        $turnosFiltrados = [new Turno("1", "09:00", "", "Mary", "Depi", "Bera"),
+            new Turno("1", "10:00", "", "chiara", "facial", "Capital")];
+        $turnosFav = [new Turno("1", "11:00", "", "Josefina", "Depi", "Lanus")];
+
+        //$turnosFiltrados = array_filter($turnos, function($turno) use ($request) {
+        //    return $turno->locacion == $request->session()->get('locacionActual') && $turno->tratamiento == $request->session()->get('tratamientoActual');
+        //});
+
+        return view('turnos', [
+            "turnosFav" => $turnosFav,
+            "turnosFiltrados" => $turnosFiltrados
+        ]);
     }
 
     /**
