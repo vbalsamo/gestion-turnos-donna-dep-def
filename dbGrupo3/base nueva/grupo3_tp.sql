@@ -18,6 +18,23 @@ CREATE SCHEMA IF NOT EXISTS `grupo3_tp` DEFAULT CHARACTER SET utf8mb4 ;
 USE `grupo3_tp` ;
 
 -- -----------------------------------------------------
+-- Table `grupo3_tp`.`locacion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `grupo3_tp`.`locacion` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `ciudad` VARCHAR(400) NOT NULL,
+  `calle` VARCHAR(400) NOT NULL,
+  `altura` VARCHAR(45) NOT NULL,
+  `piso` VARCHAR(45) NULL DEFAULT NULL,
+  `depto` VARCHAR(45) NULL DEFAULT NULL,
+  `activo` TINYINT(4) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `grupo3_tp`.`profesional`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `grupo3_tp`.`profesional` (
@@ -26,7 +43,14 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`profesional` (
   `numero_tel` INT(11) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `activo` TINYINT(4) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`))
+  `locacion_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_profesional_locacion1_idx` (`locacion_id` ASC) VISIBLE,
+  CONSTRAINT `fk_profesional_locacion1`
+    FOREIGN KEY (`locacion_id`)
+    REFERENCES `grupo3_tp`.`locacion` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 10
 DEFAULT CHARACTER SET = utf8;
@@ -53,23 +77,6 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`cliente` (
     REFERENCES `grupo3_tp`.`profesional` (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 15
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `grupo3_tp`.`locacion`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `grupo3_tp`.`locacion` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `ciudad` VARCHAR(400) NOT NULL,
-  `calle` VARCHAR(400) NOT NULL,
-  `altura` VARCHAR(45) NOT NULL,
-  `piso` VARCHAR(45) NULL DEFAULT NULL,
-  `depto` VARCHAR(45) NULL DEFAULT NULL,
-  `activo` TINYINT(4) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8;
 
 

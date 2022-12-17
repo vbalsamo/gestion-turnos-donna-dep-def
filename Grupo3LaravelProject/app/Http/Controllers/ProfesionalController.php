@@ -33,17 +33,20 @@ class ProfesionalController extends Controller
         return Validator::make($request->post(), [
             'nombre' => ['alpha_spaces'],
             'numero_tel' => ['required', 'numeric'],
-            'email' => ['required', 'email']
+            'email' => ['required', 'email'],
+            'tratamientos' => ['required'],
+            'locacion' => ['required']
         ])->validate();
     }
 
     private function storeProfesional(Request $request)
     {
         DB::transaction(function () use ($request) {
-            DB::insert('INSERT INTO profesional (nombre, numero_tel, email) values (?, ?, ?)', [
+            DB::insert('INSERT INTO profesional (nombre, numero_tel, email, locacion_id) values (?, ?, ?, ?)', [
                 $request->post("nombre"),
                 $request->post("numero_tel"),
-                $request->post("email")
+                $request->post("email"),
+                $request->post('locacion')
             ]);
             $idProfesional = DB::getPdo()->lastInsertId();
             foreach ($request->post("tratamientos") as $idTratamiento) {
@@ -70,6 +73,7 @@ class ProfesionalController extends Controller
         } catch (ValidationException $ex) {
 
         } catch (\Exception $exception) {
+
         }
     }
 
@@ -151,6 +155,7 @@ class ProfesionalController extends Controller
                     'nombre' => $request->post('nombre'),
                     'numero_tel' => $request->post('numero_tel'),
                     'email' => $request->post('email'),
+                    'locacion_id' => $request->post('locacion')
                 ]);
             $this->updateTratamientosProfesional($request->post('tratamientos'), $id);
         });
@@ -172,6 +177,7 @@ class ProfesionalController extends Controller
         } catch (ValidationException $ex) {
 
         } catch (\Exception $exception) {
+
         }
     }
 
@@ -185,7 +191,7 @@ class ProfesionalController extends Controller
     {
         try {
             DB::transaction(function () use ($id) {
-                DB::delete("DELETE from tratamientoxprofesional WHERE id_profesional = {$id}");
+                DB::update("UPDATE tratamientoxprofesional SET activo = 0 WHERE id_profesional = {$id}");
                 DB::update("UPDATE profesional SET activo = 0 WHERE id = {$id}");;
             });
             return redirect()->route('profesionales.index');

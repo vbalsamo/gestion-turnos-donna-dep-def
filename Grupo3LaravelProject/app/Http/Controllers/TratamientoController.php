@@ -136,6 +136,7 @@ class TratamientoController extends Controller
     {
         try {
             DB::transaction(function () use ($id) {
+                DB::update("UPDATE tratamientoxprofesional SET activo = 0 WHERE id_tratamiento = {$id}");
                 DB::update("UPDATE tratamiento SET activo = 0 WHERE id = {$id}");
             });
 

@@ -12,6 +12,7 @@
             <th scope="col">Tratamientos</th>
             <th scope="col">Teléfono</th>
             <th scope="col">Email</th>
+            <th scope="col">Sucursal</th>
             <th scope="col"></th>
             <th scope="col"></th>
         </tr>
@@ -34,6 +35,10 @@
                 </td>
                 <td>{{ $profesional->numero_tel }}</td>
                 <td>{{ $profesional->email }}</td>
+                @php
+                    $nombreLocacion = \App\Http\Controllers\LocacionController::nombreLocacion($profesional->locacion_id);
+                @endphp
+                <td>{{ $nombreLocacion }}</td>
                 <td>
                     <form action="{{ route('profesionales.edit', $profesional->id) }}">
                         @csrf

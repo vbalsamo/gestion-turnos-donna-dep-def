@@ -152,4 +152,9 @@ class LocacionController extends Controller
             echo $exception->getMessage();
         }
     }
+
+    public static function nombreLocacion($id)
+    {
+        return DB::selectOne("SELECT ciudad FROM locacion WHERE id = {$id}")->ciudad;
+    }
 }
