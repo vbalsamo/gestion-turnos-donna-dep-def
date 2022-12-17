@@ -9,9 +9,9 @@ class Dia
 
     private $diaNom;
 
-    private $horarios;
+    private $turnos;
 
-    private $pasado;
+    private $activo;
 
     /**
      * @return mixed
@@ -48,35 +48,34 @@ class Dia
     /**
      * @return mixed
      */
-    public function getHorarios()
+    public function getTurnos()
     {
-        return $this->horarios;
+        return $this->turnos;
     }
 
     /**
-     * @param mixed $horarios
+     * @param mixed $turnos
      */
-    public function setHorarios($horarios): void
+    public function setTurnos($turnos): void
     {
-        $this->horarios = $horarios;
+        $this->turnos = $turnos;
     }
 
     /**
      * @return mixed
      */
-    public function getPasado()
+    public function getActivo()
     {
-        return $this->pasado;
+        return $this->activo;
     }
 
     /**
-     * @param mixed $pasado
+     * @param mixed $activo
      */
-    public function setPasado($pasado): void
+    public function setActivo($activo): void
     {
-        $this->pasado = $pasado;
+        $this->activo = $activo;
     }
-
 
 
 

@@ -80,6 +80,13 @@ class TratamientoController extends Controller
         ]);
     }
 
+    //Mostrar todos los tratamientos
+    public function showAll()
+    {
+        $tratamientos = DB::select("SELECT * FROM tratamiento");
+        return $tratamientos;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

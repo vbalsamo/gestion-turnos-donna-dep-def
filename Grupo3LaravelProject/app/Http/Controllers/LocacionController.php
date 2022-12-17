@@ -84,6 +84,12 @@ class LocacionController extends Controller
         ]);
     }
 
+    public function showAll()
+    {
+        $tratamientos = DB::select("SELECT * FROM locacion");
+        return $tratamientos;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

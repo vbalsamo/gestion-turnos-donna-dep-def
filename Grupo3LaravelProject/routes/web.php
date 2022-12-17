@@ -25,4 +25,5 @@ Route::resource('register', \App\Http\Controllers\RegisterController::class);
 Route::resource('menu', \App\Http\Controllers\MenuController::class);
 Route::resource('profesionales', \App\Http\Controllers\ProfesionalController::class);
 Route::resource('turnos', \App\Http\Controllers\TurnoController::class);
-
+Route::resource('calendarioSelect', \App\Http\Controllers\CalendarioController::class);
+Route::post('calendarioSelect', [\App\Http\Controllers\CalendarioController::class, 'show'])->name('filter');

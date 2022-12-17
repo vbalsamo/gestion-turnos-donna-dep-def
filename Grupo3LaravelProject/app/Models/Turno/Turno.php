@@ -5,10 +5,8 @@ namespace App\Models\Turno;
 class Turno
 {
 
-    private $fecha;
-
+    private $diaId;
     private $hora;
-
     private $cliente;
 
     private $profesional;
@@ -29,9 +27,9 @@ class Turno
      * @param $tratamiento
      * @param $locacion
      */
-    public function __construct($fecha, $hora, $cliente, $profesional, $tratamiento, $locacion)
+    public function __construct($diaID, $hora, $cliente, $profesional, $tratamiento, $locacion)
     {
-        $this->fecha = $fecha;
+        $this->diaId = $diaID;
         $this->hora = $hora;
         $this->cliente = $cliente;
         $this->profesional = $profesional;
@@ -44,17 +42,21 @@ class Turno
     /**
      * @return mixed
      */
-    public function getFecha()
+    public function getDiaId()
     {
-        return $this->fecha;
+        return $this->diaId;
+    }
+
+    public function getFecha(){
+        return DB::selectOne("SELECT * FROM dia WHERE id = {{$this->diaId}}");
     }
 
     /**
-     * @param mixed $fecha
+     * @param mixed $diaId
      */
-    public function setFecha($fecha): void
+    public function setDiaId($diaId): void
     {
-        $this->fecha = $fecha;
+        $this->diaId = $diaId;
     }
 
     /**

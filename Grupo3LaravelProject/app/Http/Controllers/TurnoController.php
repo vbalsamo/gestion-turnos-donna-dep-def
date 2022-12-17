@@ -28,9 +28,23 @@ class TurnoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $clienteId = Auth::id();
+        $cliente = DB::select("SELECT * FROM cliente WHERE id = $clienteId");
+
+        $turnos = DB::select("SELECT * FROM turno WHERE idDia = {$request->session()->get('diaId')}");
+        $turnosFav = DB::select("SELECT * FROM turno WHERE profesional = {$cliente -> $profesionalPreferido}");
+
+
+        $turnosFiltrados = array_filter($turnos, function($turno) use ($request) {
+            return $turno->locacion == $request->session()->get('locacionActual') && $turno->tratamiento == $request->session()->get('tratamientoActual');
+        });
+
+        return view('turnos', [
+            "turnosFav" => $turnosFav,
+            "turnosFiltrados" => $turnosFiltrados
+        ]);
     }
 
     /**
@@ -41,34 +55,34 @@ class TurnoController extends Controller
      */
     public function store(Request $request)
     {
+        DB::transaction(function () use ($request) {
+            DB::update('UPDATE turno SET cliente = ?, proximo = 1 WHERE id = ?', [
+                $request->post("clienteId"),
+                $request->post("turnoId")
+            ]);
+        });
+
+        $turno = DB::selectOne('SELECT turno WHERE id = {$request->post("turnoId")}');
+
+        $this->enviarMailReserva($turno);
     }
 
-    public function enviarMailReserva()
+    public function enviarMailReserva(Turno $turno)
     {
-        //aca debería cargarlo con el Request
-        //Debería también guardarse el turno
-        //cambiar los valores para que los tome como las propiedades de los objetos
-        $turno = new Turno("01/01/01", "12:00", "Maria Perez", "Mary", "Depilacion Definitiva", "Berazategui");
-
-        $usuarioPrueba = new User("gonzalorduarte@gmail.com");
-
-        //real
-        //Mail::to($request->user()->getEmail())->send(new EnviarTurno($turno));
-
-        //prueba
+        $usuarioPrueba = Auth::user();
         Mail::to($usuarioPrueba->getEmail())->send(new EnviarTurno($turno));
     }
 
     private function matchDiaDeHoy(Turno $turno){
         date_default_timezone_set('America/Argentina/Buenos_Aires');
         $currentDate = date('d/m/y');
-        return ($turno->getFecha() == $currentDate);
+        return ($turno->getDiaId() == $currentDate);
     }
 
     private function matchDiaDeAyer(Turno $turno){
         date_default_timezone_set('America/Argentina/Buenos_Aires');
         $currentDate = date('d/m/y', strtotime("-1 days"));
-        return ($turno->getFecha() == $currentDate);
+        return ($turno->getDiaId() == $currentDate);
     }
 
     public static function enviarMailRecordatorio(){

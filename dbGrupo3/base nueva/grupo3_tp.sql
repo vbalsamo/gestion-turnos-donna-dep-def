@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`cliente` (
   `id_profesional_preferido` INT(11) NULL DEFAULT NULL,
   `activo` TINYINT(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
-  INDEX `fk_cliente_profesional1_idx` (`id_profesional_preferido` ASC) VISIBLE,
+  INDEX `fk_cliente_profesional1_idx` (`id_profesional_preferido` ASC),
   CONSTRAINT `fk_cliente_profesional1`
     FOREIGN KEY (`id_profesional_preferido`)
     REFERENCES `grupo3_tp`.`profesional` (`id`))
@@ -96,8 +96,8 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`tratamientoxprofesional` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `activo` TINYINT(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
-  INDEX `fk_tratamiento_has_profesional_profesional1_idx` (`id_profesional` ASC) VISIBLE,
-  INDEX `fk_tratamiento_has_profesional_tratamiento1_idx` (`id_tratamiento` ASC) VISIBLE,
+  INDEX `fk_tratamiento_has_profesional_profesional1_idx` (`id_profesional` ASC),
+  INDEX `fk_tratamiento_has_profesional_tratamiento1_idx` (`id_tratamiento` ASC),
   CONSTRAINT `fk_tratamiento_has_profesional_profesional1`
     FOREIGN KEY (`id_profesional`)
     REFERENCES `grupo3_tp`.`profesional` (`id`),
@@ -122,10 +122,10 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`turno` (
   `id_tratamiento` INT(11) NOT NULL,
   `activo` TINYINT(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
-  INDEX `fk_turno_cliente_idx` (`id_cliente` ASC) VISIBLE,
-  INDEX `fk_turno_locacion1_idx` (`id_locacion` ASC) VISIBLE,
-  INDEX `fk_turno_profesional1_idx` (`id_profesional` ASC) VISIBLE,
-  INDEX `fk_turno_tratamiento1_idx` (`id_tratamiento` ASC) VISIBLE,
+  INDEX `fk_turno_cliente_idx` (`id_cliente` ASC),
+  INDEX `fk_turno_locacion1_idx` (`id_locacion` ASC),
+  INDEX `fk_turno_profesional1_idx` (`id_profesional` ASC),
+  INDEX `fk_turno_tratamiento1_idx` (`id_tratamiento` ASC),
   CONSTRAINT `fk_turno_cliente`
     FOREIGN KEY (`id_cliente`)
     REFERENCES `grupo3_tp`.`cliente` (`id`),
