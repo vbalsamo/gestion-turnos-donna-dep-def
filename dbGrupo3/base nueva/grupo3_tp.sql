@@ -22,6 +22,7 @@ USE `grupo3_tp` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `grupo3_tp`.`locacion` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(400) NOT NULL,
   `ciudad` VARCHAR(400) NOT NULL,
   `calle` VARCHAR(400) NOT NULL,
   `altura` VARCHAR(45) NOT NULL,
