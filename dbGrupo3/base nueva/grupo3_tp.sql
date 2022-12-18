@@ -22,6 +22,7 @@ USE `grupo3_tp` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `grupo3_tp`.`locacion` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(400) NOT NULL,
   `ciudad` VARCHAR(400) NOT NULL,
   `calle` VARCHAR(400) NOT NULL,
   `altura` VARCHAR(45) NOT NULL,
@@ -154,6 +155,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `grupo3_tp`.`mes` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(20) NOT NULL,
   `año` INT NOT NULL,
   `dias` INT NOT NULL,
   `pasado` TINYINT NOT NULL DEFAULT 0,
