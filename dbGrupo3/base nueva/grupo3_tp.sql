@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`profesional` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 10
+AUTO_INCREMENT = 14
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`cliente` (
   `id_profesional_preferido` INT(11) NULL DEFAULT NULL,
   `activo` TINYINT(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
-  INDEX `fk_cliente_profesional1_idx` (`id_profesional_preferido` ASC),
+  INDEX `fk_cliente_profesional1_idx` (`id_profesional_preferido` ASC) VISIBLE,
   CONSTRAINT `fk_cliente_profesional1`
     FOREIGN KEY (`id_profesional_preferido`)
     REFERENCES `grupo3_tp`.`profesional` (`id`))
@@ -103,8 +103,8 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`tratamientoxprofesional` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `activo` TINYINT(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
-  INDEX `fk_tratamiento_has_profesional_profesional1_idx` (`id_profesional` ASC),
-  INDEX `fk_tratamiento_has_profesional_tratamiento1_idx` (`id_tratamiento` ASC),
+  INDEX `fk_tratamiento_has_profesional_profesional1_idx` (`id_profesional` ASC) VISIBLE,
+  INDEX `fk_tratamiento_has_profesional_tratamiento1_idx` (`id_tratamiento` ASC) VISIBLE,
   CONSTRAINT `fk_tratamiento_has_profesional_profesional1`
     FOREIGN KEY (`id_profesional`)
     REFERENCES `grupo3_tp`.`profesional` (`id`),
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`tratamientoxprofesional` (
     FOREIGN KEY (`id_tratamiento`)
     REFERENCES `grupo3_tp`.`tratamiento` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 118
+AUTO_INCREMENT = 126
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -129,10 +129,10 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`turno` (
   `id_tratamiento` INT(11) NOT NULL,
   `activo` TINYINT(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
-  INDEX `fk_turno_cliente_idx` (`id_cliente` ASC),
-  INDEX `fk_turno_locacion1_idx` (`id_locacion` ASC),
-  INDEX `fk_turno_profesional1_idx` (`id_profesional` ASC),
-  INDEX `fk_turno_tratamiento1_idx` (`id_tratamiento` ASC),
+  INDEX `fk_turno_cliente_idx` (`id_cliente` ASC) VISIBLE,
+  INDEX `fk_turno_locacion1_idx` (`id_locacion` ASC) VISIBLE,
+  INDEX `fk_turno_profesional1_idx` (`id_profesional` ASC) VISIBLE,
+  INDEX `fk_turno_tratamiento1_idx` (`id_tratamiento` ASC) VISIBLE,
   CONSTRAINT `fk_turno_cliente`
     FOREIGN KEY (`id_cliente`)
     REFERENCES `grupo3_tp`.`cliente` (`id`),
@@ -147,6 +147,19 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`turno` (
     REFERENCES `grupo3_tp`.`tratamiento` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `grupo3_tp`.`mes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `grupo3_tp`.`mes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `año` INT NOT NULL,
+  `dias` INT NOT NULL,
+  `pasado` TINYINT NOT NULL DEFAULT 0,
+  `activo` TINYINT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
