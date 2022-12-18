@@ -155,6 +155,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `grupo3_tp`.`mes` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(20) NOT NULL,
   `año` INT NOT NULL,
   `dias` INT NOT NULL,
   `pasado` TINYINT NOT NULL DEFAULT 0,
