@@ -148,7 +148,7 @@
 
 </body>
 
-<footer class="fixed-bottom" style="background-color: #F8EEE2; height: 30px;">
+<footer class="d-flex flex-wrap justify-content-between" style="background-color: #F8EEE2;">
     <div class="container">
         <footer class="row row-cols-2">
             <div class="col-md-10">
