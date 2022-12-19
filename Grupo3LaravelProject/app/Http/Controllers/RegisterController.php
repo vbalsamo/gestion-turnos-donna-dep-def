@@ -55,7 +55,7 @@ class RegisterController extends Controller
                     $request->post('nombre'),
                     $request->post('numero_tel')
                 ]);
-                Mail::to($request->post('email'))->send(new RegistroUsuario());
+                //Mail::to($request->post('email'))->send(new RegistroUsuario());
                 return view('login');
             }
             else{
@@ -144,6 +144,6 @@ class RegisterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //TODO: eliminar cuenta
     }
 }

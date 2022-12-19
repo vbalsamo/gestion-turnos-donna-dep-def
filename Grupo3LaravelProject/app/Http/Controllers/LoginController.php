@@ -46,7 +46,6 @@ class LoginController extends Controller
                     'email' => 'El email no existe en la base de datos',
                     'password' => 'La contraseña no coincide con el email/nombre de usuario proporcionado'
                 ]);
-                //NO COINCIDE NOMBRE DE USUARIO Y/O CONTRASEÑA
             }
         } catch (ValidationException $ex) {
 

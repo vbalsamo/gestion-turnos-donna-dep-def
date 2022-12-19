@@ -12,10 +12,6 @@
         <form method="POST" action="{{ route('register.update', $cliente->id)}}">
             @csrf
             {{method_field('PATCH')}}
-            @php
-                $campos = ['nombre', 'email', 'numero_tel', 'password', 'password_confirmation'];
-            @endphp
-
             <div class="form-group">
                 <h4 class="my-4" style="color: #5a1d3e">Mis Datos</h4>
                 <div class="pt-4" style="color: #5a1d3e">
@@ -58,7 +54,7 @@
                         @endforeach
                     @endif
 
-                    <a href="">Cambiar Contraseña</a>
+                    <a href="{{ route('password.edit', $cliente->id) }}">Cambiar Contraseña</a>
 
                 </div>
             </div>
@@ -71,13 +67,14 @@
     </div>
 
     <script>
-        var msg = '{{Session::get('alert')}}';
-        var exist = '{{Session::has('alert')}}';
-        if(exist){
-            alert(msg);
-        }
+        $(document).ready(function () {
+            var msg = '{{Session::get('alert')}}';
+            var exist = '{{Session::has('alert')}}';
+            if(exist){
+                alert(msg);
+            }
+        });
     </script>
 @endsection('contenido')
 
 
-@section('contenido')
