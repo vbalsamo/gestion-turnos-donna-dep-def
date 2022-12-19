@@ -17,7 +17,7 @@
     <title>Donna Depilación Definitiva</title>
 </head>
 
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: beige;">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('/') }}">
             <img src="{{ asset('logo.png') }}" width="60" height="60" alt="Donna depilación definitiva">
@@ -46,11 +46,6 @@
                                    href="{{ route('tratamientos.show', $tratamiento_global->id) }}">{{$tratamiento_global->nombre}}</a>
                             </li>
                         @endforeach
-                        {{--<li><a class="dropdown-item font-weight-bold" href="{{ route('tratamientos.index') }}">Ver todos</a></li>--}}
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
             </ul>
@@ -86,69 +81,15 @@
                     </form>
                 @endif
             </div>
-
-            {{--<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>--}}
-
         </div>
     </div>
 </nav>
 
-{{--<header>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F8EEE2">
-        <a class="navbar-brand" href="{{ route('/') }}">
-            <img src="{{ asset('logo.png') }}" width="60" height="60" alt="Donna depilación definitiva">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('turnos.index') }}">Turnos<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('locaciones.index') }}">Sucursales</a>
-                </li>
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="{{ route('tratamientos.index') }}"
-                       id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Tratamientos
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        @foreach($tratamientos_global as $tratamiento_global)
-                            <a class="dropdown-item"
-                               href="{{ route('tratamientos.show', $tratamiento_global->id) }}">{{$tratamiento_global->nombre}}</a>
-                        @endforeach
-                        <a class="dropdown-item font-weight-bold" href="{{ route('tratamientos.index') }}">Ver todos</a>
-                    </div>
-                </li>
-            </ul>
-
-            <div class="btn-group">
-                <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-
-                </ul>
-            </div>
-
-        </div>
-    </nav>
-</header>--}}
-
-<body style="background: #FAD8D1;">
+<body class="d-flex flex-column min-vh-100" style="background: #FAD8D1; margin-top: 86px">
 @yield('contenido')
 
-</body>
 
-<footer class="d-flex flex-wrap justify-content-between" style="background-color: #F8EEE2;">
+<footer class="mt-auto" style="background-color: #F8EEE2;">
     <div class="container">
         <footer class="row row-cols-2">
             <div class="col-md-10">
@@ -160,6 +101,9 @@
         </footer>
     </div>
 </footer>
+</body>
+
+
 
 
 </html>
