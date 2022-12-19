@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
@@ -37,5 +38,9 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend('alpha_spaces', function ($attribute, $value){
             return preg_match('/^[\pL\s]+$/u', $value);
         });
+
+        Gate::define('verificar_admin', function ($usuario){
+
+        }) ;
     }
 }

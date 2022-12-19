@@ -22,13 +22,13 @@ USE `grupo3_tp` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `grupo3_tp`.`locacion` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(400) NOT NULL,
   `ciudad` VARCHAR(400) NOT NULL,
   `calle` VARCHAR(400) NOT NULL,
   `altura` VARCHAR(45) NOT NULL,
   `piso` VARCHAR(45) NULL DEFAULT NULL,
   `depto` VARCHAR(45) NULL DEFAULT NULL,
   `activo` TINYINT(4) NOT NULL DEFAULT 1,
+  `nombre` VARCHAR(400) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 7
@@ -77,8 +77,22 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`cliente` (
     FOREIGN KEY (`id_profesional_preferido`)
     REFERENCES `grupo3_tp`.`profesional` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 15
+AUTO_INCREMENT = 21
 DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `grupo3_tp`.`mes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `grupo3_tp`.`mes` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `año` INT(11) NOT NULL,
+  `dias` INT(11) NOT NULL,
+  `pasado` TINYINT(4) NOT NULL DEFAULT 0,
+  `activo` TINYINT(4) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -151,17 +165,53 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `grupo3_tp`.`mes`
+-- Table `grupo3_tp`.`dia`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `grupo3_tp`.`mes` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(20) NOT NULL,
-  `año` INT NOT NULL,
-  `dias` INT NOT NULL,
-  `pasado` TINYINT NOT NULL DEFAULT 0,
-  `activo` TINYINT NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`))
+CREATE TABLE IF NOT EXISTS `grupo3_tp`.`dia` (
+  `id` INT NOT NULL,
+  `dia_num` INT NOT NULL,
+  `dia_nom` VARCHAR(45) NOT NULL,
+  `horario1` INT NULL,
+  `horario2` INT NULL,
+  `horario3` INT NULL,
+  `horario4` INT NULL,
+  `horario5` INT NULL,
+  `horario6` INT NULL,
+  `horario7` INT NULL,
+  `horario8` INT NULL,
+  `horario9` INT NULL,
+  `mes_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_dia_mes1_idx` (`mes_id` ASC) VISIBLE,
+  CONSTRAINT `fk_dia_mes1`
+    FOREIGN KEY (`mes_id`)
+    REFERENCES `grupo3_tp`.`mes` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `grupo3_tp`.`turno_has_dia`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `grupo3_tp`.`turno_has_dia` (
+  `turno_id` INT(11) NOT NULL,
+  `dia_id` INT NOT NULL,
+  PRIMARY KEY (`turno_id`, `dia_id`),
+  INDEX `fk_turno_has_dia_dia1_idx` (`dia_id` ASC) VISIBLE,
+  INDEX `fk_turno_has_dia_turno1_idx` (`turno_id` ASC) VISIBLE,
+  CONSTRAINT `fk_turno_has_dia_turno1`
+    FOREIGN KEY (`turno_id`)
+    REFERENCES `grupo3_tp`.`turno` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_turno_has_dia_dia1`
+    FOREIGN KEY (`dia_id`)
+    REFERENCES `grupo3_tp`.`dia` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

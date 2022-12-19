@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Mail\EnviarTurno;
 use App\Mail\RecordatorioTurno;
+use App\Models\Turno\Mes;
 use App\Models\Turno\Turno;
 use App\Models\Usuario\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\Mail;
 
 class TurnoController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +24,10 @@ class TurnoController extends Controller
      */
     public function index()
     {
-
+        $siguientes3meses =  (new MesController())->siguientes3Meses(Carbon::now()->month);
+        return view('calendarioSelect', [
+            'siguientes3meses'=>$siguientes3meses
+        ]);
     }
 
     /**
