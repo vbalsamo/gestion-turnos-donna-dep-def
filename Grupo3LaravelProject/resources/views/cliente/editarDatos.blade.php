@@ -53,9 +53,6 @@
                             </ul>
                         @endforeach
                     @endif
-
-                    <a href="{{ route('password.edit', $cliente->id) }}">Cambiar Contraseña</a>
-
                 </div>
             </div>
 
@@ -63,7 +60,14 @@
                 <button type="submit" class="btn btn-secondary">Guardar</button>
             </div>
         </form>
-
+        <a href="{{ route('password.edit', $cliente->id) }}">Cambiar Contraseña</a>
+        <br>
+        <form action="{{ route('register.destroy', $cliente->id) }}" id="destroy-form" method="post">
+            @csrf
+            {{ method_field('DELETE') }}
+            <a class="dropdown-item font-weight-bold" href="#"
+               onclick="document.getElementById('logout-form').submit()"></a>
+        </form>
     </div>
 
     <script>
