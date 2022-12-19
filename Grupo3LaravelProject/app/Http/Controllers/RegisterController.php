@@ -35,6 +35,18 @@ class RegisterController extends Controller
         ])->validate();
     }
 
+    private function storeCliente(Request $request){
+        DB::transaction(function () use ($request) {
+            DB::insert('INSERT INTO cliente (email,password,nombre,numero_tel) values (?,?,?,?)', [
+                $request->post('email'),
+                Hash::make($request->post('password')),
+                $request->post('nombre'),
+                $request->post('numero_tel')
+            ]);
+        });
+        //Mail::to($request->post('email'))->send(new RegistroUsuario());
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -46,20 +58,11 @@ class RegisterController extends Controller
     {
         $this->validar($request);
         try {
-            $email = $request->post('email');
-            $usuarioDuplicado = DB::selectOne("SELECT email FROM cliente WHERE email = '{$email}'");
-            if($usuarioDuplicado == null){
-                DB::insert('INSERT INTO cliente (email,password,nombre,numero_tel) values (?,?,?,?)', [
-                    $request->post('email'),
-                    Hash::make($request->post('password')),
-                    $request->post('nombre'),
-                    $request->post('numero_tel')
-                ]);
-                //Mail::to($request->post('email'))->send(new RegistroUsuario());
+            if (MailCheckController::mailNoRepetidoClienteNuevo($request->post('email'))) {
+                $this->storeCliente($request);
                 return view('login');
-            }
-            else{
-                return view('register')->withErrors([
+            } else {
+                return back()->withErrors([
                     'email' => 'El email ya está registrado en la base de datos'
                 ]);
             }
@@ -116,6 +119,7 @@ class RegisterController extends Controller
                 ]);
         });
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -126,10 +130,17 @@ class RegisterController extends Controller
     public function update(Request $request, $id)
     {
         $this->validarUpdate($request);
-        try{
-            $this->updateCliente($request, $id);
-            return redirect()->back()->with('alert', 'Datos actualizados correctamente.');
-        } catch (ValidationException $ex) {
+        try {
+            if (MailCheckController::mailNoRepetidoCliente($request->post('email'), $id)) {
+                $this->updateCliente($request, $id);
+                return redirect()->back()->with('alert', 'Datos actualizados correctamente.');
+            } else {
+                return view('cliente.editarDatos')->withErrors([
+                    'email' => 'El email ya está registrado en la base de datos'
+                ]);
+            }
+        } catch
+        (ValidationException $ex) {
 
         } catch (\Exception $exception) {
 
