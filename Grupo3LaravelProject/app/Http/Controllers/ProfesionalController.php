@@ -68,8 +68,17 @@ class ProfesionalController extends Controller
     {
         $this->validar($request);
         try {
-            $this->storeProfesional($request);
-            return redirect(route('profesionales.index'));
+            if(MailCheckController::mailNoRepetidoProfesionalNuevo($request->post('email'))){
+                $this->storeProfesional($request);
+                return redirect(route('profesionales.index'));
+            }
+            else
+            {
+                return back()->withErrors([
+                    'email' => 'El email ya está registrado en la base de datos'
+                ]);
+            }
+
         } catch (ValidationException $ex) {
 
         } catch (\Exception $exception) {
@@ -172,8 +181,17 @@ class ProfesionalController extends Controller
     {
         $this->validar($request);
         try {
-            $this->updateProfesional($request, $id);
-            return redirect()->route('profesionales.index');
+            if(MailCheckController::mailNoRepetidoProfesionalNuevo($request->post('email'))){
+                $this->updateProfesional($request, $id);
+                return redirect()->route('profesionales.index');
+            }
+            else
+            {
+                return back()->withErrors([
+                    'email' => 'El email ya está registrado en la base de datos'
+                ]);
+            }
+
         } catch (ValidationException $ex) {
 
         } catch (\Exception $exception) {
