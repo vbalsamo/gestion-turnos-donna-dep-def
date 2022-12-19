@@ -64,6 +64,13 @@
                                href="{{ route('menu.index') }}">Volver al menú</a>
                         </li>
                         <li>
+                            <form action="{{ route('register.edit', $cliente->id) }}" id="edit-form">
+                                @csrf
+                                <a class="dropdown-item font-weight-bold" href="#"
+                                   onclick="document.getElementById('edit-form').submit()">Mis Datos</a>
+                            </form>
+                        </li>
+                        <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li>

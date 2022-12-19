@@ -81,7 +81,7 @@ class RegisterController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -92,9 +92,30 @@ class RegisterController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('cliente.editarDatos');
     }
 
+    private function validarUpdate(Request $request)
+    {
+        return Validator::make($request->post(), [
+            'nombre' => ['required', 'alpha_spaces'],
+            'email' => ['required', 'email'],
+            'numero_tel' => ['required', 'numeric']
+        ])->validate();
+    }
+
+    private function updateCliente(Request $request, $id)
+    {
+        DB::transaction(function () use ($request, $id) {
+            DB::table('cliente')
+                ->where('id', $id)
+                ->update([
+                    'nombre' => $request->post('nombre'),
+                    'numero_tel' => $request->post('numero_tel'),
+                    'email' => $request->post('email')
+                ]);
+        });
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -104,7 +125,15 @@ class RegisterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validarUpdate($request);
+        try{
+            $this->updateCliente($request, $id);
+            return redirect()->back()->with('alert', 'Datos actualizados correctamente.');
+        } catch (ValidationException $ex) {
+
+        } catch (\Exception $exception) {
+
+        }
     }
 
     /**

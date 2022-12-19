@@ -50,7 +50,7 @@
             <button type="submit" class="btn btn-secondary">Guardar</button>
         </div>
     </form>
-    
+
 </div>
 
 @endsection('contenido')
