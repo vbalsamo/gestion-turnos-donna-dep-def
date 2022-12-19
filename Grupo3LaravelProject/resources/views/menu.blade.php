@@ -34,7 +34,7 @@
                 <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
               </svg>
               <div class="card-body">
-                <p class="card-text"> mirá tus turnos aquí! </p>
+                <p class="card-text"> Mirá tus turnos aquí! </p>
                   <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
                           <button type="button" class="btn btn-outline-primary">Ver mis turnos</button>
