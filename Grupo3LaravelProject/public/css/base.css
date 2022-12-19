@@ -3,6 +3,10 @@ body {
     background: pink;
 }
 
+#container_menu {
+    background-color: #B5D6BE;
+}
+
 #container {
     background-color: beige;
 }
