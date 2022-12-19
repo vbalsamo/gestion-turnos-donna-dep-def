@@ -2,6 +2,8 @@
 
 @section('contenido')
 
+<div class="container w-50 my-5">
+
     <form method="POST" action="
         @if(isset($tratamiento->id))
         {{ route('tratamientos.update', $tratamiento->id)}}
@@ -16,6 +18,9 @@
         @endif
 
         <div class="form-group">
+        <h4 class="my-4">Agregar nuevo tratamiento</h4>
+        
+        <div class="py-4">
             <label for="nombre">Nombre</label>
             <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}"
                    name="nombre" @if(isset($tratamiento)) value="{{ $tratamiento->nombre }}"
@@ -27,7 +32,9 @@
                     <br>
                 </span>
             @endif
-
+        </div>
+        
+        <div class="pb-4">
             <label for="descripcion">Descripción</label>
             @php
                 $descripcionTextarea = '';
@@ -49,6 +56,7 @@
                     <br>
                 </span>
             @endif
+        </div>
 
         </div>
 
@@ -56,5 +64,7 @@
             <button type="submit" class="btn btn-secondary">Guardar</button>
         </div>
     </form>
+    
+</div>
 
 @endsection('contenido')
