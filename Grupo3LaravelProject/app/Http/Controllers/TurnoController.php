@@ -24,7 +24,6 @@ class TurnoController extends Controller
      */
     public function index()
     {
-        return view('turnos');        
         $siguientes3meses =  (new MesController())->siguientes3Meses(Carbon::now()->month);
         return view('calendarioSelect', [
             'siguientes3meses'=>$siguientes3meses

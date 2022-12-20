@@ -12,15 +12,19 @@
 @endsection
 @section('contenido')
 
-    @php
-        use \Illuminate\Support\Facades\Auth;
-        $cliente = Auth::user();
-    @endphp
+    @csrf
+
+    @if(isset($turno->id))
+        {{method_field('PATCH')}}
+    @endif
 
     <div class="container w-50 my-5">
-        <form method="POST" action="{{ route('turnosAdmin.store')}}">
+        <form method="POST" action="@if(isset($turno->id))
+        {{ route('turnosAdmin.update', $turno->id)}}
+    @else
+        {{ route('turnosAdmin.store') }}
+    @endif">
             @csrf
-            {{method_field('PATCH')}}
             <div class="form-group">
                 <h4 class="my-4" style="color: #5a1d3e">Abrir un horario</h4>
 
