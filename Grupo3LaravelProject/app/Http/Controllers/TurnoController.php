@@ -40,8 +40,8 @@ class TurnoController extends Controller
 
     }
 
-    public static function horariosLibres ($dia){
-        return DB::select("SELECT * FROM turno WHERE dia_id = {$dia} AND id_cliente is NULL");
+    public static function horariosLibres ($dia, $locacion){
+        return DB::select("SELECT * FROM turno WHERE dia_id = {$dia} AND id_locacion = {$locacion} AND id_cliente is NULL");
     }
 
     public function elegirHorario(Request $request){
@@ -70,7 +70,11 @@ class TurnoController extends Controller
             });
             $turno = DB::selectOne("SELECT * FROM turno WHERE id = {$idTurno}");
             $this->enviarMailReserva($turno);
-            $this->mostrarTurnos();
+            $id = Auth::id();
+            $turnos = DB::select("SELECT * FROM turno WHERE id_cliente = {$id}");
+            return view('cliente.indexTurno', [
+                'turnos' => $turnos,
+            ]);
         } catch (\Exception $exception) {
             dd($exception);
         }
@@ -155,14 +159,6 @@ class TurnoController extends Controller
 
     private function filtrarTurnos($turno){
 
-    }
-
-    public function mostrarTurnos(){
-        $id = Auth::id();
-        $turnos = DB::select("SELECT * FROM turno WHERE id_cliente = {$id}");
-        return view('cliente.indexTurno', [
-            'turnos' => $turnos,
-        ]);
     }
 
     /**

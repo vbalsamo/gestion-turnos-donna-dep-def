@@ -53,9 +53,7 @@
                         <select id="locacion" name="locacion" aria-controls="dataTable"
                                 class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                             <option value="" selected disabled></option>
-                            @foreach ($locaciones_global as $locacion)
-                                <option value="{{$locacion->id}}"> {{$locacion->nombre}}</option>
-                            @endforeach
+                                <option value="{{$locacion}}"> {{$locacion}}</option>
                         </select>
                     </div>
 
@@ -66,6 +64,8 @@
                             <option value="{{$tratamiento}}"> {{$tratamiento}}</option>
                         </select>
                     </div>
+
+                    {{dd($locacion)}}
 
                     <div class="my-3" style="display: none">
                         <label for="mes">Mes</label>
@@ -85,7 +85,7 @@
                     </div>
 
                     @php
-                        $horariosLibres = \App\Http\Controllers\TurnoController::horariosLibres($dia);
+                        $horariosLibres = \App\Http\Controllers\TurnoController::horariosLibres($dia, 1);
                     @endphp
                     @php
                         $horario = [

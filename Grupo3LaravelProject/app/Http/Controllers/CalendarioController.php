@@ -40,8 +40,9 @@ class CalendarioController extends Controller
         }
     }
 
-    public function diasDisponibles($mes, $tratamiento){
-        return DB::select("SELECT DISTINCT dia.id, dia.dia_num, dia.dia_nom FROM turno INNER JOIN dia ON turno.dia_id WHERE id_tratamiento = {$tratamiento} AND dia.dia_mes = {$mes} ORDER BY dia.dia_num");
+    public function diasDisponibles($mes, $tratamiento, $locacion){
+        return DB::select("SELECT DISTINCT dia.id, dia.dia_num, dia.dia_nom, turno.id_locacion FROM turno INNER JOIN dia ON turno.dia_id
+        WHERE id_tratamiento = {$tratamiento} AND dia.dia_mes = {$mes} AND turno.id_locacion = {$locacion} ORDER BY dia.dia_num");
     }
 
     public function show(Request $request){
@@ -72,7 +73,8 @@ class CalendarioController extends Controller
 
 
         $diasDisponibles = [];
-        foreach ($this->diasDisponibles($mes , $request->post('tratamiento')) as $diaDisponible){
+        //dd($this->diasDisponibles($mes , $request->post('tratamiento'), $request->post('locacion')));
+        foreach ($this->diasDisponibles($mes , $request->post('tratamiento'), $request->post('locacion')) as $diaDisponible){
             array_push($diasDisponibles, $diaDisponible);
         }
 
