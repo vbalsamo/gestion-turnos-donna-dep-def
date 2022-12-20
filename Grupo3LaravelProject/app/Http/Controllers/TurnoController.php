@@ -115,8 +115,7 @@ class TurnoController extends Controller
 
 
         //real
-        $Idsturnos = DB::select("SELECT * FROM turno_has_dia WHERE dia_id = {$request->post('diaId')}");
-        $turnos = DB::select("SELECT * FROM turno WHERE id = {$Idsturnos}");
+        $turnos = DB::select("SELECT * FROM turno WHERE dia_id = {$request->post('diaId')}");
         $turnosFav = DB::select("SELECT * FROM turno WHERE profesional = {$cliente -> $profesionalPreferido}");
 
         //prueba
