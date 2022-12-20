@@ -33,13 +33,13 @@
                 </li>
                 <li class="nav-item">
                     @can('clienteAuth')
-                            <li><a class="dropdown-item" href="{{ route('menu.index') }}">Menú</a>
+                            <li><a class="nav-link active" href="{{ route('menu.index') }}">Menú</a>
                             </li>
                     @endcan
                 </li>
                 <li class="nav-item">
                     @can('clienteAuth')
-                            <li><a class="dropdown-item" href="{{ route('turnos.mostrarTurnos') }}">Ver mis turnos</a>
+                            <li><a class="nav-link active" href="{{ route('turnos.mostrarTurnos') }}">Ver mis turnos</a>
                             </li>
                     @endcan
                 </li>
