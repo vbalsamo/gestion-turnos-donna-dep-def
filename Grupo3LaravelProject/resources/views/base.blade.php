@@ -37,6 +37,12 @@
                             </li>
                     @endcan
                 </li>
+                <li class="nav-item">
+                    @can('clienteAuth')
+                            <li><a class="dropdown-item" href="{{ route('turnos.mostrarTurnos') }}">Ver mis turnos</a>
+                            </li>
+                    @endcan
+                </li>
                 {{--<li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('locaciones.index') }}">Sucursales</a>
                 </li>
