@@ -76,7 +76,7 @@ class TurnoController extends Controller
                 'turnos' => $turnos,
             ]);
         } catch (\Exception $exception) {
-            dd($exception);
+
         }
 
         /*$id_turno = $request->post("turnoId");
@@ -155,6 +155,14 @@ class TurnoController extends Controller
         foreach($turnos as $turno){
             $turno->setProximo(false);
         }
+    }
+
+    public function mostrarTurnos(){
+        $id = Auth::id();
+        $turnos = DB::select("SELECT * FROM turno WHERE id_cliente = {$id}");
+        return view('cliente.indexTurno', [
+            'turnos' => $turnos,
+        ]);
     }
 
     private function filtrarTurnos($turno){
