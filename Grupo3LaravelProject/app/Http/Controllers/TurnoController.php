@@ -40,8 +40,8 @@ class TurnoController extends Controller
 
     }
 
-    public static function horariosLibres ($dia){
-        return DB::select("SELECT * FROM turno WHERE dia_id = {$dia} AND id_cliente is NULL");
+    public static function horariosLibres ($dia, $locacion){
+        return DB::select("SELECT * FROM turno WHERE dia_id = {$dia} AND id_locacion = {$locacion} AND id_cliente is NULL");
     }
 
     public function elegirHorario(Request $request){
@@ -69,8 +69,12 @@ class TurnoController extends Controller
                 ]);
             });
             $turno = DB::selectOne("SELECT * FROM turno WHERE id = {$idTurno}");
-            //$this->enviarMailReserva($turno);
-            $this->mostrarTurnos();
+            $this->enviarMailReserva($turno);
+            $id = Auth::id();
+            $turnos = DB::select("SELECT * FROM turno WHERE id_cliente = {$id}");
+            return view('cliente.indexTurno', [
+                'turnos' => $turnos,
+            ]);
         } catch (\Exception $exception) {
 
         }
@@ -112,9 +116,9 @@ class TurnoController extends Controller
             $profesional = DB::selectOne("SELECT nombre FROM profesional WHERE id = {$turno->id_profesional}")->nombre;
             $locacion = DB::selectOne("SELECT ciudad FROM locacion WHERE id = {$turno->id_locacion}")->ciudad;
             $turnoSend = new Turno($fecha, $hora, $cliente, $profesional, $tratamiento, $locacion);
-            Mail::to($clienteObj->email)->send(new EnviarTurno($turnoSend));
+             Mail::to($clienteObj->email)->send(new EnviarTurno($turnoSend));
         } catch (\Exception $e) {
-            dd($e);
+
         }
 
     }
@@ -155,14 +159,6 @@ class TurnoController extends Controller
 
     private function filtrarTurnos($turno){
 
-    }
-
-    public function mostrarTurnos(){
-        $id = Auth::id();
-        $turnos = DB::select("SELECT * FROM turno WHERE id_cliente = {$id}");
-        return view('cliente.indexTurno', [
-            'turnos' => $turnos,
-        ]);
     }
 
     /**
