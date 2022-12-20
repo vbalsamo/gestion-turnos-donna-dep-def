@@ -11,13 +11,6 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 @endsection
 @section('contenido')
-
-    @csrf
-
-    @if(isset($turno->id))
-        {{method_field('PATCH')}}
-    @endif
-
     <div class="container w-50 my-5">
         <form method="POST" action="@if(isset($turno->id))
         {{ route('turnosAdmin.update', $turno->id)}}
@@ -25,38 +18,29 @@
         {{ route('turnosAdmin.store') }}
     @endif">
             @csrf
+
+            @if(isset($turno->id))
+                {{method_field('PATCH')}}
+            @endif
+
             <div class="form-group">
                 <h4 class="my-4" style="color: #5a1d3e">Abrir un horario</h4>
-
-                <div class="row form-group">
-                    <div class="">
-                        <label for="fecha">Fecha</label>
-                        <div class="input-group date" id="datepicker">
-                            <input type="text" name="fecha" class="form-control">
-                            <span class="input-group-append">
-                                <span class="input-group-text bg-white d-block">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                    </span>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="pt-4" style="color: #5a1d3e">
                     <label for="Hora">Horario</label>
                     <select form="form" name="hora"
                             class="form-select"
-                            aria-label="Hora">
+                            aria-label="hora">
                         <option disabled selected value="null">Seleccione un horario</option>
-                        <option value=1>9 a 10</option>
-                        <option value=2>10 a 11</option>
-                        <option value=3>11 a 12</option>
-                        <option value=4>12 a 13</option>
-                        <option value=5>13 a 14</option>
-                        <option value=6>14 a 15</option>
-                        <option value=7>15 a 16</option>
-                        <option value=8>16 a 17</option>
-                        <option value=9>17 a 18</option>
+                        <option value='1'>9 a 10</option>
+                        <option value='2'>10 a 11</option>
+                        <option value='3'>11 a 12</option>
+                        <option value='4'>12 a 13</option>
+                        <option value='5'>13 a 14</option>
+                        <option value='6'>14 a 15</option>
+                        <option value='7'>15 a 16</option>
+                        <option value='8'>16 a 17</option>
+                        <option value='9'>17 a 18</option>
                     </select>
                 </div>
 

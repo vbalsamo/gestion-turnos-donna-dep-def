@@ -85,10 +85,11 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `grupo3_tp`.`dia`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `grupo3_tp`.`dia` (
-  `id` INT(11) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `dia_num` INT(11) NOT NULL,
   `dia_nom` VARCHAR(45) NOT NULL,
-  `mes_id` INT(11) NOT NULL,
+  `dia_mes` INT(11) NOT NULL,
+  `dia_anio` INT(11) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
