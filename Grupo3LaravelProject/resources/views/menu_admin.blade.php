@@ -23,17 +23,17 @@
                 <p class="card-text"> Creá nuevas instancias! </p>
                   <div class="d-flex justify-content-between align-items-center ">
                       <div class="btn-group">
-                          <form>
-                              <button type="button" class="btn btn-outline-primary">Crear Profesional</button>                           
+                          <form action="{{ route('profesionales.index') }}">
+                              <button type="submit" class="btn btn-outline-primary">Profesionales</button>
                             </form>
-                          <form>
-                              <button type="button" class="btn btn-outline-primary">Crear Tratamiento</button>
-                          </form>    
-                          <form>
-                            <button type="button" class="btn btn-outline-primary">Crear Locación</button>
+                          <form action="{{ route('tratamientos.index') }}">
+                              <button type="submit" class="btn btn-outline-primary">Tratamientos</button>
                           </form>
-                          <form>
-                            <button type="button" class="btn btn-outline-primary">Crear Turno</button>
+                          <form action="{{ route('locaciones.index') }}">
+                            <button type="submit" class="btn btn-outline-primary">Sucursales</button>
+                          </form>
+                          <form action="{{ route('turnosAdmin.create') }}">
+                            <button type="submit" class="btn btn-outline-primary">Turnos</button>
                           </form>
                       </div>
                   </div>
@@ -41,8 +41,8 @@
             </div>
           </div>
 
-        
-        
+
+
       </div>
     </div>
   </div>

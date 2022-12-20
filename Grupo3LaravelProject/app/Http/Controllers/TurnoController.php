@@ -149,9 +149,10 @@ class TurnoController extends Controller
 
     }
 
-    public function mostrarTurnos($id){
+    public function mostrarTurnos(){
+        $id = Auth::id();
         $turnos = DB::select("SELECT *
-        FROM turno WHERE id_cliente = $id");
+        FROM turno WHERE id_cliente = {$id}");
         return view('cliente.indexTurno', [
             'turnos' => $turnos
         ]);

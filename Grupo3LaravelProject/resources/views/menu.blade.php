@@ -43,7 +43,7 @@
                 <p class="card-text"> Mirá tus turnos aquí! </p>
                   <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                          <form action="{{ route('turnosShow.show', 1) }}">
+                          <form action="{{ route('turnos.mostrarTurnos') }}">
                             <button type="submit" class="btn btn-outline-primary">Ver mis turnos</button>
                           </form>
                       </div>
