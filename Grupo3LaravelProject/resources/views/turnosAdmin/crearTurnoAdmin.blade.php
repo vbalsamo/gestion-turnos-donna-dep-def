@@ -83,6 +83,18 @@
                         @endforeach
                     </select>
                 </div>
+
+                <div class="pt-4" style="color: #5a1d3e">
+                    <label for="profesional">Profesional</label>
+                    <select form="form" name="profesional"
+                            class="form-select"
+                            aria-label="profesional">
+                        <option disabled selected value="null">Seleccione un profesional</option>
+                        @foreach($profesionales_global as $profesional)
+                            <option value={{$profesional->id}}>{{ $profesional->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
             <br>
             <div>
