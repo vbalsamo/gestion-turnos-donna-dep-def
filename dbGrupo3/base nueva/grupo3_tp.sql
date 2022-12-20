@@ -87,11 +87,12 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `grupo3_tp`.`dia` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `dia_num` INT(11) NOT NULL,
-  `dia_nom` VARCHAR(45) NOT NULL,
+  `dia_nom` VARCHAR(45) NULL DEFAULT NULL,
   `dia_mes` INT(11) NOT NULL,
   `dia_anio` INT(11) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 26
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -167,6 +168,7 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`turno` (
     FOREIGN KEY (`id_tratamiento`)
     REFERENCES `grupo3_tp`.`tratamiento` (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 17
 DEFAULT CHARACTER SET = utf8;
 
 
