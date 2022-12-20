@@ -23,11 +23,10 @@ class TurnoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('turnos');        
+    {    
         $siguientes3meses =  (new MesController())->siguientes3Meses(Carbon::now()->month);
         return view('calendarioSelect', [
-            'siguientes3meses'=>$siguientes3meses
+          'siguientes3meses'=>$siguientes3meses
         ]);
     }
 

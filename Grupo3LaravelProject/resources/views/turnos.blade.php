@@ -53,7 +53,11 @@
                     class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                         <option selected>seleccione un turno</option>
                         <option value="" ></option>
-
+                        @foreach ($locaciones_global as $locacion)
+                        <option value ="horario:{{  }}"  > {{  }}</option>
+                        @endforeach
+                   
+                   
                     </select>
                     <label for="locacion">Locación</label>
                     <select id="locacion" name="locacion" aria-controls="dataTable"
@@ -68,7 +72,6 @@
                 <div class="text-center mt-4 mb-5">
                     <button id="btnIngresar" type="submit" class="btn btn-secondary text-center">Confirmar</button>
                 </div>
-
             </form>
         </div>
     </div>
