@@ -6,7 +6,7 @@
     @endsection()
 
     @section('contenido')
-        
+
         <div class="container-fluid w-50 position-absolute top-50 start-50 translate-middle rounded shadow" id="container">
 
             <div class="row align-items-stretch">
@@ -32,13 +32,9 @@
                             <label for="locacion">Locación</label>
                             <select id="locacion" name="locacion" aria-controls="dataTable"
                                     class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                <option value ="" selected disabled></option>
-                                @foreach ($locaciones_global as $locacion)
-                                    <option value ="{{$locacion->id}}"  > {{$locacion->nombre}}</option>
-                                @endforeach
+                                    <option selected value ="{{$locacion}}"> {{$locacion}}</option>
                             </select>
                         </div>
-
                         <div class="my-3" style="display: none">
                             <label for="tratamiento">Tratamiento</label>
                             <select disabled id="tratamiento" name="tratamiento" aria-controls="dataTable"

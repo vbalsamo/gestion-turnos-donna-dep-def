@@ -65,8 +65,6 @@
                         </select>
                     </div>
 
-                    {{dd($locacion)}}
-
                     <div class="my-3" style="display: none">
                         <label for="mes">Mes</label>
                         <select disabled id="mes" name="mes" aria-controls="dataTable"
@@ -85,7 +83,7 @@
                     </div>
 
                     @php
-                        $horariosLibres = \App\Http\Controllers\TurnoController::horariosLibres($dia, 1);
+                        $horariosLibres = \App\Http\Controllers\TurnoController::horariosLibres($dia);
                     @endphp
                     @php
                         $horario = [

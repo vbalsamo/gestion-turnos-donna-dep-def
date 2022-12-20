@@ -40,8 +40,8 @@ class TurnoController extends Controller
 
     }
 
-    public static function horariosLibres ($dia, $locacion){
-        return DB::select("SELECT * FROM turno WHERE dia_id = {$dia} AND id_locacion = {$locacion} AND id_cliente is NULL");
+    public static function horariosLibres ($dia){
+        return DB::select("SELECT * FROM turno WHERE dia_id = {$dia} AND id_cliente is NULL");
     }
 
     public function elegirHorario(Request $request){
