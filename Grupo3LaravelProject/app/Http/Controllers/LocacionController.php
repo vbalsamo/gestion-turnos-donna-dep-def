@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+use function Illuminate\Events\queueable;
 
 class LocacionController extends Controller
 {
@@ -18,9 +19,7 @@ class LocacionController extends Controller
     public function index()
     {
         return view('locaciones.indexLocacion');
-        /*$usuario = Auth::id();
-        if(Gate::allows('admin-auth', $usuario)) return view('locaciones.indexLocacion');
-        else return abort(403);*/
+
     }
 
     /**
@@ -46,12 +45,13 @@ class LocacionController extends Controller
 
     private function storeLocacion(Request $request){
         DB::transaction(function () use ($request) {
-            DB::insert('INSERT INTO locacion (ciudad, calle, altura, piso, depto) values (?, ?, ?, ?, ?)', [
+            DB::insert('INSERT INTO locacion (ciudad, calle, altura, piso, depto, nombre) values (?, ?, ?, ?, ?, ?)', [
                 $request->post("ciudad"),
                 $request->post("calle"),
                 $request->post("altura"),
                 $request->post("piso"),
-                $request->post("depto")
+                $request->post("depto"),
+                $request->post("ciudad")
             ]);
         });
     }
@@ -69,9 +69,9 @@ class LocacionController extends Controller
             $this->storeLocacion($request);
             return redirect(route('locaciones.index'));
         } catch (ValidationException $ex) {
-
+            dd($ex);
         } catch (\Exception $exception) {
-
+            dd($exception);
         }
     }
 

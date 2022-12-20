@@ -15,7 +15,7 @@ class TurnosAdminController extends Controller
      */
     public function index()
     {
-
+        return view('turnosAdmin.crearTurnoAdmin');
     }
 
     /**
@@ -25,8 +25,7 @@ class TurnosAdminController extends Controller
      */
     public function create()
     {
-        if(Gate::allows('admin-auth')) return view('turnosAdmin.crearTurnoAdmin');
-        else return abort(403);
+        return view('turnosAdmin.crearTurnoAdmin');
     }
 
     private function crearDia($fecha){
@@ -77,7 +76,7 @@ class TurnosAdminController extends Controller
             $this->storeTurno($request);
             return redirect(route('turnosAdmin.create'));
         } catch (ValidationException $ex) {
-
+            dd($ex);
         } catch (\Exception $exception) {
             dd($exception);
         }

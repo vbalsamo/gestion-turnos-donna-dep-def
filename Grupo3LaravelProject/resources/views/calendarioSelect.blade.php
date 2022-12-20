@@ -33,7 +33,7 @@
                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                         <option value ="" selected disabled></option>
                         @foreach ($locaciones_global as $locacion)
-                        <option value ="{{$locacion->id}}"  > {{$locacion->nombre}}</option>
+                        <option value ="{{$locacion->id}}"  > {{$locacion->ciudad}}</option>
                         @endforeach
                     </select>
                 </div>
