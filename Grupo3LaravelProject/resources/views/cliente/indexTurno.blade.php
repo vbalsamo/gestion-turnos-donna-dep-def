@@ -32,8 +32,13 @@
         <tbody>
         @foreach ($turnos as $turno)
         <tr>
-            <td class="align-middle">{{ $turno->dia_nom }} {{ $turno->dia_num }} del {{ $turno->dia_mes }}</td>
-            <td class="align-middle">{{ $horario[$turno->hora] }}</td>
+            @php
+                $dia = DB::selectOne("SELECT * FROM dia WHERE id = {$turno->dia_id}");
+                $fecha = $dia->dia_nom . ", " . $dia->dia_num . " del " . $dia->dia_mes;
+                $hora = \App\Http\Controllers\TurnoController::traducirHorario($turno->hora);
+            @endphp
+            <td class="align-middle">{{$fecha}}</td>
+            <td class="align-middle">{{$hora }}</td>
             <td class="align-middle">{{ \App\Http\Controllers\TratamientoController::nombreTratamiento($turno->id_tratamiento) }}</td>
             <td class="align-middle">{{ \App\Http\Controllers\ProfesionalController::nombreProfesional($turno->id_profesional) }}</td>
             <td class="align-middle">{{ \App\Http\Controllers\LocacionController::nombreLocacion($turno->id_locacion) }}</td>

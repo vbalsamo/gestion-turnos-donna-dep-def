@@ -70,7 +70,7 @@ class TurnoController extends Controller
             });
             $turno = DB::selectOne("SELECT * FROM turno WHERE id = {$idTurno}");
             //$this->enviarMailReserva($turno);
-            $this->mostrarTurnos(Auth::id());
+            $this->mostrarTurnos();
         } catch (\Exception $exception) {
 
         }
@@ -85,8 +85,7 @@ class TurnoController extends Controller
         ]);*/
     }
 
-    public function enviarMailReserva($turno)
-    {
+    public static function traducirHorario($hora){
         $horario = [
             '1' => '9 a 10',
             '2' => '10 a 11',
@@ -98,16 +97,25 @@ class TurnoController extends Controller
             '8' => '16 a 17',
             '9' => '17 a 18'
         ];
-        $tratamiento = DB::selectOne("SELECT nombre FROM tratamiento WHERE id = {$turno->id_tratamiento}")->nombre;
-        $dia = DB::selectOne("SELECT * FROM dia WHERE id = {$turno->dia_id}");
-        $fecha = $dia->dia_nom . ", " . $dia->dia_num . " del " . $dia->dia_mes;
-        $hora = $horario [$turno->hora];
-        $clienteObj = DB::selectOne("SELECT nombre, email FROM cliente WHERE id = {$turno->id_cliente}");
-        $cliente = $clienteObj->nombre;
-        $profesional = DB::selectOne("SELECT nombre FROM profesional WHERE id = {$turno->id_profesional}")->nombre;
-        $locacion = DB::selectOne("SELECT ciudad FROM locacion WHERE id = {$turno->id_locacion}")->ciudad;
-        $turnoSend = new Turno($fecha,  $hora, $cliente, $profesional, $tratamiento, $locacion);
-        Mail::to($clienteObj->email)->send(new EnviarTurno($turnoSend));
+        return $horario[$hora];
+    }
+
+    public function enviarMailReserva($turno)
+    {
+        try {
+            $tratamiento = DB::selectOne("SELECT nombre FROM tratamiento WHERE id = {$turno->id_tratamiento}")->nombre;
+            $dia = DB::selectOne("SELECT * FROM dia WHERE id = {$turno->dia_id}");
+            $fecha = $dia->dia_nom . ", " . $dia->dia_num . " del " . $dia->dia_mes;
+            $hora = $this->traducirHorario($turno->hora);
+            $clienteObj = DB::selectOne("SELECT nombre, email FROM cliente WHERE id = {$turno->id_cliente}");
+            $cliente = $clienteObj->nombre;
+            $profesional = DB::selectOne("SELECT nombre FROM profesional WHERE id = {$turno->id_profesional}")->nombre;
+            $locacion = DB::selectOne("SELECT ciudad FROM locacion WHERE id = {$turno->id_locacion}")->ciudad;
+            $turnoSend = new Turno($fecha, $hora, $cliente, $profesional, $tratamiento, $locacion);
+            Mail::to($clienteObj->email)->send(new EnviarTurno($turnoSend));
+        } catch (\Exception $e) {
+            dd($e);
+        }
 
     }
 
@@ -151,10 +159,9 @@ class TurnoController extends Controller
 
     public function mostrarTurnos(){
         $id = Auth::id();
-        $turnos = DB::select("SELECT *
-        FROM turno WHERE id_cliente = {$id}");
+        $turnos = DB::select("SELECT * FROM turno WHERE id_cliente = {$id}");
         return view('cliente.indexTurno', [
-            'turnos' => $turnos
+            'turnos' => $turnos,
         ]);
     }
 
