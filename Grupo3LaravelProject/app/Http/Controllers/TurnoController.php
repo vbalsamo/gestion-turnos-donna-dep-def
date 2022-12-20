@@ -207,6 +207,10 @@ class TurnoController extends Controller
                 $id
             ]);
         });
-        $this->mostrarTurnos();
+        $id = Auth::id();
+        $turnos = DB::select("SELECT * FROM turno WHERE id_cliente = {$id}");
+        return view('cliente.indexTurno', [
+            'turnos' => $turnos,
+        ]);
     }
 }
