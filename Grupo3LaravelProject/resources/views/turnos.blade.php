@@ -49,7 +49,7 @@
                         </div>
                 </div>
                 <div class="my-3">
-                    <label for="locacion">turnos disponibles</label>
+                    <label class="py-2" for="locacion">Turnos disponibles:</label>
                     <select id="locacion" name="locacion" aria-controls="dataTable"
                     class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                         <option selected>seleccione un turno</option>
