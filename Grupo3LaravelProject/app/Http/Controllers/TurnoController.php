@@ -66,8 +66,15 @@ class TurnoController extends Controller
                 $request->post("turnoId")
             ]);
         });
-        $id_turno = $request->post("turnoId");
+        return redirect()->route('turnos.mostrarTurnos');
+        /*$id_turno = $request->post("turnoId");
         $turno = DB::selectOne("SELECT * FROM turno WHERE id = {$id_turno}");
+        $id_dia = $turno->dia_id;
+        $dia = DB::selectOne("SELECT * FROM dia WHERE id = {$id_dia}");
+        return view('cliente.indexTurno',[
+            'turno' => $turno,
+            'dia' => $dia
+        ]);*/
 
         //$this->enviarMailReserva($turno);
     }
@@ -114,6 +121,10 @@ class TurnoController extends Controller
 
     private function filtrarTurnos($turno){
 
+    }
+
+    public function mostrarTurnos($id){
+        return view('cliente.indexTurno');
     }
 
     /**

@@ -16,8 +16,7 @@ class TratamientoController extends Controller
      */
     public function index()
     {
-        if(Gate::allows('admin-auth')) return view('tratamientos/tratamientosIndex');
-        else return abort(403);
+        return view('tratamientos/tratamientosIndex');
     }
 
     /**
@@ -27,8 +26,7 @@ class TratamientoController extends Controller
      */
     public function create()
     {
-        if(Gate::allows('admin-auth')) return view('tratamientos/createTratamiento');
-        else return abort(403);
+        return view('tratamientos/createTratamiento');
     }
 
     private function validar(Request $request)

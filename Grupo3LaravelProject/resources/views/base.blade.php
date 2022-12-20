@@ -31,7 +31,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('turnos.index') }}">Turnos</a>
                 </li>
-                <li class="nav-item">
+                {{--<li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('locaciones.index') }}">Sucursales</a>
                 </li>
 
@@ -47,7 +47,7 @@
                             </li>
                         @endforeach
                     </ul>
-                </li>
+                </li>--}}
             </ul>
             @php
                 use \Illuminate\Support\Facades\Auth;
