@@ -53,9 +53,9 @@
                     class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                         <option selected>seleccione un turno</option>
                         <option value="" ></option>
-                        @foreach ($locaciones_global as $locacion)
+                        {{-- @foreach ($locaciones_global as $locacion)
                         <option value ="horario:{{  }}"  > {{  }}</option>
-                        @endforeach
+                        @endforeach --}}
                    
                    
                     </select>
