@@ -26,7 +26,8 @@
             <th scope="col">Tratamiento</th>
             <th scope="col">Profesional</th>
             <th scope="col">Sucursal</th>
-            <th scope="col">Disponible</th>
+            <th scope="col">Cancelar</th>
+            <!--<th scope="col">Disponible</th>!-->
         </tr>
         </thead>
         <tbody>
@@ -42,7 +43,14 @@
             <td class="align-middle">{{ \App\Http\Controllers\TratamientoController::nombreTratamiento($turno->id_tratamiento) }}</td>
             <td class="align-middle">{{ \App\Http\Controllers\ProfesionalController::nombreProfesional($turno->id_profesional) }}</td>
             <td class="align-middle">{{ \App\Http\Controllers\LocacionController::nombreLocacion($turno->id_locacion) }}</td>
-            <td class="align-middle">{{ \App\Http\Controllers\TurnosShowController::turnoDisponible($turno->id) }}</td>
+            <td class="align-middle"><form action="{{ route('turnos.destroy', $turno->id) }}" method="POST">
+                    @csrf
+                    <div class="text-center">
+                        {{ method_field('DELETE') }}
+                        <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este turno?')" class="btn btn-danger">Eliminar</button>
+                    </div>
+                </form></td>
+            <!--<td class="align-middle">{{ \App\Http\Controllers\TurnosShowController::turnoDisponible($turno->id) }}</td>!-->
 
             {{--<td class="align-middle"><a>{{ $dia->dia_nom }}</a></td>
             <td class="align-middle">{{ $locacion->calle }}</td>
