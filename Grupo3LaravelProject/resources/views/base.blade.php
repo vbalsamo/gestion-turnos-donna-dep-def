@@ -79,12 +79,10 @@
                         </li>
                     </ul>
                 @else
-                        <div class="nav-item dropdown active">
-                            <form action="{{ route('login.index') }}">
-                                <button id="btnIngresar" type="submit" class="btn btn-primary shadow">Iniciar Sesión
-                                </button>
-                            </form>
-                        </div>
+                    <form action="{{ route('login.index') }}">
+                        <button id="btnIngresar" type="submit" class="btn btn-primary shadow">Iniciar Sesión
+                        </button>
+                    </form>
                 @endif
             </div>
         </div>
