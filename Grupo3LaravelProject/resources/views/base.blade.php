@@ -31,6 +31,12 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('turnos.index') }}">Turnos</a>
                 </li>
+                <li class="nav-item">
+                    @can('clienteAuth')
+                            <li><a class="dropdown-item" href="{{ route('menu.index') }}">Menú</a>
+                            </li>
+                    @endcan
+                </li>
                 {{--<li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('locaciones.index') }}">Sucursales</a>
                 </li>
@@ -60,6 +66,11 @@
                         {{ $cliente->nombre }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
+                        @can('adminAuth')
+                            <li><a class="dropdown-item"
+                                href="{{ route('panelAdmin') }}">Menú de Administrador</a>
+                            </li>
+                        @endcan
                         <li><a class="dropdown-item"
                                href="{{ route('menu.index') }}">Volver al menú</a>
                         </li>

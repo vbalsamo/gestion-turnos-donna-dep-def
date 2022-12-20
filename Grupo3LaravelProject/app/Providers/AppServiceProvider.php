@@ -46,5 +46,13 @@ class AppServiceProvider extends ServiceProvider
             return $rol == 'admin';
             //return $usuario->getRol() == 'admin';
         }) ;
+
+        Gate::define('clienteAuth', function ($usuario){
+            $id = $usuario->id;
+            $rol = DB::selectOne("SELECT rol FROM cliente WHERE id={$id}")->rol;
+            //dd($id, $rol);
+            return $rol == 'cliente';
+            //return $usuario->getRol() == 'admin';
+        }) ;
     }
 }
