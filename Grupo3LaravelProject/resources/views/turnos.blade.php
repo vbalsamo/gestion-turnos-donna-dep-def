@@ -23,69 +23,64 @@
 
 </form> --}}
 
-<p> pepe</p>
+@section('contenido_header')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/calendarioSelect.css') }}">
+@endsection()
 
+@section('contenido')
 
-<div class="container w-75 position-absolute top-50 start-50 translate-middle rounded shadow" id="container" >
+<div class="container-fluid w-50 position-absolute top-50 start-50 translate-middle rounded shadow" id="container">
+
     <div class="row align-items-stretch">
-        <div class="col-md-5 col-xl-6 rounded-start" >
-            <select class="form-select" size="3" aria-label="size 3 select example" height="auto">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-                    
+
+        <!-- IMAGEN -->
+        <div class="col rounded-start d-none d-sm-block col-sm-4 col-md-5 col-lg-6" id="imagen">
         </div>
-        <div class="col-md-7 col-xl-6 rounded-end">
-            <h5 class="py-5 text-center">Ingrese sus credenciales</h5>
+        <!-- FIN IMAGEN -->
 
-            <!-- Log In -->
-            <form action="{{ route('login.store') }}" method="POST" class="mx-4">
+        <!-- FORMULARIO DE TURNO -->
+        <div class="col mx-3">
+
+            <form action="{{ route('filter') }}" METHOD="POST">
                 @csrf
-                <div class="mb-4">
-                    @if (!$errors->has('email'))
-                        <input type="text" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}">
-                    @else
-                        <input id="error-email" type="text" class="form-control is-invalid" name="email"
-                                placeholder="Email">
-                        @foreach($errors->get('email') as $error)
-                            <ul id="error-list-email" class="invalid-feedback">
-                                <li>{{ $error }}</li>
-                            </ul>
+                <div class="row align-items-stretch text-center mt-5 mb-3">
+                        <div class="col">
+                            <h5>Selección de turno</h5>
+                        </div>
+                </div>
+                <div class="my-3">
+                    <select id="locacion" name="locacion" aria-controls="dataTable"
+                    class="custom-select custom-select-sm form-control form-control-sm form-control-user">
+                        <option selected>seleccione un turno</option>
+                        <option value="" ></option>
+                        @foreach ($locaciones_global as $locacion)
+                        <option value ="horario:{{  }}"  > {{  }}</option>
                         @endforeach
-                    @endif
-                </div>
-
-                <div class="mb-4">
-                    @if (!$errors->has('password'))
-                        <input type="password" class="form-control" name="password" placeholder="Contraseña">
-                    @else
-                        <input id="error-password" type="password" class="form-control is-invalid" name="password"
-                                placeholder="Contraseña">
-                        @foreach($errors->get('password') as $error)
-                            <ul id="error-list-password" class="invalid-feedback">
-                                <li>{{ $error }}</li>
-                            </ul>
+                   
+                   
+                    </select>
+                    <label for="locacion">Locación</label>
+                    <select id="locacion" name="locacion" aria-controls="dataTable"
+                            class="custom-select custom-select-sm form-control form-control-sm form-control-user">
+                        <option value ="" selected disabled></option>
+                        @foreach ($locaciones_global as $locacion)
+                        <option value ="{{$locacion->id}}"  > {{$locacion->nombre}}</option>
                         @endforeach
-                    @endif
-                </div>
-                <div class="mb-4 text-center">
-                    <button id="btnIngresar" type="submit" class="btn btn-primary shadow">Ingresar</button>
+                    </select>
                 </div>
 
-                <div class="my-4 text-center">
-                    <a id="btnRegistrarse" class="btn btn-primary shadow" href="{{ route('register.index') }}"
-                        role="button">Registrarse</a>
+                <div class="text-center mt-4 mb-5">
+                    <button id="btnIngresar" type="submit" class="btn btn-secondary text-center">Confirmar</button>
                 </div>
-                <div class="mb-5 text-center">
-                    <span><a href="#">¿Olvidó su clave o usuario?</a></span>
-                </div>
-
             </form>
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous">
+</script>
 
 
 
