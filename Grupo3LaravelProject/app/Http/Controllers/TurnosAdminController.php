@@ -25,7 +25,8 @@ class TurnosAdminController extends Controller
      */
     public function create()
     {
-        return view('turnosAdmin.crearTurnoAdmin');
+        if(Gate::allows('admin-auth')) return view('turnosAdmin.crearTurnoAdmin');
+        else return abort(403);
     }
 
     private function crearDia($fecha){

@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 Route::view('/', 'home')->name('/');
 Route::view('home', 'home')->name('home');
-Route::resource('tratamientos', \App\Http\Controllers\TratamientoController::class);
-Route::resource('locaciones', \App\Http\Controllers\LocacionController::class);
-Route::resource('login', \App\Http\Controllers\LoginController::class)
+Route::resource('tratamientos', \App\Http\Controllers\TratamientoController::class)->middleware('auth');
+Route::resource('locaciones', \App\Http\Controllers\LocacionController::class)->middleware('auth');
+Route::resource('login', \App\Http\Controllers\LoginController::class)->name('*', 'login')
 ->only(['index', 'store']);
 Route::post('logout', [\App\Http\Controllers\LoginController::class, 'destroy'])->name('logout');
 Route::resource('register', \App\Http\Controllers\RegisterController::class);

@@ -15,7 +15,8 @@ class LocacionController extends Controller
      */
     public function index()
     {
-        return view('locaciones.indexLocacion');
+        if(Gate::allows('admin-auth')) return view('locaciones.indexLocacion');
+        else return abort(403);
     }
 
     /**

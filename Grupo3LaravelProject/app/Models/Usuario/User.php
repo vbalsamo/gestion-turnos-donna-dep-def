@@ -60,4 +60,14 @@ class User extends Authenticatable
         return $this->email;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getRol()
+    {
+        return $this->rol;
+    }
+
+
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class TratamientoController extends Controller
@@ -15,7 +16,8 @@ class TratamientoController extends Controller
      */
     public function index()
     {
-        return view('tratamientos/tratamientosIndex');
+        if(Gate::allows('admin-auth')) return view('tratamientos/tratamientosIndex');
+        else return abort(403);
     }
 
     /**
@@ -25,7 +27,8 @@ class TratamientoController extends Controller
      */
     public function create()
     {
-        return view('tratamientos/createTratamiento');
+        if(Gate::allows('admin-auth')) return view('tratamientos/createTratamiento');
+        else return abort(403);
     }
 
     private function validar(Request $request)
@@ -54,15 +57,18 @@ class TratamientoController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validar($request);
-        try {
-            $this->storeTratamiento($request);
-            return redirect(route('tratamientos.index'));
-        } catch (ValidationException $ex) {
+        if(Gate::allows('admin-auth')) {
+            $this->validar($request);
+            try {
+                $this->storeTratamiento($request);
+                return redirect(route('tratamientos.index'));
+            } catch (ValidationException $ex) {
 
-        } catch (\Exception $exception) {
+            } catch (\Exception $exception) {
 
+            }
         }
+        else return abort(403);
 
     }
 
@@ -141,7 +147,7 @@ class TratamientoController extends Controller
      */
     public function destroy($id)
     {
-        try {
+        if(Gate::allows('admin-auth')){ try {
             DB::transaction(function () use ($id) {
                 DB::update("UPDATE tratamientoxprofesional SET activo = 0 WHERE id_tratamiento = {$id}");
                 DB::update("UPDATE tratamiento SET activo = 0 WHERE id = {$id}");
@@ -153,7 +159,8 @@ class TratamientoController extends Controller
 
         } catch (\Exception $exception) {
             echo $exception->getMessage();
-        }
+        }}
 
+        else return abort(403);
     }
 }

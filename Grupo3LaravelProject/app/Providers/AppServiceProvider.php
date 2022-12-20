@@ -39,8 +39,8 @@ class AppServiceProvider extends ServiceProvider
             return preg_match('/^[\pL\s]+$/u', $value);
         });
 
-        Gate::define('verificar_admin', function ($usuario){
-
+        Gate::define('adminAuth', function ($usuario){
+            return $usuario->getRol() == 'admin';
         }) ;
     }
 }
