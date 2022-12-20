@@ -46,12 +46,13 @@ class LocacionController extends Controller
 
     private function storeLocacion(Request $request){
         DB::transaction(function () use ($request) {
-            DB::insert('INSERT INTO locacion (ciudad, calle, altura, piso, depto) values (?, ?, ?, ?, ?)', [
+            DB::insert('INSERT INTO locacion (ciudad, calle, altura, piso, depto, nombre) values (?, ?, ?, ?, ?, ?)', [
                 $request->post("ciudad"),
                 $request->post("calle"),
                 $request->post("altura"),
                 $request->post("piso"),
-                $request->post("depto")
+                $request->post("depto"),
+                $request->post("ciudad")
             ]);
         });
     }
@@ -87,6 +88,11 @@ class LocacionController extends Controller
         return view('locaciones/showlocacion', [
             "locacion" => $locacion
         ]);
+    }
+
+    public static function nombreProfesional($id){
+        $locacion = DB::selectOne("SELECT * FROM locacion WHERE id = {$id}");
+        return $locacion->ciudad;
     }
 
     public function showAll()

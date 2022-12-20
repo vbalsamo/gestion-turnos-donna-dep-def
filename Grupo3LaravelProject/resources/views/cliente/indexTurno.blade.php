@@ -23,30 +23,35 @@
         <tr>
             <th scope="col">Dia</th>
             <th scope="col">Hora</th>
-            <th scope="col">Cae</th>
             <th scope="col">Tratamiento</th>
             <th scope="col">Profesional</th>
             <th scope="col">Sucursal</th>
-            <th scope="col"></th>
+            <th scope="col">Disponible</th>
         </tr>
         </thead>
         <tbody>
-        @foreach ($locaciones_global as $locacion)
+        @foreach ($turnos as $turno)
         <tr>
-            <td class="align-middle">{{ $dia->dia_num }}/{{ $dia->dia_mes }}</td>
-            <td class="align-middle"><a>{{ $dia->dia_nom }}</a></td>
+            <td class="align-middle">{{ $turno->dia_nom }} {{ $turno->dia_num }} del {{ $turno->dia_mes }}</td>
+            <td class="align-middle">{{ $horario[$turno->hora] }}</td>
+            <td class="align-middle">{{ \App\Http\Controllers\TratamientoController::nombreTratamiento($turno->id_tratamiento) }}</td>
+            <td class="align-middle">{{ \App\Http\Controllers\ProfesionalController::nombreProfesional($turno->id_profesional) }}</td>
+            <td class="align-middle">{{ \App\Http\Controllers\LocacionController::nombreLocacion($turno->id_locacion) }}</td>
+            <td class="align-middle">{{ \App\Http\Controllers\TurnosShowController::turnoDisponible($turno->id) }}</td>
+
+            {{--<td class="align-middle"><a>{{ $dia->dia_nom }}</a></td>
             <td class="align-middle">{{ $locacion->calle }}</td>
             <td class="align-middle">{{ $locacion->altura }}</td>
             <td class="align-middle">{{ $locacion->piso }}</td>
-            <td class="align-middle">{{ $locacion->depto }}</td>
-            <td class="align-middle"><form action="{{ route('locaciones.edit', $locacion->id) }}">
+            <td class="align-middle">{{ $locacion->depto }}</td>--}}
+            {{--<td class="align-middle"><form action="{{ route('locaciones.edit', $locacion->id) }}">
                     @csrf
                     <div class="text-center">
                         <button type="submit" class="btn btn-warning">Editar</button>
                     </div>
                 </form>
-            </td>
-            <td class="align-middle">
+            </td>--}}
+            {{--<td class="align-middle">
                 <form action="{{ route('locaciones.destroy', $locacion->id) }}" method="POST">
                     @csrf
                     <div class="text-center">
@@ -54,7 +59,7 @@
                     <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar {{ $locacion->ciudad }}?')" class="btn btn-danger">Eliminar</button>
                     </div>
                 </form>
-            </td>
+            </td>--}}
         </tr>
         @endforeach
         </tbody>

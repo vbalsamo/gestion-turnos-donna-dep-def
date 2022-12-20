@@ -123,10 +123,6 @@ class TurnoController extends Controller
 
     }
 
-    public function mostrarTurnos($id){
-        return view('cliente.indexTurno');
-    }
-
     /**
      * Display the specified resource.
      *
