@@ -23,7 +23,7 @@ class TurnosAdminController extends Controller
      */
     public function create()
     {
-        return view('turnnosAdmin.crearTurnoAdmin');
+        return view('turnosAdmin.crearTurnoAdmin');
     }
 
     /**
