@@ -60,16 +60,21 @@ class TurnoController extends Controller
      */
     public function store(Request $request)
     {
-        $idTurno = $request->post("turnoId");
-        DB::transaction(function () use ($request) {
-            DB::update('UPDATE turno SET id_cliente = ?, activo = 1 WHERE id = ?', [
-                Auth::id(),
-                $request->post("turnoId")
-            ]);
-        });
-        $turno = DB::selectOne("SELECT * FROM turno WHERE id = {$idTurno}");
-        $this->enviarMailReserva($turno);
-        return redirect()->route('turnos.mostrarTurnos');
+        try {
+            $idTurno = $request->post("turnoId");
+            DB::transaction(function () use ($request) {
+                DB::update('UPDATE turno SET id_cliente = ?, activo = 1 WHERE id = ?', [
+                    Auth::id(),
+                    $request->post("turnoId")
+                ]);
+            });
+            $turno = DB::selectOne("SELECT * FROM turno WHERE id = {$idTurno}");
+            //$this->enviarMailReserva($turno);
+            $this->mostrarTurnos(Auth::id());
+        } catch (\Exception $exception) {
+
+        }
+
         /*$id_turno = $request->post("turnoId");
         $turno = DB::selectOne("SELECT * FROM turno WHERE id = {$id_turno}");
         $id_dia = $turno->dia_id;
@@ -103,6 +108,7 @@ class TurnoController extends Controller
         $locacion = DB::selectOne("SELECT ciudad FROM locacion WHERE id = {$turno->id_locacion}")->ciudad;
         $turnoSend = new Turno($fecha,  $hora, $cliente, $profesional, $tratamiento, $locacion);
         Mail::to($clienteObj->email)->send(new EnviarTurno($turnoSend));
+
     }
 
     private function matchDiaDeHoy(Turno $turno){
@@ -143,8 +149,12 @@ class TurnoController extends Controller
 
     }
 
-    public function mostrarTurnos(){
-        return view('cliente.indexTurno');
+    public function mostrarTurnos($id){
+        $turnos = DB::select("SELECT *
+        FROM turno WHERE id_cliente = $id");
+        return view('cliente.indexTurno', [
+            'turnos' => $turnos
+        ]);
     }
 
     /**
