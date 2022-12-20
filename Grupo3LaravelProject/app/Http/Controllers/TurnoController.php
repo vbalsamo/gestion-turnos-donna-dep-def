@@ -97,6 +97,11 @@ class TurnoController extends Controller
             $turno->setProximo(false);
         }
     }
+
+    private function filtrarTurnos($turno){
+
+    }
+
     /**
      * Display the specified resource.
      *
@@ -110,20 +115,25 @@ class TurnoController extends Controller
 
 
         //real
-        //$turnos = DB::select("SELECT * FROM turno WHERE idDia = {$request->session()->get('diaId')}");
-        //$turnosFav = DB::select("SELECT * FROM turno WHERE profesional = {$cliente -> $profesionalPreferido}");
+        $Idsturnos = DB::select("SELECT * FROM turno_has_dia WHERE dia_id = {$request->post('diaId')}");
+        $turnos = DB::select("SELECT * FROM turno WHERE id = {$Idsturnos}");
+        $turnosFav = DB::select("SELECT * FROM turno WHERE profesional = {$cliente -> $profesionalPreferido}");
 
         //prueba
-        $turnosFiltrados = [new Turno("1", "09:00", "", "Mary", "Depi", "Bera"),
-            new Turno("1", "10:00", "", "chiara", "facial", "Capital")];
-        $turnosFav = [new Turno("1", "11:00", "", "Josefina", "Depi", "Lanus")];
+        //$turnosFiltrados = [new Turno("1", "09:00", "", "Mary", "Depi", "Bera"),
+            //new Turno("1", "10:00", "", "chiara", "facial", "Capital")];
+        //$turnosFav = [new Turno("1", "11:00", "", "Josefina", "Depi", "Lanus")];
 
-        //$turnosFiltrados = array_filter($turnos, function($turno) use ($request) {
-        //    return $turno->locacion == $request->session()->get('locacionActual') && $turno->tratamiento == $request->session()->get('tratamientoActual');
-        //});
+        $turnosFiltrados = array_filter($turnos, function($turno) use ($request) {
+            return $turno->locacion == $request->session()->get('locacionActual') && $turno->tratamiento == $request->session()->get('tratamientoActual');
+        });
+
+        $turnosFavFiltrados = array_filter($turnosFav, function($turno) use ($request) {
+            return $turno->locacion == $request->session()->get('locacionActual') && $turno->tratamiento == $request->session()->get('tratamientoActual');
+        });
 
         return view('turnos', [
-            "turnosFav" => $turnosFav,
+            "turnosFav" => $turnosFavFiltrados,
             "turnosFiltrados" => $turnosFiltrados
         ]);
     }
