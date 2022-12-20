@@ -82,14 +82,13 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `grupo3_tp`.`mes`
+-- Table `grupo3_tp`.`dia`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `grupo3_tp`.`mes` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `año` INT(11) NOT NULL,
-  `dias` INT(11) NOT NULL,
-  `pasado` TINYINT(4) NOT NULL DEFAULT 0,
-  `activo` TINYINT(4) NOT NULL DEFAULT 0,
+CREATE TABLE IF NOT EXISTS `grupo3_tp`.`dia` (
+  `id` INT(11) NOT NULL,
+  `dia_num` INT(11) NOT NULL,
+  `dia_nom` VARCHAR(45) NOT NULL,
+  `mes_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -136,9 +135,9 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `grupo3_tp`.`turno` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `fecha_y_hora` DATETIME NOT NULL,
-  `proximo` TINYINT(4) NOT NULL,
-  `id_cliente` INT(11) NOT NULL,
+  `hora` INT(11) NOT NULL,
+  `dia_id` INT(11) NOT NULL,
+  `id_cliente` INT(11) NULL DEFAULT NULL,
   `id_locacion` INT(11) NOT NULL,
   `id_profesional` INT(11) NOT NULL,
   `id_tratamiento` INT(11) NOT NULL,
@@ -148,9 +147,15 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`turno` (
   INDEX `fk_turno_locacion1_idx` (`id_locacion` ASC) VISIBLE,
   INDEX `fk_turno_profesional1_idx` (`id_profesional` ASC) VISIBLE,
   INDEX `fk_turno_tratamiento1_idx` (`id_tratamiento` ASC) VISIBLE,
+  INDEX `fk_turno_dia1_idx` (`dia_id` ASC) VISIBLE,
   CONSTRAINT `fk_turno_cliente`
     FOREIGN KEY (`id_cliente`)
     REFERENCES `grupo3_tp`.`cliente` (`id`),
+  CONSTRAINT `fk_turno_dia1`
+    FOREIGN KEY (`dia_id`)
+    REFERENCES `grupo3_tp`.`dia` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_turno_locacion1`
     FOREIGN KEY (`id_locacion`)
     REFERENCES `grupo3_tp`.`locacion` (`id`),
@@ -160,56 +165,6 @@ CREATE TABLE IF NOT EXISTS `grupo3_tp`.`turno` (
   CONSTRAINT `fk_turno_tratamiento1`
     FOREIGN KEY (`id_tratamiento`)
     REFERENCES `grupo3_tp`.`tratamiento` (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `grupo3_tp`.`dia`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `grupo3_tp`.`dia` (
-  `id` INT NOT NULL,
-  `dia_num` INT NOT NULL,
-  `dia_nom` VARCHAR(45) NOT NULL,
-  `horario1` INT NULL,
-  `horario2` INT NULL,
-  `horario3` INT NULL,
-  `horario4` INT NULL,
-  `horario5` INT NULL,
-  `horario6` INT NULL,
-  `horario7` INT NULL,
-  `horario8` INT NULL,
-  `horario9` INT NULL,
-  `mes_id` INT(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_dia_mes1_idx` (`mes_id` ASC) VISIBLE,
-  CONSTRAINT `fk_dia_mes1`
-    FOREIGN KEY (`mes_id`)
-    REFERENCES `grupo3_tp`.`mes` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `grupo3_tp`.`turno_has_dia`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `grupo3_tp`.`turno_has_dia` (
-  `turno_id` INT(11) NOT NULL,
-  `dia_id` INT NOT NULL,
-  PRIMARY KEY (`turno_id`, `dia_id`),
-  INDEX `fk_turno_has_dia_dia1_idx` (`dia_id` ASC) VISIBLE,
-  INDEX `fk_turno_has_dia_turno1_idx` (`turno_id` ASC) VISIBLE,
-  CONSTRAINT `fk_turno_has_dia_turno1`
-    FOREIGN KEY (`turno_id`)
-    REFERENCES `grupo3_tp`.`turno` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_turno_has_dia_dia1`
-    FOREIGN KEY (`dia_id`)
-    REFERENCES `grupo3_tp`.`dia` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
