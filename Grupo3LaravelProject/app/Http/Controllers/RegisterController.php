@@ -44,7 +44,7 @@ class RegisterController extends Controller
                 $request->post('numero_tel')
             ]);
         });
-        //Mail::to($request->post('email'))->send(new RegistroUsuario());
+        Mail::to($request->post('email'))->send(new RegistroUsuario());
     }
 
     /**

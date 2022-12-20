@@ -54,12 +54,12 @@
                     <select id="mes" name="mes" aria-controls="dataTable"
                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                             <option value ="" selected disabled></option>
-                        @foreach ($meses_global as $mes)
-                            <option value ="{{$mes->id}}"  > {{$mes->nombre}}</option>
+                        @foreach ($siguientes3meses as $mes)
+                            <option value ="{{$mes}}"  > {{$mes}}</option>
                         @endforeach
                     </select>
                 </div>
-                
+
                 <div class="text-center mt-4 mb-5">
                     <button id="btnIngresar" type="submit" class="btn btn-secondary text-center">Confirmar</button>
                 </div>
