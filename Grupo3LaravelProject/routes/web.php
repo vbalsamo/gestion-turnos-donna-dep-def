@@ -30,5 +30,6 @@ Route::post('turnos.elegirHorario', [\App\Http\Controllers\TurnoController::clas
 Route::post('turnos.horariosLibres', [\App\Http\Controllers\TurnoController::class, 'horariosLibres'])->name('turnos.horariosLibres');
 Route::post('turnoShow', [\App\Http\Controllers\TurnoController::class, 'show'])->name('turnoShow');
 Route::resource('turnos', \App\Http\Controllers\TurnoController::class);
-Route::resource('turnosShow', \App\Http\Controllers\TurnosShowController::class);
 Route::resource('turnosAdmin', \App\Http\Controllers\TurnosAdminController::class)->middleware('auth')->middleware('can:adminAuth');
+Route::post('turnos.mostrarTurnos', [\App\Http\Controllers\TurnoController::class, 'mostrarTurnos'])->name('turnos.mostrarTurnos');
+Route::view('panelAdmin', 'menu_admin')->name('panelAdmin');

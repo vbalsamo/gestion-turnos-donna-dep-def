@@ -1,10 +1,14 @@
 @extends("base")
 @section("contenido")
 
+    @php
+        use \Illuminate\Support\Facades\Auth;
+        $cliente = Auth::user();
+    @endphp
 
 <div class="row py-lg-5">
     <div class="col-lg-6 col-md-8 mx-auto">
-      <h1 class="fw-light">Bienvenido NOMBRE </h1>
+      <h1 class="fw-light">Bienvenido {{ $cliente->nombre }}</h1>
     </div>
 </div>
 <div class="album py-5" id="container_menu">
@@ -17,9 +21,20 @@
               </svg>
               <div class="card-body">
                 <p class="card-text"> Creá nuevas instancias! </p>
-                  <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex justify-content-between align-items-center ">
                       <div class="btn-group">
-                          <button type="button" class="btn btn-outline-primary">Crear Instancias</button>
+                          <form>
+                              <button type="button" class="btn btn-outline-primary">Crear Profesional</button>                           
+                            </form>
+                          <form>
+                              <button type="button" class="btn btn-outline-primary">Crear Tratamiento</button>
+                          </form>    
+                          <form>
+                            <button type="button" class="btn btn-outline-primary">Crear Locación</button>
+                          </form>
+                          <form>
+                            <button type="button" class="btn btn-outline-primary">Crear Turno</button>
+                          </form>
                       </div>
                   </div>
               </div>

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
@@ -40,10 +41,17 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Gate::define('adminAuth', function ($usuario){
+            $id = Auth::id();
+            $rol = DB::selectOne("SELECT * FROM cliente WHERE id={$id}")->rol;
+            return $rol == "admin";
+            //return $usuario->getRol() == 'admin';
+        }) ;
+
+        Gate::define('clienteAuth', function ($usuario){
             $id = $usuario->id;
             $rol = DB::selectOne("SELECT rol FROM cliente WHERE id={$id}")->rol;
             //dd($id, $rol);
-            return $rol == 'admin';
+            return $rol == 'cliente';
             //return $usuario->getRol() == 'admin';
         }) ;
     }

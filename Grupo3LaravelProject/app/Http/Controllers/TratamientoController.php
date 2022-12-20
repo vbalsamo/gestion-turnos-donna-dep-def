@@ -40,7 +40,7 @@ class TratamientoController extends Controller
     private function storeTratamiento(Request $request)
     {
         DB::transaction(function () use ($request) {
-            DB::insert('INSERT INTO tratamiento (id_tratamiento, id_locacion) values (?, ?)', [
+            DB::insert('INSERT INTO tratamiento (nombre, descripcion) values (?, ?)', [
                 $request->post("nombre"),
                 $request->post("descripcion")
             ]);
@@ -55,19 +55,15 @@ class TratamientoController extends Controller
      */
     public function store(Request $request)
     {
-        if(Gate::allows('admin-auth')) {
             $this->validar($request);
             try {
                 $this->storeTratamiento($request);
                 return redirect(route('tratamientos.index'));
             } catch (ValidationException $ex) {
-
+                dd($ex);
             } catch (\Exception $exception) {
-
+                dd($exception);
             }
-        }
-        else return abort(403);
-
     }
 
     /**
@@ -136,9 +132,9 @@ class TratamientoController extends Controller
             $this->updateTratamiento($request, $id);
             return redirect()->route('tratamientos.index');
         } catch (ValidationException $ex) {
-
+                dd($ex);
         } catch (\Exception $exception) {
-
+            dd($exception);
         }
     }
 
@@ -150,7 +146,7 @@ class TratamientoController extends Controller
      */
     public function destroy($id)
     {
-        if(Gate::allows('admin-auth')){ try {
+        try {
             DB::transaction(function () use ($id) {
                 DB::update("UPDATE tratamientoxprofesional SET activo = 0 WHERE id_tratamiento = {$id}");
                 DB::update("UPDATE tratamiento SET activo = 0 WHERE id = {$id}");
@@ -162,8 +158,9 @@ class TratamientoController extends Controller
 
         } catch (\Exception $exception) {
             echo $exception->getMessage();
-        }}
-
-        else return abort(403);
+        }
+        return null;
     }
+
+
 }

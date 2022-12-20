@@ -48,7 +48,7 @@ class Turno
     }
 
     public function getFecha(){
-        return DB::selectOne("SELECT * FROM dia WHERE id = {{$this->diaId}}");
+        return $this->diaId;
     }
 
     /**

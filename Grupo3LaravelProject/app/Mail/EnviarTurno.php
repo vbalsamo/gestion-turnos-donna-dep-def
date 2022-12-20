@@ -36,7 +36,7 @@ class EnviarTurno extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Turno Reservado para '.$this->datos->getTratamiento(),
+            subject: 'Turno Reservado para '. $this->datos->getTratamiento(),
             //Para realizar una funcion antes de enviar el mail
             using: [],
         );

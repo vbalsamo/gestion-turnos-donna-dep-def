@@ -15,8 +15,7 @@ class ProfesionalController extends Controller
      */
     public function index()
     {
-        if(Gate::allows('admin-auth')) return view('profesionales.profesionalesIndex');
-        else return abort(403);
+        return view('profesionales.profesionalesIndex');
     }
 
     /**
