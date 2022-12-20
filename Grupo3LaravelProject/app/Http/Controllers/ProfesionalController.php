@@ -114,6 +114,11 @@ class ProfesionalController extends Controller
         ]);
     }
 
+    public static function nombreProfesional($id){
+        $profesional = DB::selectOne("SELECT * FROM profesional WHERE id = {$id}");
+        return $profesional->nombre;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

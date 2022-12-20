@@ -89,6 +89,11 @@ class LocacionController extends Controller
         ]);
     }
 
+    public static function nombreProfesional($id){
+        $locacion = DB::selectOne("SELECT * FROM locacion WHERE id = {$id}");
+        return $locacion->ciudad;
+    }
+
     public function showAll()
     {
         $tratamientos = DB::select("SELECT * FROM locacion");

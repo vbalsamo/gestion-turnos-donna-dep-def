@@ -80,6 +80,11 @@ class TratamientoController extends Controller
         ]);
     }
 
+    public static function nombreTratamiento($id){
+        $tratamiento = DB::selectOne("SELECT * FROM tratamiento WHERE id = {$id}");
+        return $tratamiento->nombre;
+    }
+
     //Mostrar todos los tratamientos
     public function showAll()
     {
