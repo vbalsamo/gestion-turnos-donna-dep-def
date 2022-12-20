@@ -23,18 +23,29 @@
                 <p class="card-text"> Creá nuevas instancias! </p>
                   <div class="d-flex justify-content-between align-items-center ">
                       <div class="btn-group">
-                          <form>
+                        <div class="row text-center py-3">
+                          <div class="col mx-auto">
+                            <form>
                               <button type="button" class="btn btn-outline-primary">Crear Profesional</button>                           
                             </form>
-                          <form>
+                          </div>
+                          <div class="col mx-auto">
+                            <form>
                               <button type="button" class="btn btn-outline-primary">Crear Tratamiento</button>
-                          </form>    
-                          <form>
-                            <button type="button" class="btn btn-outline-primary">Crear Locación</button>
                           </form>
-                          <form>
-                            <button type="button" class="btn btn-outline-primary">Crear Turno</button>
-                          </form>
+                          </div>
+                          <div class="col mx-auto">
+                            <form>
+                              <button type="button" class="btn btn-outline-primary">Crear Locación</button>
+                            </form>
+                          </div>
+                          <div class="col mx-auto">
+                            <form>
+                              <button type="button" class="btn btn-outline-primary">Crear Turno</button>
+                            </form>
+                          </div>
+                      </div> 
+
                       </div>
                   </div>
               </div>
