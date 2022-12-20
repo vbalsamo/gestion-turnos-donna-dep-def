@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -29,16 +30,18 @@ class TurnosAdminController extends Controller
 
     private function crearDia($fecha){
         $date = strtotime($fecha);
-        echo date('m/d/Y', $date);
         $dia_num = date('d', $date);
         $dia_mes = date('m', $date);
         $dia_anio = date('Y', $date);
+        $datetime = DateTime::createFromFormat('d/m/Y', $fecha);
+        $nombre_dia =  CalendarioController::traducirDia($datetime->format('l'));
         $dia = DB::selectOne("SELECT * FROM dia WHERE dia_num = {$dia_num} AND dia_mes = {$dia_mes} AND dia_anio = {$dia_anio}");
         if($dia == null){
-            DB::insert('INSERT INTO dia (dia_num, dia_mes, dia_anio) values (?, ?, ?)', [
+            DB::insert('INSERT INTO dia (dia_num, dia_mes, dia_anio, dia_nom) values (?, ?, ?, ?)', [
                 $dia_num,
                 $dia_mes,
-                $dia_anio
+                $dia_anio,
+                $nombre_dia
             ]);
             return DB::getPdo()->lastInsertId();
         }
@@ -51,11 +54,11 @@ class TurnosAdminController extends Controller
     {
         DB::transaction(function () use ($request) {
             DB::insert('INSERT INTO turno (hora, id_tratamiento, id_locacion, id_profesional, dia_id) values (?, ?, ?, ?, ?)', [
-                $request->post("hora"),
-                $request->post("tratamiento"),
+                $request->post('hora'),
+                $request->post('tratamiento'),
                 $request->post('locacion'),
                 $request->post('profesional'),
-                $this->crearDia($request->post('21/12/2022'))
+                $this->crearDia($request->post('fecha'))
             ]);
         });
     }
@@ -71,7 +74,7 @@ class TurnosAdminController extends Controller
         //$this->validar($request);
         try {
             $this->storeTurno($request);
-            return redirect(route('tratamientos.index'));
+            return redirect(route('turnosAdmin.create'));
         } catch (ValidationException $ex) {
 
         } catch (\Exception $exception) {

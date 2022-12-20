@@ -12,7 +12,7 @@
 @endsection
 @section('contenido')
     <div class="container w-50 my-5">
-        <form method="POST" action="@if(isset($turno->id))
+        <form method="POST" id="form" action="@if(isset($turno->id))
         {{ route('turnosAdmin.update', $turno->id)}}
     @else
         {{ route('turnosAdmin.store') }}
@@ -25,6 +25,20 @@
 
             <div class="form-group">
                 <h4 class="my-4" style="color: #5a1d3e">Abrir un horario</h4>
+
+                <div class="row form-group">
+                    <div class="">
+                        <label for="fecha">Fecha</label>
+                        <div class="input-group date" id="datepicker">
+                            <input type="text" name="fecha" class="form-control">
+                            <span class="input-group-append">
+                                <span class="input-group-text bg-white d-block">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </span>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="pt-4" style="color: #5a1d3e">
                     <label for="Hora">Horario</label>

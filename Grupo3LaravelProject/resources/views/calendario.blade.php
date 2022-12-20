@@ -1,15 +1,13 @@
 @extends('base')
 
-<h1>Mes</h1>
+<h1>Día</h1>
 
-<form action="{{ route('turnoShow') }}" METHOD="POST">
+<form action="{{ route('turnos.store') }}" method="post">
     @csrf
-
-@foreach ($dias as $dia)
+    @method('POST')
+@foreach ($diasDisponibles as $dia)
     <!--Poner una card por cada dia del mes en formato grid -->
-    <p>{{$dia->getdiaNom()}}</p>
-    <p>{{$dia->getdiaNum()}}</p>
+                <button name="dia" value="{{ $dia->id }}">{{ $dia->dia_nom }} {{ $dia->dia_num }} de {{ $mes }}</button><br><br>
 @endforeach
-
-    <button type="submit" class="btn btn-secondary">Confirmar</button>
 </form>
+

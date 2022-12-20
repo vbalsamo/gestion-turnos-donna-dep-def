@@ -14,7 +14,7 @@ class CalendarioController extends Controller
         return view('calendarioSelect');
     }
 
-    public function traducirDia($nombre){
+    public static function traducirDia($nombre){
         switch ($nombre) {
             case 'Monday':
                 return "Lunes";
@@ -38,6 +38,10 @@ class CalendarioController extends Controller
                 return "Domingo";
                 break;
         }
+    }
+
+    public function diasDisponibles($mes, $tratamiento){
+        return DB::select("SELECT DISTINCT dia.id, dia.dia_num, dia.dia_nom FROM turno INNER JOIN dia ON turno.dia_id WHERE id_tratamiento = {$tratamiento} AND dia.dia_mes = {$mes}");
     }
 
     public function show(Request $request){
@@ -65,8 +69,18 @@ class CalendarioController extends Controller
             $nombreDia = $this->traducirDia($datetime->format('l'));
             $dias[] = new Dia($i, $nombreDia);
         }
+
+
+        $diasDisponibles = [];
+        foreach ($this->diasDisponibles($mes , $request->post('tratamiento')) as $diaDisponible){
+            array_push($diasDisponibles, $diaDisponible);
+        }
+
         return view('calendario', [
-            "dias" => $dias
+            'tratamiento' => $request->input('tratamiento'),
+            'locacion' => $request->input('locacion'),
+            'mes' => $mes,
+            'diasDisponibles' => $diasDisponibles
         ]);
     }
 
