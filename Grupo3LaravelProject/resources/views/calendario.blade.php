@@ -6,7 +6,7 @@
     @endsection()
 
     @section('contenido')
-        <h1>Día</h1>
+        
         <div class="container-fluid w-50 position-absolute top-50 start-50 translate-middle rounded shadow" id="container">
 
             <div class="row align-items-stretch">
