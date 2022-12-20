@@ -26,6 +26,8 @@ Route::resource('menu', \App\Http\Controllers\MenuController::class);
 Route::resource('profesionales', \App\Http\Controllers\ProfesionalController::class);
 Route::resource('calendarioSelect', \App\Http\Controllers\CalendarioController::class);
 Route::post('filter', [\App\Http\Controllers\CalendarioController::class, 'show'])->name('filter');
+Route::post('turnos.elegirHorario', [\App\Http\Controllers\TurnoController::class, 'elegirHorario'])->name('turnos.elegirHorario');
+Route::post('turnos.horariosLibres', [\App\Http\Controllers\TurnoController::class, 'horariosLibres'])->name('turnos.horariosLibres');
 Route::post('turnoShow', [\App\Http\Controllers\TurnoController::class, 'show'])->name('turnoShow');
 Route::resource('turnos', \App\Http\Controllers\TurnoController::class);
 Route::resource('turnosAdmin', \App\Http\Controllers\TurnosAdminController::class);

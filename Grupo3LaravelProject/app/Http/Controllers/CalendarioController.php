@@ -41,7 +41,7 @@ class CalendarioController extends Controller
     }
 
     public function diasDisponibles($mes, $tratamiento){
-        return DB::select("SELECT DISTINCT dia.id, dia.dia_num, dia.dia_nom FROM turno INNER JOIN dia ON turno.dia_id WHERE id_tratamiento = {$tratamiento} AND dia.dia_mes = {$mes}");
+        return DB::select("SELECT DISTINCT dia.id, dia.dia_num, dia.dia_nom FROM turno INNER JOIN dia ON turno.dia_id WHERE id_tratamiento = {$tratamiento} AND dia.dia_mes = {$mes} ORDER BY dia.dia_num");
     }
 
     public function show(Request $request){
@@ -77,6 +77,7 @@ class CalendarioController extends Controller
         }
 
         return view('calendario', [
+
             'tratamiento' => $request->input('tratamiento'),
             'locacion' => $request->input('locacion'),
             'mes' => $mes,

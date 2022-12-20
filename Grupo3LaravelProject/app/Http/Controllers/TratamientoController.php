@@ -39,7 +39,7 @@ class TratamientoController extends Controller
     private function storeTratamiento(Request $request)
     {
         DB::transaction(function () use ($request) {
-            DB::insert('INSERT INTO tratamiento (nombre, descripcion) values (?, ?)', [
+            DB::insert('INSERT INTO tratamiento (id_tratamiento, id_locacion) values (?, ?)', [
                 $request->post("nombre"),
                 $request->post("descripcion")
             ]);

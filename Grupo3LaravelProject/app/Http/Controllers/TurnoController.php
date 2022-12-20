@@ -37,6 +37,20 @@ class TurnoController extends Controller
      */
     public function create()
     {
+
+    }
+
+    public static function horariosLibres ($dia){
+        return DB::select("SELECT * FROM turno WHERE dia_id = {$dia} AND id_cliente is NULL");
+    }
+
+    public function elegirHorario(Request $request){
+        return view('turnos',[
+            'locacion' => $request->post('locacion'),
+            'tratamiento' => $request->post('tratamiento'),
+            'mes' => $request->post('mes'),
+            'dia' => $request->post('dia')
+        ]);
     }
 
     /**
@@ -47,15 +61,15 @@ class TurnoController extends Controller
     public function store(Request $request)
     {
         DB::transaction(function () use ($request) {
-            DB::update('UPDATE turno SET cliente = ?, proximo = 1 WHERE id = ?', [
-                $request->post("clienteId"),
+            DB::update('UPDATE turno SET id_cliente = ?, activo = 1 WHERE id = ?', [
+                Auth::id(),
                 $request->post("turnoId")
             ]);
         });
+        $id_turno = $request->post("turnoId");
+        $turno = DB::selectOne("SELECT * FROM turno WHERE id = {$id_turno}");
 
-        $turno = DB::selectOne('SELECT turno WHERE id = {$request->post("turnoId")}');
-
-        $this->enviarMailReserva($turno);
+        //$this->enviarMailReserva($turno);
     }
 
     public function enviarMailReserva(Turno $turno)
