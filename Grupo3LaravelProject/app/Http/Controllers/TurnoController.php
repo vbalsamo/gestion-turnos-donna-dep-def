@@ -69,10 +69,10 @@ class TurnoController extends Controller
                 ]);
             });
             $turno = DB::selectOne("SELECT * FROM turno WHERE id = {$idTurno}");
-            //$this->enviarMailReserva($turno);
+            $this->enviarMailReserva($turno);
             $this->mostrarTurnos();
         } catch (\Exception $exception) {
-
+            dd($exception);
         }
 
         /*$id_turno = $request->post("turnoId");
@@ -148,7 +148,7 @@ class TurnoController extends Controller
         $turnos = DB::select("SELECT * FROM turno");
         array_filter($turnos, "matchDiaDeAyer");
 
-        foreach($turnos as &$turno){
+        foreach($turnos as $turno){
             $turno->setProximo(false);
         }
     }
@@ -173,31 +173,6 @@ class TurnoController extends Controller
      */
     public function show(Request $request)
     {
-        $clienteId = Auth::id();
-        $cliente = DB::select("SELECT * FROM cliente WHERE id = $clienteId");
-
-
-        //real
-        $turnos = DB::select("SELECT * FROM turno WHERE dia_id = {$request->post('diaId')}");
-        $turnosFav = DB::select("SELECT * FROM turno WHERE profesional = {$cliente -> $profesionalPreferido}");
-
-        //prueba
-        //$turnosFiltrados = [new Turno("1", "09:00", "", "Mary", "Depi", "Bera"),
-            //new Turno("1", "10:00", "", "chiara", "facial", "Capital")];
-        //$turnosFav = [new Turno("1", "11:00", "", "Josefina", "Depi", "Lanus")];
-
-        $turnosFiltrados = array_filter($turnos, function($turno) use ($request) {
-            return $turno->locacion == $request->session()->get('locacionActual') && $turno->tratamiento == $request->session()->get('tratamientoActual');
-        });
-
-        $turnosFavFiltrados = array_filter($turnosFav, function($turno) use ($request) {
-            return $turno->locacion == $request->session()->get('locacionActual') && $turno->tratamiento == $request->session()->get('tratamientoActual');
-        });
-
-        return view('turnos', [
-            "turnosFav" => $turnosFavFiltrados,
-            "turnosFiltrados" => $turnosFiltrados
-        ]);
     }
 
     /**
@@ -231,6 +206,11 @@ class TurnoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::transaction(function () use ($id) {
+            DB::update('UPDATE turno SET id_cliente = NULL, activo = 0 WHERE id = ? ', [
+                $id
+            ]);
+        });
+        $this->mostrarTurnos();
     }
 }
