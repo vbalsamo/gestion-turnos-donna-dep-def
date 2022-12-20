@@ -44,9 +44,15 @@
                             class="form-select"
                             aria-label="Hora">
                         <option disabled selected value="null">Seleccione un horario</option>
-                        @foreach($tratamientos_global as $tratamiento)
-                            <option value={{$tratamiento->id}}>{{ $tratamiento->nombre }}</option>
-                        @endforeach
+                        <option value=1>9 a 10</option>
+                        <option value=2>10 a 11</option>
+                        <option value=3>11 a 12</option>
+                        <option value=4>12 a 13</option>
+                        <option value=5>13 a 14</option>
+                        <option value=6>14 a 15</option>
+                        <option value=7>15 a 16</option>
+                        <option value=8>16 a 17</option>
+                        <option value=9>17 a 18</option>
                     </select>
                 </div>
 
@@ -61,8 +67,25 @@
                         @endforeach
                     </select>
                 </div>
+
+                <div class="pt-4" style="color: #5a1d3e">
+                    <label for="locacion">Sucursal</label>
+                    <select form="form" name="locacion"
+                            class="form-select"
+                            aria-label="locacion">
+                        <option disabled selected value="null">Seleccione un locacion</option>
+                        @foreach($locaciones_global as $locacion)
+                            <option value={{$locacion->id}}>{{ $locacion->ciudad }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
         </form>
+
     </div>
 
     <script type="text/javascript">
