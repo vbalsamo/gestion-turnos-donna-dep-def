@@ -34,7 +34,7 @@
     <div class="row align-items-stretch">
 
         <!-- IMAGEN -->
-        <div class="col rounded-start d-none d-sm-block col-sm-4 col-md-5 col-lg-6" id="imagen">
+        <div class="col rounded-start d-none d-sm-block col-sm-4 col-md-5 col-lg-6" id="imagen2">
         </div>
         <!-- FIN IMAGEN -->
 
@@ -49,24 +49,25 @@
                         </div>
                 </div>
                 <div class="my-3">
+                    <label for="locacion">turnos disponibles</label>
                     <select id="locacion" name="locacion" aria-controls="dataTable"
                     class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                         <option selected>seleccione un turno</option>
                         <option value="" ></option>
-                        @foreach ($locaciones_global as $locacion)
+                        {{-- @foreach ($locaciones_global as $locacion)
                         <option value ="horario:{{  }}"  > {{  }}</option>
-                        @endforeach
+                        @endforeach --}}
                    
                    
                     </select>
-                    <label for="locacion">Locación</label>
+                    {{-- <label for="locacion">Locación</label>
                     <select id="locacion" name="locacion" aria-controls="dataTable"
                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                         <option value ="" selected disabled></option>
                         @foreach ($locaciones_global as $locacion)
                         <option value ="{{$locacion->id}}"  > {{$locacion->nombre}}</option>
                         @endforeach
-                    </select>
+                    </select> --}}
                 </div>
 
                 <div class="text-center mt-4 mb-5">
