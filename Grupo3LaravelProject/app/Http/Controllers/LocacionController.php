@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class LocacionController extends Controller
@@ -15,8 +17,10 @@ class LocacionController extends Controller
      */
     public function index()
     {
-        if(Gate::allows('admin-auth')) return view('locaciones.indexLocacion');
-        else return abort(403);
+        return view('locaciones.indexLocacion');
+        /*$usuario = Auth::id();
+        if(Gate::allows('admin-auth', $usuario)) return view('locaciones.indexLocacion');
+        else return abort(403);*/
     }
 
     /**
