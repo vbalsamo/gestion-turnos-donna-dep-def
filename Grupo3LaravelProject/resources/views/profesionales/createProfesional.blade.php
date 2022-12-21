@@ -42,10 +42,9 @@
                 </div>
             @endif
 
-            <label for="numero_tel">Telefono</label>
             @if (!$errors->has('numero_tel'))
                 <div class="pt-4" style="color: #5a1d3e">
-                <label for="numero_tel">Teléfono</label>
+                <label for="numero_tel">Telefono</label>
                 <input id="numero_tel" type="text"
                        class="form-control{{ $errors->has('numero_tel') ? ' is-invalid' : '' }}"
                        name="numero_tel" @if(isset($profesional)) value="{{ $profesional->numero_tel }}"
