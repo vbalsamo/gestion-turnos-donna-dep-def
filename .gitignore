@@ -14,3 +14,13 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/.dockerignore
+/.fly/scripts/caches.sh
+/Dockerfile
+/.fly/entrypoint.sh
+/fly.toml
+/.fly/nginx-default
+/.fly/nginx-default-swoole
+/.fly/nginx-websockets.conf
+/.fly/octane-rr/run
+/.fly/octane-swoole/run
