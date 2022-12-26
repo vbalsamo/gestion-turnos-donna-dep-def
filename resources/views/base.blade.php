@@ -14,6 +14,7 @@
             crossorigin="anonymous"></script>
     @yield('contenido_header')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}">
+    <link rel='icon' href='{{ asset('logo.png') }}' type='image/x-icon' sizes="16x16" />
     <title>Donna Depilación Definitiva</title>
 </head>
 

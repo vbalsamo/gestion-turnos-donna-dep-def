@@ -9,13 +9,14 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
             integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/register.css') }}">
+    <link rel='icon' href='{{ asset('logo.png') }}' type='image/x-icon' sizes="16x16" />
 </head>
 <body>
 
 <div class="container w-75 rounded shadow" id="container">
     <div class="row align-items-stretch">
         <div class="col-md-5 col-xl-6 rounded-start" id="logo">
-            <img class="px-3 img-fluid position-relative top-50 start-50 translate-middle py-4 md-px-0" 
+            <img class="px-3 img-fluid position-relative top-50 start-50 translate-middle py-4 md-px-0"
             src="{{ asset('logo.png') }}" width="300" height="auto" alt="Donna depilación definitiva" id="logoImg">
 
         </div>
