@@ -24,3 +24,4 @@ yarn-error.log
 /.fly/nginx-websockets.conf
 /.fly/octane-rr/run
 /.fly/octane-swoole/run
+.vercel
