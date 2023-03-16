@@ -14,14 +14,14 @@
             crossorigin="anonymous"></script>
     @yield('contenido_header')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}">
-    <link rel='icon' href='{{ asset('logo.png') }}' type='image/x-icon' sizes="16x16" />
+    <link rel='icon' href='https://i.ibb.co/Mnc1jWH/logo.png' type='image/x-icon' sizes="16x16" />
     <title>Donna Depilación Definitiva</title>
 </head>
 
 <nav class="navbar navbar-expand-lg fixed-top" style="background-color: beige;">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('/') }}">
-            <img src="{{ asset('logo.png') }}" width="60" height="60" alt="Donna depilación definitiva">
+            <img src="https://i.ibb.co/Mnc1jWH/logo.png" width="60" height="60" alt="Donna depilación definitiva">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -8,7 +8,7 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
             integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <link rel='icon' href='{{ asset('logo.png') }}' type='image/x-icon' sizes="16x16" />
+    <link rel='icon' href='https://i.ibb.co/Mnc1jWH/logo.png' type='image/x-icon' sizes="16x16" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/login.css') }}">
 </head>
 <body>
@@ -16,7 +16,7 @@
 <div class="container w-75 position-absolute top-50 start-50 translate-middle rounded shadow" id="container">
     <div class="row align-items-stretch">
         <div class="col-md-5 col-xl-6 rounded-start" id="logo">
-            <img class="px-3 img-fluid position-relative top-50 start-50 translate-middle py-4 md-mx-0" src="{{ asset('logo.png') }}" width="300"
+            <img class="px-3 img-fluid position-relative top-50 start-50 translate-middle py-4 md-mx-0" src="https://i.ibb.co/Mnc1jWH/logo.png" width="300"
                  height="auto" alt="Donna depilación definitiva">
         </div>
         <div class="col-md-7 col-xl-6 rounded-end">
