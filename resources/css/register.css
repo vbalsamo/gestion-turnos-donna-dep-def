@@ -1,20 +1,22 @@
-
 body {
     background: pink;
 }
 
-
-
-#container_menu {
-    background-color: #B5D6BE;
-}
-
 #container {
     background-color: beige;
+    position: absolute;
+    top: 19%;
+    left: 17%;
 }
 
 #logo {
     background-color: white;
+}
+
+#logoImg{
+    position: relative;
+    left: 26.5%;
+    top: 21%;
 }
 
 h5 {
@@ -23,17 +25,17 @@ h5 {
 
 #btnIngresar {
     background-color: pink;
-    color: #5a1d3e;
     border: none;
     transition-duration: 0.1s;
+    color: #5a1d3e;
     box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.1);
 }
 
 #btnRegistrarse {
     background: pink;
     border: none;
-    transition-duration: 0.1s;
     color: #5a1d3e;
+    transition-duration: 0.1s;
 }
 
 #btnIngresar:hover {
@@ -48,13 +50,4 @@ h5 {
 
 img{
     background: transparent;
-}
-
-#select{
-    height: 426px;
-    width: 612px;
-    left: 205px;
-    top: 216px;
-    border-radius: 15px;
-    padding: 10px 0px 10px 0px;
 }

@@ -3,12 +3,6 @@ body {
     background: pink;
 }
 
-
-
-#container_menu {
-    background-color: #B5D6BE;
-}
-
 #container {
     background-color: beige;
 }
@@ -48,13 +42,4 @@ h5 {
 
 img{
     background: transparent;
-}
-
-#select{
-    height: 426px;
-    width: 612px;
-    left: 205px;
-    top: 216px;
-    border-radius: 15px;
-    padding: 10px 0px 10px 0px;
 }
