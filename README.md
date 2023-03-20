@@ -11,4 +11,4 @@ Entre las funcionalidades principales destacamos: <br />
 
 Este proyecto se construyo en el framework **Laravel** de php.
 
-[Ver proyecto en Vercel](gestion-turnos-donna-dep-def.vercel.app)
+[Ver proyecto en Vercel](https://gestion-turnos-donna-dep-def.vercel.app)
