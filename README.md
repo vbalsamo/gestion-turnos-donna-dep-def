@@ -11,4 +11,4 @@ Entre las funcionalidades principales destacamos: <br />
 
 Este proyecto se construyo en el framework **Laravel** de php.
 
-Se encuentra alojado en: gestion-turnos-donna-dep-def.vercel.app[gestion-turnos-donna-dep-def.vercel.app]
+[Ver proyecto en Vercel](gestion-turnos-donna-dep-def.vercel.app)
