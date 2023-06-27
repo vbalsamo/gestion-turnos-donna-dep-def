@@ -10,3 +10,5 @@ Entre las funcionalidades principales destacamos: <br />
 * Calendarización de tareas
 
 Este proyecto se construyo en el framework **Laravel** de php.
+
+Deploy en: https://gestion-turnos-donna-dep-def.up.railway.app
